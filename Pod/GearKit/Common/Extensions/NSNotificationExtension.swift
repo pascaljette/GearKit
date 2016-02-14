@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 import Foundation
+import UIKit
 
 /// Extension for the NSNotification class
 extension NSNotification {

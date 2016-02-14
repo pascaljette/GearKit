@@ -80,7 +80,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5j-r7-poT" customClass="GKRadarGraphView" customModule="BaseKit">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5j-r7-poT" customClass="GKRadarGraphView" customModule="GearKit">
                                 <rect key="frame" x="40" y="104" width="520" height="456"/>
                                 <color key="backgroundColor" red="0.24970474140429008" green="0.85292851594997487" blue="0.86000001430511475" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                             </view>
@@ -143,7 +143,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSI-U1-Tz2" userLabel="LoginButton" customClass="GKSolidColorButton" customModule="BaseKit">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSI-U1-Tz2" userLabel="LoginButton" customClass="GKSolidColorButton" customModule="GearKit">
                                         <rect key="frame" x="20" y="291" width="560" height="48"/>
                                         <color key="backgroundColor" red="0.6233022708" green="0.84512947900000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -297,7 +297,7 @@
         <!--Navigation Controller Base-->
         <scene sceneID="rLG-wU-qbf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lyd-g7-Tit" customClass="GKNavigationControllerBase" customModule="BaseKit" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lyd-g7-Tit" customClass="GKNavigationControllerBase" customModule="GearKit" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="sZY-Ly-BLk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

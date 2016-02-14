@@ -39,6 +39,30 @@
 		512DFAE728521F02AF225F0082195DCC /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = C307B149EDD69F11472A13A7222B9483 /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B0263F90696E7FD87CB146D5C5E2C1 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = 96BA47A35323C78B470F49B82E0A7C21 /* UIImage+Diff.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		52F7A46AB0053D8BB1D793B917D37BB2 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EFF71EDB9D0B02EC602B5D438BB2E /* SwiftSupport.swift */; };
+		535A0CEA1C7075E7000C1CFF /* GKNavigationControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CC31C7075E7000C1CFF /* GKNavigationControllerBase.swift */; };
+		535A0CEB1C7075E7000C1CFF /* GKViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CC41C7075E7000C1CFF /* GKViewControllerBase.swift */; };
+		535A0CEC1C7075E7000C1CFF /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CC61C7075E7000C1CFF /* ArrayExtension.swift */; };
+		535A0CED1C7075E7000C1CFF /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CC71C7075E7000C1CFF /* CGFloatExtension.swift */; };
+		535A0CEE1C7075E7000C1CFF /* NSNotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CC81C7075E7000C1CFF /* NSNotificationExtension.swift */; };
+		535A0CEF1C7075E7000C1CFF /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CC91C7075E7000C1CFF /* StringExtension.swift */; };
+		535A0CF01C7075E7000C1CFF /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CCA1C7075E7000C1CFF /* UIColorExtension.swift */; };
+		535A0CF11C7075E7000C1CFF /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CCB1C7075E7000C1CFF /* UIImageExtension.swift */; };
+		535A0CF21C7075E7000C1CFF /* GKNibInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CCD1C7075E7000C1CFF /* GKNibInstance.swift */; };
+		535A0CF31C7075E7000C1CFF /* GKScrollingKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CCF1C7075E7000C1CFF /* GKScrollingKeyboardListener.swift */; };
+		535A0CF41C7075E7000C1CFF /* GKThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CD11C7075E7000C1CFF /* GKThread.swift */; };
+		535A0CF51C7075E7000C1CFF /* GKSolidColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CD31C7075E7000C1CFF /* GKSolidColorButton.swift */; };
+		535A0CF61C7075E7000C1CFF /* GKRadarGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CD61C7075E7000C1CFF /* GKRadarGraph.swift */; };
+		535A0CF71C7075E7000C1CFF /* GKManualLoginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CD81C7075E7000C1CFF /* GKManualLoginDelegate.swift */; };
+		535A0CF81C7075E7000C1CFF /* GKManualLoginViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CD91C7075E7000C1CFF /* GKManualLoginViewControllerBase.swift */; };
+		535A0CF91C7075E7000C1CFF /* GKTableCellBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CDD1C7075E7000C1CFF /* GKTableCellBase.swift */; };
+		535A0CFA1C7075E7000C1CFF /* GKTableCellBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CDE1C7075E7000C1CFF /* GKTableCellBasic.swift */; };
+		535A0CFB1C7075E7000C1CFF /* GKTableCellCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CDF1C7075E7000C1CFF /* GKTableCellCustom.swift */; };
+		535A0CFC1C7075E7000C1CFF /* GKTableSectionBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CE11C7075E7000C1CFF /* GKTableSectionBase.swift */; };
+		535A0CFD1C7075E7000C1CFF /* GKTableSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CE21C7075E7000C1CFF /* GKTableSectionTitle.swift */; };
+		535A0CFE1C7075E7000C1CFF /* GKTableSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CE31C7075E7000C1CFF /* GKTableSectionView.swift */; };
+		535A0CFF1C7075E7000C1CFF /* GKTableViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CE51C7075E7000C1CFF /* GKTableViewControllerBase.swift */; };
+		535A0D001C7075E7000C1CFF /* GKTableCellErrorBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CE81C7075E7000C1CFF /* GKTableCellErrorBasic.swift */; };
+		535A0D011C7075E7000C1CFF /* GKTableCellErrorBasic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535A0CE91C7075E7000C1CFF /* GKTableCellErrorBasic.xib */; };
 		58DE63B2FF3954F1467A5B41D8FF3932 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899697610CD89ABF71B0C316A2B370ED /* XCTest.framework */; };
 		58EBA2C1A43283FB2188AB1FB592D32B /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D68C595A7CAF15BC8BF040ACA6450 /* DSL.swift */; };
 		5939811F316A7378F81454963469E366 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F567A0F84D52EF356BEDCB9F4C9AE7 /* Foundation.framework */; };
@@ -250,6 +274,30 @@
 		51C9A7AD630EA1967170870E8B560D78 /* Nimble-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nimble-umbrella.h"; sourceTree = "<group>"; };
 		522AA69A9C312CA910903C055CAC1521 /* Expectation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expectation.swift; path = Nimble/Expectation.swift; sourceTree = "<group>"; };
 		52E7EA65E32FC73741367DDA6D1BA75A /* FBSnapshotTestController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestController.h; path = FBSnapshotTestCase/FBSnapshotTestController.h; sourceTree = "<group>"; };
+		535A0CC31C7075E7000C1CFF /* GKNavigationControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKNavigationControllerBase.swift; sourceTree = "<group>"; };
+		535A0CC41C7075E7000C1CFF /* GKViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKViewControllerBase.swift; sourceTree = "<group>"; };
+		535A0CC61C7075E7000C1CFF /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		535A0CC71C7075E7000C1CFF /* CGFloatExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
+		535A0CC81C7075E7000C1CFF /* NSNotificationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNotificationExtension.swift; sourceTree = "<group>"; };
+		535A0CC91C7075E7000C1CFF /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		535A0CCA1C7075E7000C1CFF /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		535A0CCB1C7075E7000C1CFF /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		535A0CCD1C7075E7000C1CFF /* GKNibInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKNibInstance.swift; sourceTree = "<group>"; };
+		535A0CCF1C7075E7000C1CFF /* GKScrollingKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKScrollingKeyboardListener.swift; sourceTree = "<group>"; };
+		535A0CD11C7075E7000C1CFF /* GKThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKThread.swift; sourceTree = "<group>"; };
+		535A0CD31C7075E7000C1CFF /* GKSolidColorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKSolidColorButton.swift; sourceTree = "<group>"; };
+		535A0CD61C7075E7000C1CFF /* GKRadarGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraph.swift; sourceTree = "<group>"; };
+		535A0CD81C7075E7000C1CFF /* GKManualLoginDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKManualLoginDelegate.swift; sourceTree = "<group>"; };
+		535A0CD91C7075E7000C1CFF /* GKManualLoginViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKManualLoginViewControllerBase.swift; sourceTree = "<group>"; };
+		535A0CDD1C7075E7000C1CFF /* GKTableCellBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableCellBase.swift; sourceTree = "<group>"; };
+		535A0CDE1C7075E7000C1CFF /* GKTableCellBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableCellBasic.swift; sourceTree = "<group>"; };
+		535A0CDF1C7075E7000C1CFF /* GKTableCellCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableCellCustom.swift; sourceTree = "<group>"; };
+		535A0CE11C7075E7000C1CFF /* GKTableSectionBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableSectionBase.swift; sourceTree = "<group>"; };
+		535A0CE21C7075E7000C1CFF /* GKTableSectionTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableSectionTitle.swift; sourceTree = "<group>"; };
+		535A0CE31C7075E7000C1CFF /* GKTableSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableSectionView.swift; sourceTree = "<group>"; };
+		535A0CE51C7075E7000C1CFF /* GKTableViewControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableViewControllerBase.swift; sourceTree = "<group>"; };
+		535A0CE81C7075E7000C1CFF /* GKTableCellErrorBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableCellErrorBasic.swift; sourceTree = "<group>"; };
+		535A0CE91C7075E7000C1CFF /* GKTableCellErrorBasic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKTableCellErrorBasic.xib; sourceTree = "<group>"; };
 		5AD55F3974939097556240403DEE2DFF /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E0F6A5AD14204A8A8EDBDB1028C2F68 /* NimbleSnapshotsConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NimbleSnapshotsConfiguration.swift; sourceTree = "<group>"; };
 		61A22CF260E92DC7AE2862E161AE4FC8 /* Nimble_Snapshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nimble_Snapshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -512,6 +560,10 @@
 		3CBC834E9DFB7C9413CEEE8F580E547D /* GearKit */ = {
 			isa = PBXGroup;
 			children = (
+				535A0CC01C7075E7000C1CFF /* Common */,
+				535A0CD41C7075E7000C1CFF /* GKGraphs */,
+				535A0CD71C7075E7000C1CFF /* GKManualLogin */,
+				535A0CDA1C7075E7000C1CFF /* GKTable */,
 			);
 			name = GearKit;
 			path = ../..;
@@ -532,6 +584,174 @@
 				202E71B3F2864DB9B898F6D7DD5AEE60 /* Pods-GearKit_Tests */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		535A0CC01C7075E7000C1CFF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CC11C7075E7000C1CFF /* Base */,
+				535A0CC51C7075E7000C1CFF /* Extensions */,
+				535A0CCC1C7075E7000C1CFF /* Protocols */,
+				535A0CD01C7075E7000C1CFF /* Utils */,
+				535A0CD21C7075E7000C1CFF /* Views */,
+			);
+			name = Common;
+			path = Pod/GearKit/Common;
+			sourceTree = "<group>";
+		};
+		535A0CC11C7075E7000C1CFF /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CC21C7075E7000C1CFF /* ViewController */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		535A0CC21C7075E7000C1CFF /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CC31C7075E7000C1CFF /* GKNavigationControllerBase.swift */,
+				535A0CC41C7075E7000C1CFF /* GKViewControllerBase.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		535A0CC51C7075E7000C1CFF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CC61C7075E7000C1CFF /* ArrayExtension.swift */,
+				535A0CC71C7075E7000C1CFF /* CGFloatExtension.swift */,
+				535A0CC81C7075E7000C1CFF /* NSNotificationExtension.swift */,
+				535A0CC91C7075E7000C1CFF /* StringExtension.swift */,
+				535A0CCA1C7075E7000C1CFF /* UIColorExtension.swift */,
+				535A0CCB1C7075E7000C1CFF /* UIImageExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		535A0CCC1C7075E7000C1CFF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CCD1C7075E7000C1CFF /* GKNibInstance.swift */,
+				535A0CCE1C7075E7000C1CFF /* Keyboard Listeners */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		535A0CCE1C7075E7000C1CFF /* Keyboard Listeners */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CCF1C7075E7000C1CFF /* GKScrollingKeyboardListener.swift */,
+			);
+			path = "Keyboard Listeners";
+			sourceTree = "<group>";
+		};
+		535A0CD01C7075E7000C1CFF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CD11C7075E7000C1CFF /* GKThread.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		535A0CD21C7075E7000C1CFF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CD31C7075E7000C1CFF /* GKSolidColorButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		535A0CD41C7075E7000C1CFF /* GKGraphs */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CD51C7075E7000C1CFF /* GKRadarGraph */,
+			);
+			name = GKGraphs;
+			path = Pod/GearKit/GKGraphs;
+			sourceTree = "<group>";
+		};
+		535A0CD51C7075E7000C1CFF /* GKRadarGraph */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CD61C7075E7000C1CFF /* GKRadarGraph.swift */,
+			);
+			path = GKRadarGraph;
+			sourceTree = "<group>";
+		};
+		535A0CD71C7075E7000C1CFF /* GKManualLogin */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CD81C7075E7000C1CFF /* GKManualLoginDelegate.swift */,
+				535A0CD91C7075E7000C1CFF /* GKManualLoginViewControllerBase.swift */,
+			);
+			name = GKManualLogin;
+			path = Pod/GearKit/GKManualLogin;
+			sourceTree = "<group>";
+		};
+		535A0CDA1C7075E7000C1CFF /* GKTable */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CDB1C7075E7000C1CFF /* TableConfiguration */,
+				535A0CE41C7075E7000C1CFF /* TableViewControllerBase */,
+				535A0CE61C7075E7000C1CFF /* Views */,
+			);
+			name = GKTable;
+			path = Pod/GearKit/GKTable;
+			sourceTree = "<group>";
+		};
+		535A0CDB1C7075E7000C1CFF /* TableConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CDC1C7075E7000C1CFF /* TableCell */,
+				535A0CE01C7075E7000C1CFF /* TableSection */,
+			);
+			path = TableConfiguration;
+			sourceTree = "<group>";
+		};
+		535A0CDC1C7075E7000C1CFF /* TableCell */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CDD1C7075E7000C1CFF /* GKTableCellBase.swift */,
+				535A0CDE1C7075E7000C1CFF /* GKTableCellBasic.swift */,
+				535A0CDF1C7075E7000C1CFF /* GKTableCellCustom.swift */,
+			);
+			path = TableCell;
+			sourceTree = "<group>";
+		};
+		535A0CE01C7075E7000C1CFF /* TableSection */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CE11C7075E7000C1CFF /* GKTableSectionBase.swift */,
+				535A0CE21C7075E7000C1CFF /* GKTableSectionTitle.swift */,
+				535A0CE31C7075E7000C1CFF /* GKTableSectionView.swift */,
+			);
+			path = TableSection;
+			sourceTree = "<group>";
+		};
+		535A0CE41C7075E7000C1CFF /* TableViewControllerBase */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CE51C7075E7000C1CFF /* GKTableViewControllerBase.swift */,
+			);
+			path = TableViewControllerBase;
+			sourceTree = "<group>";
+		};
+		535A0CE61C7075E7000C1CFF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CE71C7075E7000C1CFF /* Error */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		535A0CE71C7075E7000C1CFF /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CE81C7075E7000C1CFF /* GKTableCellErrorBasic.swift */,
+				535A0CE91C7075E7000C1CFF /* GKTableCellErrorBasic.xib */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		58F50D6DFEACD17AFE64CE6B91A5D63F /* Nimble-Snapshots */ = {
@@ -1018,6 +1238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				535A0D011C7075E7000C1CFF /* GKTableCellErrorBasic.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,6 +1280,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				535A0CEE1C7075E7000C1CFF /* NSNotificationExtension.swift in Sources */,
+				535A0D001C7075E7000C1CFF /* GKTableCellErrorBasic.swift in Sources */,
+				535A0CFC1C7075E7000C1CFF /* GKTableSectionBase.swift in Sources */,
+				535A0CF01C7075E7000C1CFF /* UIColorExtension.swift in Sources */,
+				535A0CEC1C7075E7000C1CFF /* ArrayExtension.swift in Sources */,
+				535A0CFA1C7075E7000C1CFF /* GKTableCellBasic.swift in Sources */,
+				535A0CEF1C7075E7000C1CFF /* StringExtension.swift in Sources */,
+				535A0CF21C7075E7000C1CFF /* GKNibInstance.swift in Sources */,
+				535A0CF91C7075E7000C1CFF /* GKTableCellBase.swift in Sources */,
+				535A0CFB1C7075E7000C1CFF /* GKTableCellCustom.swift in Sources */,
+				535A0CFD1C7075E7000C1CFF /* GKTableSectionTitle.swift in Sources */,
+				535A0CEA1C7075E7000C1CFF /* GKNavigationControllerBase.swift in Sources */,
+				535A0CF71C7075E7000C1CFF /* GKManualLoginDelegate.swift in Sources */,
+				535A0CFF1C7075E7000C1CFF /* GKTableViewControllerBase.swift in Sources */,
+				535A0CF61C7075E7000C1CFF /* GKRadarGraph.swift in Sources */,
+				535A0CED1C7075E7000C1CFF /* CGFloatExtension.swift in Sources */,
+				535A0CEB1C7075E7000C1CFF /* GKViewControllerBase.swift in Sources */,
+				535A0CF81C7075E7000C1CFF /* GKManualLoginViewControllerBase.swift in Sources */,
+				535A0CFE1C7075E7000C1CFF /* GKTableSectionView.swift in Sources */,
+				535A0CF41C7075E7000C1CFF /* GKThread.swift in Sources */,
+				535A0CF31C7075E7000C1CFF /* GKScrollingKeyboardListener.swift in Sources */,
+				535A0CF11C7075E7000C1CFF /* UIImageExtension.swift in Sources */,
+				535A0CF51C7075E7000C1CFF /* GKSolidColorButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
