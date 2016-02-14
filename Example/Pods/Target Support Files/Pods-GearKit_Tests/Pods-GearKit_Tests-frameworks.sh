@@ -84,7 +84,6 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-GearKit_Tests/GearKit.framework"
   install_framework "Pods-GearKit_Tests/SwiftyJSON.framework"
   install_framework "Pods-GearKit_Tests/FBSnapshotTestCase.framework"
   install_framework "Pods-GearKit_Tests/Nimble.framework"
@@ -92,7 +91,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-GearKit_Tests/Quick.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-GearKit_Tests/GearKit.framework"
   install_framework "Pods-GearKit_Tests/SwiftyJSON.framework"
   install_framework "Pods-GearKit_Tests/FBSnapshotTestCase.framework"
   install_framework "Pods-GearKit_Tests/Nimble.framework"
