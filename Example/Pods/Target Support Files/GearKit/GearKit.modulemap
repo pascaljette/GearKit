@@ -1,0 +1,6 @@
+framework module GearKit {
+  umbrella header "GearKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
