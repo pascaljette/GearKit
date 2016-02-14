@@ -1,8 +1,8 @@
 {
   "name": "GearKit",
   "version": "0.1.0",
-  "summary": "Basic library for common tasks.",
-  "description": "Can also be used as a tutorial!",
+  "summary": "Various utilities for standard applications.",
+  "description": "Can be used either as a framework library or as a tutorial.",
   "homepage": "https://github.com/pascaljette/GearKit",
   "license": "MIT",
   "authors": {
@@ -20,6 +20,12 @@
   "resource_bundles": {
     "GearKit": [
       "Pod/Assets/*.png"
+    ]
+  },
+  "frameworks": "UIKit",
+  "dependencies": {
+    "SwiftyJSON": [
+      "~> 2"
     ]
   }
 }

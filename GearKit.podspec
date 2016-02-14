@@ -37,5 +37,5 @@ Can be used either as a framework library or as a tutorial.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'
-  s.dependency 'SwiftyJSON', '> 2'
+  s.dependency 'SwiftyJSON', '~> 2'
 end

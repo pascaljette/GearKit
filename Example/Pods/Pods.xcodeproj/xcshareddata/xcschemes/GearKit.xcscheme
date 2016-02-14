@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3A03E109D6EF68E7AB3208AA'
+               BlueprintIdentifier = 'F41F6FBB306F85C2BB8A6882'
                BlueprintName = 'GearKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'GearKit.framework'>
