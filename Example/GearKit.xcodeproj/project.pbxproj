@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		04412475DDF1737681F49D29 /* Pods_GearKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC44BFE1D1D3018E745A7EF /* Pods_GearKit_Example.framework */; };
+		535A0CB71C7070B1000C1CFF /* GKRadarGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB21C7070B1000C1CFF /* GKRadarGraphViewController.swift */; };
+		535A0CB81C7070B1000C1CFF /* GKKeyboardScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */; };
+		535A0CB91C7070B1000C1CFF /* GKManualLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */; };
+		535A0CBC1C707123000C1CFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 535A0CBA1C707123000C1CFF /* LaunchScreen.storyboard */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
-		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		952DE57BA6AEC0BB21F5FF47 /* Pods_GearKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC0A73CBA9720FF2EE3EA82E /* Pods_GearKit_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -35,13 +38,16 @@
 		379FB71C41A86FE891B92525 /* Pods-GearKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GearKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-GearKit_Example/Pods-GearKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		3E55453717B94C34FDC8BC0F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		44C96B4E25CCEED12BF882E2 /* Pods-GearKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GearKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GearKit_Tests/Pods-GearKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		535A0CB21C7070B1000C1CFF /* GKRadarGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphViewController.swift; sourceTree = "<group>"; };
+		535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKKeyboardScrollViewController.swift; sourceTree = "<group>"; };
+		535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKManualLoginViewController.swift; sourceTree = "<group>"; };
+		535A0CBB1C707123000C1CFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* GearKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GearKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* GearKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GearKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -80,6 +86,40 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		535A0CB01C7070B1000C1CFF /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CB11C7070B1000C1CFF /* Graphs */,
+				535A0CB31C7070B1000C1CFF /* KeyboardScroll */,
+				535A0CB51C7070B1000C1CFF /* ManualLogin */,
+			);
+			path = Samples;
+			sourceTree = "<group>";
+		};
+		535A0CB11C7070B1000C1CFF /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CB21C7070B1000C1CFF /* GKRadarGraphViewController.swift */,
+			);
+			path = Graphs;
+			sourceTree = "<group>";
+		};
+		535A0CB31C7070B1000C1CFF /* KeyboardScroll */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */,
+			);
+			path = KeyboardScroll;
+			sourceTree = "<group>";
+		};
+		535A0CB51C7070B1000C1CFF /* ManualLogin */ = {
+			isa = PBXGroup;
+			children = (
+				535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */,
+			);
+			path = ManualLogin;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -104,11 +144,12 @@
 		607FACD21AFB9204008FA782 /* Example for GearKit */ = {
 			isa = PBXGroup;
 			children = (
+				535A0CB01C7070B1000C1CFF /* Samples */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				535A0CBA1C707123000C1CFF /* LaunchScreen.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
-				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for GearKit";
@@ -246,8 +287,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				535A0CBC1C707123000C1CFF /* LaunchScreen.storyboard in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,8 +400,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				535A0CB81C7070B1000C1CFF /* GKKeyboardScrollViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				535A0CB91C7070B1000C1CFF /* GKManualLoginViewController.swift in Sources */,
+				535A0CB71C7070B1000C1CFF /* GKRadarGraphViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,20 +427,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		535A0CBA1C707123000C1CFF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				535A0CBB1C707123000C1CFF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				607FACDA1AFB9204008FA782 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		607FACDE1AFB9204008FA782 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				607FACDF1AFB9204008FA782 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

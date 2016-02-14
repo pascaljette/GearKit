@@ -30,12 +30,12 @@ Can be used either as a framework library or as a tutorial.
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/**/*'
+  s.source_files = 'Pod/GearKit/**/*'
   s.resource_bundles = {
     'GearKit' => ['Pod/Assets/*.png']
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'
-  s.dependency 'SwiftyJSON', '> 2'
+  s.dependency 'SwiftyJSON', '~> 2'
 end
