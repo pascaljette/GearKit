@@ -1,6 +1,6 @@
 # GearKit
 
-[![CI Status](http://img.shields.io/travis/Pascal Jette/GearKit.svg?style=flat)](https://travis-ci.org/pascaljette/GearKit)
+[![CI Status](http://img.shields.io/travis/pascaljette/GearKit.svg?style=flat)](https://travis-ci.org/pascaljette/GearKit)
 [![Version](https://img.shields.io/cocoapods/v/GearKit.svg?style=flat)](http://cocoapods.org/pods/GearKit)
 [![License](https://img.shields.io/cocoapods/l/GearKit.svg?style=flat)](http://cocoapods.org/pods/GearKit)
 [![Platform](https://img.shields.io/cocoapods/p/GearKit.svg?style=flat)](http://cocoapods.org/pods/GearKit)
