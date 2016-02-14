@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "summary": "Basic library for common tasks.",
   "description": "Can also be used as a tutorial!",
-  "homepage": "https://github.com/pascal.jette/GearKit",
+  "homepage": "https://github.com/pascaljette/GearKit",
   "license": "MIT",
   "authors": {
     "Pascal Jette": "pascal.jette@gmail.com"
