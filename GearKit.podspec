@@ -9,15 +9,14 @@
 Pod::Spec.new do |s|
   s.name             = "GearKit"
   s.version          = "0.1.0"
-  s.summary          = "A short description of GearKit."
+  s.summary          = "Various utilities for standard applications."
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
-  s.description      = <<-DESC
-                       Various utilities for business applications
+  s.description      = <<-DESC Can be used either as a framework library or as a tutorial!
                        DESC
 
   s.homepage         = "https://github.com/pascaljette/GearKit"
@@ -37,5 +36,5 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'
-  # s.dependency 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+  s.dependency 'SwiftyJSON', '> 2'
 end
