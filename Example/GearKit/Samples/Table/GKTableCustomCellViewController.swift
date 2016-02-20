@@ -34,7 +34,5 @@ class GKTableCustomCellViewController : GKTableViewControllerBase {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        
     }
 }
