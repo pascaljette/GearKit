@@ -101,8 +101,8 @@ public class GKColorRGB {
     /// '#' or '0x'.
     ///
     /// - parameter rgbString: A string of the "#RRGGBB" format.
-    /// - parameter alpha: Alpha value (default is 1.0, lowest possible value is 0.0)
-    public convenience init?(rgbString: String, alpha: CGFloat = 1.0) {
+    /// - parameter alpha: Alpha value.  Range between 0.0 and 255.0, where 255.0 is opaque.
+    public convenience init?(rgbString: String, alpha: CGFloat = 255.0) {
         
         guard let intValue = GKColorRGB.integerFromHexString(rgbString, length: 6) else {
             
@@ -118,7 +118,9 @@ extension GKColorRGB {
     //
     // MARK: Computed properties
     //
-    var uiColor: UIColor {
+    
+    /// Generate UIColor from our components
+    public var uiColor: UIColor {
         
         return UIColor(red: self.red / 255.0
             , green: self.green / 255.0
@@ -148,7 +150,7 @@ extension GKColorRGB {
             let index = trimmedString.startIndex.advancedBy(1)
             trimmedString = trimmedString.substringFromIndex(index);
             
-        } else if trimmedString.hasPrefix("0x") {
+        } else if trimmedString.hasPrefix("0X") {
             
             // Skip the '0x'
             let index = trimmedString.startIndex.advancedBy(2)
