@@ -22,7 +22,7 @@
 
 import Foundation
 
-/// Utilities for string in extension
+/// Extension for the Swift Standard String class
 extension String {
     
     /// Check whether a string is nil or empty
@@ -37,6 +37,7 @@ extension String {
             
             return true
         }
+        
         return nonOptionalString.isEmpty
     }
 }

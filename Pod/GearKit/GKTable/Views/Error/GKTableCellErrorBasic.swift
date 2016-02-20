@@ -49,7 +49,7 @@ public class GKTableCellErrorBasic : UITableViewCell {
 extension GKTableCellErrorBasic : GKNibInstance {
 
     /// Name of the associated .xib file
-    static var NIB_NAME: String {
+    public static var NIB_NAME: String {
         
         return "GKTableCellErrorBasic"
     }

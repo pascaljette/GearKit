@@ -51,6 +51,8 @@
 		52A993FCA4EFAE032CDE6A9670006C65 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 075018B9D21FC6C168581AB299101D70 /* SwiftyJSON.framework */; };
 		52B0263F90696E7FD87CB146D5C5E2C1 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = 96BA47A35323C78B470F49B82E0A7C21 /* UIImage+Diff.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		52F7A46AB0053D8BB1D793B917D37BB2 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EFF71EDB9D0B02EC602B5D438BB2E /* SwiftSupport.swift */; };
+		536248181C78356B004EC051 /* GKPlistKeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536248171C78356B004EC051 /* GKPlistKeyConstants.swift */; };
+		5362481A1C78400E004EC051 /* GKKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536248191C78400E004EC051 /* GKKeyboardListener.swift */; };
 		57777286FA55D7EBAC87D8FD9E82B9C1 /* GKManualLoginViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131811CF89927E2BF329EF2F3DFEC64A /* GKManualLoginViewControllerBase.swift */; };
 		58DE63B2FF3954F1467A5B41D8FF3932 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1EF76FE0C0FE0638FCD1666876DF45 /* XCTest.framework */; };
 		58EBA2C1A43283FB2188AB1FB592D32B /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D68C595A7CAF15BC8BF040ACA6450 /* DSL.swift */; };
@@ -307,6 +309,8 @@
 		522AA69A9C312CA910903C055CAC1521 /* Expectation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expectation.swift; path = Nimble/Expectation.swift; sourceTree = "<group>"; };
 		52B21BF743F6268BE2B2B6EF085C0CD2 /* UIColorExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		52E7EA65E32FC73741367DDA6D1BA75A /* FBSnapshotTestController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestController.h; path = FBSnapshotTestCase/FBSnapshotTestController.h; sourceTree = "<group>"; };
+		536248171C78356B004EC051 /* GKPlistKeyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKPlistKeyConstants.swift; sourceTree = "<group>"; };
+		536248191C78400E004EC051 /* GKKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKKeyboardListener.swift; sourceTree = "<group>"; };
 		542A67643521E1A85112D15CF6F15D4D /* GKTableCellCustom.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GKTableCellCustom.swift; sourceTree = "<group>"; };
 		5D1EF76FE0C0FE0638FCD1666876DF45 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5E0F6A5AD14204A8A8EDBDB1028C2F68 /* NimbleSnapshotsConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NimbleSnapshotsConfiguration.swift; sourceTree = "<group>"; };
@@ -551,6 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				7D116538E3FC1AEB4B84CB8CFFF65494 /* GKScrollingKeyboardListener.swift */,
+				536248191C78400E004EC051 /* GKKeyboardListener.swift */,
 			);
 			path = "Keyboard Listeners";
 			sourceTree = "<group>";
@@ -683,6 +688,14 @@
 				202E71B3F2864DB9B898F6D7DD5AEE60 /* Pods-GearKit_Tests */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		536248161C78354D004EC051 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				536248171C78356B004EC051 /* GKPlistKeyConstants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		541FC1668390E986604AA4D883A27B09 /* iOS */ = {
@@ -905,6 +918,7 @@
 			isa = PBXGroup;
 			children = (
 				76578F61E73112DF06B7E8612A16F425 /* Base */,
+				536248161C78354D004EC051 /* Constants */,
 				BECC141F971660805C330C4F8AFB4089 /* Extensions */,
 				B3EF75194707F5F0E820E524C7BFA68D /* Protocols */,
 				1B00AE675383873C9481BD73A93CB3D7 /* Utils */,
@@ -1488,6 +1502,7 @@
 				89AF7E4A168485F1CBD7AB20EF6813F0 /* GKManualLoginDelegate.swift in Sources */,
 				57777286FA55D7EBAC87D8FD9E82B9C1 /* GKManualLoginViewControllerBase.swift in Sources */,
 				3859B57D192738B05DD59A859B253938 /* GKNavigationControllerBase.swift in Sources */,
+				536248181C78356B004EC051 /* GKPlistKeyConstants.swift in Sources */,
 				1D7CD7AA05DF24A0004FDF69F9AB11EB /* GKNibInstance.swift in Sources */,
 				35DBE8A3833E47EDE6EF12FEC2D45759 /* GKRadarGraph.swift in Sources */,
 				4CD4F241E8F53B5BA90A9A0FEBBCBF4B /* GKScrollingKeyboardListener.swift in Sources */,
@@ -1496,6 +1511,7 @@
 				347333CB56DFC99BCBDA86EA2976D5F0 /* GKTableCellBasic.swift in Sources */,
 				E5B75EBF4E4E231BE89F4668F0FAF46B /* GKTableCellCustom.swift in Sources */,
 				7B942F2A2057E80EF0F70B3E27A52185 /* GKTableCellErrorBasic.swift in Sources */,
+				5362481A1C78400E004EC051 /* GKKeyboardListener.swift in Sources */,
 				707A0498D85DE91200B1FBA1F9127D58 /* GKTableCellErrorBasic.xib in Sources */,
 				B4320FB821ED878F3E482AD9580BA34B /* GKTableSectionBase.swift in Sources */,
 				6BA0C04CDC4F5331B416375C3D8BCE39 /* GKTableSectionTitle.swift in Sources */,

@@ -25,8 +25,19 @@ import Foundation
 /// Miscellaneous utilities for threads
 public class GKThread {
     
-    ///Function type for dispatching on another thread.
+    //
+    // MARK: Types
+    //
+    
+    /// Function type for dispatching on another thread.
     public typealias DispatchFunction = () -> Void
+}
+
+extension GKThread {
+    
+    //
+    // MARK: Class functions
+    //
     
     /// Dispatch a closure on the UI thread
     ///
@@ -45,7 +56,7 @@ public class GKThread {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(interval * Double(NSEC_PER_MSEC))), dispatch_get_main_queue(), function)
     }
-
+    
     /// Sleep the current thread for a time specified in milliseconds
     ///
     /// - parameter milliseconds: Time interval in milliseconds to sleep the thread.

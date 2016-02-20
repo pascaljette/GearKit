@@ -23,13 +23,17 @@
 import Foundation
 import UIKit
 
-/// Extension to instantiate a color with RGBA values
+/// Extension for the Swift Standard UIColor class
 extension UIColor {
+    
+    //
+    // MARK: Initializers
+    //
     
     /// Instantiate a color with an integer including alpha
     ///
-    /// - parameter rgba: An int of the 0xAABBCCDD form
-    convenience init(rgba: UInt32) {
+    /// - parameter rgba: An int of the 0xRRGGBBAA form
+    public convenience init(rgba: UInt32) {
         
         let red =   CGFloat((rgba & 0xFF000000) >> 24) / 255.0
         let green = CGFloat((rgba & 0x00FF0000) >> 16) / 255.0
@@ -41,9 +45,9 @@ extension UIColor {
     
     /// Instantiate a color with an integer excluding alpha
     ///
-    /// - parameter rgba: An int of the 0xAABBCC form
-    /// - parameter alpha: Alpha value (default is 0)
-    convenience init(rgb: UInt32, alpha: CGFloat = 0.0) {
+    /// - parameter rgba: An int of the 0xRRGGBB form
+    /// - parameter alpha: Alpha value (default is 1.0, lowest possible value is 0.0)
+    public convenience init(rgb: UInt32, alpha: CGFloat = 1.0) {
         
         let red =   CGFloat((rgb & 0xFF0000) >> 16) / 255.0
         let green = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
@@ -52,20 +56,11 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
     
-    /// Instantiate a color with an hex string excluding alpha.
-    /// The expected format is #RRGGBB
-    convenience init?(rgbString: String, alpha: CGFloat = 1) {
-        
-        guard let intValue = UIColor.integerFromHexString(rgbString, length: 6) else {
-            
-            return nil        }
-        
-        self.init(rgb: intValue, alpha: alpha)
-    }
-    
-    /// Instantiate a color with an hex string excluding alpha.
-    /// The expected format is #RRGGBBAA
-    convenience init?(rgbaString: String) {
+    /// Instantiate a color with an hex string including alpha.  The prefix can be either
+    /// '#' or '0x'.
+    ///
+    /// - parameter rgbaString: A string of the "#RRGGBBAA" format.
+    public convenience init?(rgbaString: String) {
         
         guard let intValue = UIColor.integerFromHexString(rgbaString, length: 8) else {
             
@@ -75,7 +70,31 @@ extension UIColor {
         self.init(rgba: intValue)
     }
     
-    // TODO-pk SwiftDoc
+    /// Instantiate a color with an hex string excluding alpha.  The prefix can be either
+    /// '#' or '0x'.
+    ///
+    /// - parameter rgbString: A string of the "#RRGGBB" format.
+    /// - parameter alpha: Alpha value (default is 1.0, lowest possible value is 0.0)
+    public convenience init?(rgbString: String, alpha: CGFloat = 1.0) {
+        
+        guard let intValue = UIColor.integerFromHexString(rgbString, length: 6) else {
+            
+            return nil        }
+        
+        self.init(rgb: intValue, alpha: alpha)
+    }
+}
+
+extension UIColor {
+    
+    //
+    // MARK: Private methods
+    //
+    
+    /// Convert a hex string to an integer.
+    ///
+    /// - parameter colorString: The string representing the hex value to convert.
+    /// - parameter length: The length of the string to convert.
     private class func integerFromHexString(colorString: String, length: Int) -> UInt32? {
         
         var trimmedString: String = colorString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
@@ -94,12 +113,13 @@ extension UIColor {
             trimmedString = trimmedString.substringFromIndex(index);
             
         } else {
-
+            
             return nil
         }
         
         return trimmedString.characters.count == length
             ? UInt32(trimmedString, radix: 16)
             : nil
-    }    
+    }
+
 }

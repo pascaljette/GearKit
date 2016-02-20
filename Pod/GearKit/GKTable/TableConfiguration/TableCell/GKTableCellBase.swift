@@ -24,7 +24,7 @@ import Foundation
 import UIKit
 
 
-/// Base class for creating table cells.
+/// Base class for creating functional table cells.
 public class GKTableCellBase {
     
     //
