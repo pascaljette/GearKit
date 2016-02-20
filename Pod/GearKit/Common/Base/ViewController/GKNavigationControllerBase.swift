@@ -39,8 +39,8 @@ public class GKNavigationControllerBase: UINavigationController {
         if let plistDefinition = NSBundle.mainBundle().objectForInfoDictionaryKey(GKPlistKeyConstants.NAVIGATION_BAR_DEFAULT_COLOR_KEY) {
             
             if let colorDefinition = plistDefinition as? String {
-                
-                return UIColor(rgbaString: colorDefinition) ?? UIColor.whiteColor()
+                                
+                return GKColorRGB(rgbaString: colorDefinition)?.uiColor ?? UIColor.whiteColor()
             }
         }
         return UIColor.whiteColor()

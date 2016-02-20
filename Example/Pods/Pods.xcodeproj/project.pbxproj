@@ -53,6 +53,8 @@
 		52F7A46AB0053D8BB1D793B917D37BB2 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EFF71EDB9D0B02EC602B5D438BB2E /* SwiftSupport.swift */; };
 		536248181C78356B004EC051 /* GKPlistKeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536248171C78356B004EC051 /* GKPlistKeyConstants.swift */; };
 		5362481A1C78400E004EC051 /* GKKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536248191C78400E004EC051 /* GKKeyboardListener.swift */; };
+		53A1D5F61C789CFB009E83CB /* GKColorRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D5F41C789843009E83CB /* GKColorRGB.swift */; };
+		53A1D5FC1C789E00009E83CB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D5FA1C789D96009E83CB /* UIColorExtension.swift */; };
 		57777286FA55D7EBAC87D8FD9E82B9C1 /* GKManualLoginViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131811CF89927E2BF329EF2F3DFEC64A /* GKManualLoginViewControllerBase.swift */; };
 		58DE63B2FF3954F1467A5B41D8FF3932 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1EF76FE0C0FE0638FCD1666876DF45 /* XCTest.framework */; };
 		58EBA2C1A43283FB2188AB1FB592D32B /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D68C595A7CAF15BC8BF040ACA6450 /* DSL.swift */; };
@@ -95,7 +97,6 @@
 		8E7B6D7AB848E30E6EA443BE6B87FF3A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DC93B113B4597439B6E497E6414796 /* Foundation.framework */; };
 		9187EEC2982DB82AD8D3A7001AA647D6 /* NMBExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 419CC10077FC17C18A6A17CC32295DEA /* NMBExceptionCapture.m */; };
 		9341B96D63EF6C54A1F906A1BBAEAF46 /* DSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 164CA190BD0FA8E68CD1D5C4D0652434 /* DSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		962D8641F25381025BB0DCCC577FF8F8 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B21BF743F6268BE2B2B6EF085C0CD2 /* UIColorExtension.swift */; };
 		9646787942A85613FE77F45794E9B5CD /* BeginWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70F7D31C81D2FECEF6FD2FF3E8A8B82 /* BeginWith.swift */; };
 		9A6DE5B6F55232DC12497ED10E7E1DE4 /* QuickSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CCB03408C64DDB6B5A8C072AE7A78C1 /* QuickSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AFB25D3C2E4B568E3937E8E8FDC16A0 /* Nimble-Snapshots-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1260BDC6CDF1D40A05391F2F1813C222 /* Nimble-Snapshots-dummy.m */; };
@@ -307,10 +308,11 @@
 		51A04F0E2720102734D81E9FE176A3F6 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51C9A7AD630EA1967170870E8B560D78 /* Nimble-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nimble-umbrella.h"; sourceTree = "<group>"; };
 		522AA69A9C312CA910903C055CAC1521 /* Expectation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expectation.swift; path = Nimble/Expectation.swift; sourceTree = "<group>"; };
-		52B21BF743F6268BE2B2B6EF085C0CD2 /* UIColorExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		52E7EA65E32FC73741367DDA6D1BA75A /* FBSnapshotTestController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestController.h; path = FBSnapshotTestCase/FBSnapshotTestController.h; sourceTree = "<group>"; };
 		536248171C78356B004EC051 /* GKPlistKeyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKPlistKeyConstants.swift; sourceTree = "<group>"; };
 		536248191C78400E004EC051 /* GKKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKKeyboardListener.swift; sourceTree = "<group>"; };
+		53A1D5F41C789843009E83CB /* GKColorRGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKColorRGB.swift; sourceTree = "<group>"; };
+		53A1D5FA1C789D96009E83CB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		542A67643521E1A85112D15CF6F15D4D /* GKTableCellCustom.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GKTableCellCustom.swift; sourceTree = "<group>"; };
 		5D1EF76FE0C0FE0638FCD1666876DF45 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5E0F6A5AD14204A8A8EDBDB1028C2F68 /* NimbleSnapshotsConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NimbleSnapshotsConfiguration.swift; sourceTree = "<group>"; };
@@ -835,6 +837,7 @@
 			isa = PBXGroup;
 			children = (
 				E16EE1E4AB1E2AF7E419B7B273ED5EB5 /* GKSolidColorButton.swift */,
+				53A1D5F41C789843009E83CB /* GKColorRGB.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -989,8 +992,8 @@
 				C7A0019DF3807D6A30133368F6E083E5 /* CGFloatExtension.swift */,
 				A3BFDA9A4ACE83C14355FD9473041B12 /* NSNotificationExtension.swift */,
 				51133E8E99737A28815CE529C19242B0 /* StringExtension.swift */,
-				52B21BF743F6268BE2B2B6EF085C0CD2 /* UIColorExtension.swift */,
 				6D6636ECEB580FABA103E5E369A62237 /* UIImageExtension.swift */,
+				53A1D5FA1C789D96009E83CB /* UIColorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1511,8 +1514,10 @@
 				347333CB56DFC99BCBDA86EA2976D5F0 /* GKTableCellBasic.swift in Sources */,
 				E5B75EBF4E4E231BE89F4668F0FAF46B /* GKTableCellCustom.swift in Sources */,
 				7B942F2A2057E80EF0F70B3E27A52185 /* GKTableCellErrorBasic.swift in Sources */,
+				53A1D5FC1C789E00009E83CB /* UIColorExtension.swift in Sources */,
 				5362481A1C78400E004EC051 /* GKKeyboardListener.swift in Sources */,
 				707A0498D85DE91200B1FBA1F9127D58 /* GKTableCellErrorBasic.xib in Sources */,
+				53A1D5F61C789CFB009E83CB /* GKColorRGB.swift in Sources */,
 				B4320FB821ED878F3E482AD9580BA34B /* GKTableSectionBase.swift in Sources */,
 				6BA0C04CDC4F5331B416375C3D8BCE39 /* GKTableSectionTitle.swift in Sources */,
 				3D3BE698E66F63339B2CAE3FDE8FDC5B /* GKTableSectionView.swift in Sources */,
@@ -1521,7 +1526,6 @@
 				116FAD503F06FC6646D8B1703C2E659E /* GKViewControllerBase.swift in Sources */,
 				F966583015F58F689A93C26BD8540088 /* NSNotificationExtension.swift in Sources */,
 				6AD7EDDB672FECFB1F94AA893706B075 /* StringExtension.swift in Sources */,
-				962D8641F25381025BB0DCCC577FF8F8 /* UIColorExtension.swift in Sources */,
 				058C634530012A9C8AC1D497CFE776C2 /* UIImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
