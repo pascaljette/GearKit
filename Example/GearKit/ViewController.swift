@@ -38,6 +38,7 @@ extension RootViewController {
         case SHOW_RADAR_GRAPH = "ShowGKRadarGraphSample"
         case SHOW_MANUAL_LOGIN = "ShowGKManualLoginSample"
         case SHOW_KEYBOARD_SCROLLVIEW = "ShowKeyboardScrollview"
+        case SHOW_TABLE_CUSTOM_CELL = "ShowTableCustomCell"
     }
 }
 
@@ -49,7 +50,7 @@ extension RootViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableSections = [graphSection, manualLoginSection, keyboardSection]
+        tableSections = [tableSection, graphSection, manualLoginSection, keyboardSection]
     }
 }
 
@@ -57,6 +58,22 @@ extension RootViewController {
 // MARK: Computed Properties
 //
 extension RootViewController {
+    
+    // Table section for table
+    var tableSection: GKTableSectionTitle {
+        
+        get {
+            
+            // Graph section
+            let customTableCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
+                , title: "GKTable"
+                , subTitle: "CustomCell"
+                , cellTouchedFunction: { [weak self] _ in self?.navigateToSample(SegueIdentifiers.SHOW_TABLE_CUSTOM_CELL)}
+                , deselectOnSelected: true)
+            
+            return GKTableSectionTitle(cells: [customTableCell], headerTitle: "GKTable")
+        }
+    }
     
     // Table section for graph
     var graphSection: GKTableSectionTitle {

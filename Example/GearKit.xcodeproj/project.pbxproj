@@ -12,6 +12,8 @@
 		535A0CB81C7070B1000C1CFF /* GKKeyboardScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */; };
 		535A0CB91C7070B1000C1CFF /* GKManualLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */; };
 		535A0CBC1C707123000C1CFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 535A0CBA1C707123000C1CFF /* LaunchScreen.storyboard */; };
+		53A067441C7090B20022DF95 /* GKTableCustomCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A067431C7090B20022DF95 /* GKTableCustomCellViewController.swift */; };
+		53A067461C7093120022DF95 /* TripleLabelCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A067451C7093120022DF95 /* TripleLabelCellModel.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -42,6 +44,8 @@
 		535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKKeyboardScrollViewController.swift; sourceTree = "<group>"; };
 		535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKManualLoginViewController.swift; sourceTree = "<group>"; };
 		535A0CBB1C707123000C1CFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		53A067431C7090B20022DF95 /* GKTableCustomCellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableCustomCellViewController.swift; sourceTree = "<group>"; };
+		53A067451C7093120022DF95 /* TripleLabelCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripleLabelCellModel.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* GearKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GearKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 				535A0CB11C7070B1000C1CFF /* Graphs */,
 				535A0CB31C7070B1000C1CFF /* KeyboardScroll */,
 				535A0CB51C7070B1000C1CFF /* ManualLogin */,
+				53A067421C70909A0022DF95 /* Table */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -118,6 +123,15 @@
 				535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */,
 			);
 			path = ManualLogin;
+			sourceTree = "<group>";
+		};
+		53A067421C70909A0022DF95 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				53A067431C7090B20022DF95 /* GKTableCustomCellViewController.swift */,
+				53A067451C7093120022DF95 /* TripleLabelCellModel.swift */,
+			);
+			path = Table;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -400,9 +414,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53A067441C7090B20022DF95 /* GKTableCustomCellViewController.swift in Sources */,
 				535A0CB81C7070B1000C1CFF /* GKKeyboardScrollViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				53A067461C7093120022DF95 /* TripleLabelCellModel.swift in Sources */,
 				535A0CB91C7070B1000C1CFF /* GKManualLoginViewController.swift in Sources */,
 				535A0CB71C7070B1000C1CFF /* GKRadarGraphViewController.swift in Sources */,
 			);
