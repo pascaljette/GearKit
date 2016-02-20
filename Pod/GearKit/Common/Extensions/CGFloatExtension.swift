@@ -26,7 +26,7 @@ import UIKit
 /// Extension for Swift Standard CGFloat type
 extension CGFloat {
     
-    /// Check whether self is equal to another float provided with an epsilon (margin of error0
+    /// Check whether self is equal to another float provided with an epsilon (margin of error)
     ///
     /// - parameter otherFloat: Other value used for comparison
     /// - parameter epsilon: The accepted margin of error for which we will accept equality.

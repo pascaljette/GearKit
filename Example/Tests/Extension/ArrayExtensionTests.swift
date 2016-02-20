@@ -36,6 +36,9 @@ class ArrayExtensionSpec: QuickSpec {
             
             var myArray: [Int?]!
             
+            ///
+            /// MARK: Array contains valid Integers
+            ///
             context("Array contains valid Integers") {
                 
                 beforeEach {
@@ -59,6 +62,9 @@ class ArrayExtensionSpec: QuickSpec {
                 }
             }
             
+            ///
+            /// MARK: Array contains valid Integers and nil values
+            ///
             context("Array contains valid Integers and nil values") {
                 
                 beforeEach {
@@ -82,6 +88,9 @@ class ArrayExtensionSpec: QuickSpec {
                 }
             }
 
+            ///
+            /// MARK: Array contains only nil values
+            ///
             context("Array contains only nil values") {
                 
                 beforeEach {
@@ -104,7 +113,6 @@ class ArrayExtensionSpec: QuickSpec {
                     expect(myArray.isInBounds(-1)) == false
                 }
             }
-            
         }
     }
 }

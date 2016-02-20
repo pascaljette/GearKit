@@ -49,6 +49,9 @@ class CGFloatExtensionSpec: QuickSpec {
             var secondValue: CGFloat!
             var epsilon: CGFloat!
             
+            ///
+            /// MARK: Epsilon is 0
+            ///
             context("Epsilon is 0") {
                 
                 beforeEach {
@@ -105,6 +108,9 @@ class CGFloatExtensionSpec: QuickSpec {
                 }
             }
             
+            ///
+            /// MARK: Epsilon is not 0
+            ///
             context("Epsilon is not 0") {
                 
                 beforeEach {

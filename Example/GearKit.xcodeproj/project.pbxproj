@@ -16,6 +16,7 @@
 		536248231C785161004EC051 /* CGFloatExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536248211C784E8A004EC051 /* CGFloatExtensionTests.swift */; };
 		53A067441C7090B20022DF95 /* GKTableCustomCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A067431C7090B20022DF95 /* GKTableCustomCellViewController.swift */; };
 		53A067461C7093120022DF95 /* TripleLabelCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A067451C7093120022DF95 /* TripleLabelCellModel.swift */; };
+		53A1D5F01C7867E8009E83CB /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D5EE1C78669D009E83CB /* StringExtensionTests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		536248211C784E8A004EC051 /* CGFloatExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloatExtensionTests.swift; sourceTree = "<group>"; };
 		53A067431C7090B20022DF95 /* GKTableCustomCellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableCustomCellViewController.swift; sourceTree = "<group>"; };
 		53A067451C7093120022DF95 /* TripleLabelCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripleLabelCellModel.swift; sourceTree = "<group>"; };
+		53A1D5EE1C78669D009E83CB /* StringExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* GearKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GearKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				5362481E1C7846AA004EC051 /* ArrayExtensionTests.swift */,
 				536248211C784E8A004EC051 /* CGFloatExtensionTests.swift */,
+				53A1D5EE1C78669D009E83CB /* StringExtensionTests.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 			files = (
 				536248231C785161004EC051 /* CGFloatExtensionTests.swift in Sources */,
 				536248201C784801004EC051 /* ArrayExtensionTests.swift in Sources */,
+				53A1D5F01C7867E8009E83CB /* StringExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
