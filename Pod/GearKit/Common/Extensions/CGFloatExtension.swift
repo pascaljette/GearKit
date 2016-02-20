@@ -44,7 +44,16 @@ extension CGFloat {
     /// - returns The value converted to radians.
     public static func degreesToRadians(degrees degrees: CGFloat) -> CGFloat {
         
-        let b = CGFloat(M_PI) * (degrees/180)
-        return b
+        return CGFloat(M_PI) * (degrees/180)
+    }
+    
+    /// Convert radians to degrees
+    ///
+    /// - parameter radians: The radian value to convert to degrees.
+    ///
+    /// - returns The value converted to degrees.
+    public static func radiansToDegrees(radians radians: CGFloat) -> CGFloat {
+        
+        return (radians * 180) / CGFloat(M_PI)
     }
 }
