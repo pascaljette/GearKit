@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>GKNavigationBarDefaultColor</key>
-	<string>#660066FF</string>
+	<string>#333333FF</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
