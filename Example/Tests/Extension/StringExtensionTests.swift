@@ -41,31 +41,31 @@ class StringExtensionSpec: QuickSpec {
                 it("should return true when a string is nil") {
                     
                     let myString: String? = nil
-                    expect(String.isNilOrEmpty(myString)) == true
+                    expect(String.isNilOrEmpty(myString)).to(beTrue())
                 }
                 
                 it("should return true when a string is nil (implicitly unwrapped)") {
                     
                     let myString: String! = nil
-                    expect(String.isNilOrEmpty(myString)) == true
+                    expect(String.isNilOrEmpty(myString)).to(beTrue())
                 }
                 
                 it("should return true when a string is empty") {
                     
                     let myString: String = ""
-                    expect(String.isNilOrEmpty(myString)) == true
+                    expect(String.isNilOrEmpty(myString)).to(beTrue())
                 }
                 
                 it("should return true when an optional string is empty") {
                     
                     let myString: String? = ""
-                    expect(String.isNilOrEmpty(myString)) == true
+                    expect(String.isNilOrEmpty(myString)).to(beTrue())
                 }
 
                 it("should return true when an optional string is empty (implicitly unwrapped)") {
                     
                     let myString: String! = ""
-                    expect(String.isNilOrEmpty(myString)) == true
+                    expect(String.isNilOrEmpty(myString)).to(beTrue())
                 }
             }
             
@@ -77,31 +77,31 @@ class StringExtensionSpec: QuickSpec {
                 it("should return true when a string is nil") {
                     
                     let myString: NSString? = nil
-                    expect(String.isNilOrEmpty(myString)) == true
+                    expect(String.isNilOrEmpty(myString)).to(beTrue())
                 }
                 
                 it("should return true when a string is nil (implicitly unwrapped)") {
                     
                     let myString: NSString! = nil
-                    expect(String.isNilOrEmpty(myString)) == true
+                    expect(String.isNilOrEmpty(myString)).to(beTrue())
                 }
                 
                 it("should return true when a string is empty") {
                     
                     let myString: NSString = ""
-                    expect(String.isNilOrEmpty(myString)) == true
+                    expect(String.isNilOrEmpty(myString)).to(beTrue())
                 }
                 
                 it("should return true when an optional string is empty") {
                     
                     let myString: NSString? = ""
-                    expect(String.isNilOrEmpty(myString)) == true
+                    expect(String.isNilOrEmpty(myString)).to(beTrue())
                 }
                 
                 it("should return true when an optional string is empty (implicitly unwrapped)") {
                     
                     let myString: NSString! = ""
-                    expect(String.isNilOrEmpty(myString)) == true
+                    expect(String.isNilOrEmpty(myString)).to(beTrue())
                 }
             }
             
@@ -114,19 +114,19 @@ class StringExtensionSpec: QuickSpec {
                 it("should return false when a string is not nil") {
                     
                     let myString: String? = "Hello World"
-                    expect(String.isNilOrEmpty(myString)) == false
+                    expect(String.isNilOrEmpty(myString)).to(beFalse())
                 }
                 
                 it("should return false when a string is not nil (implicitly unwrapped)") {
                     
                     let myString: String! = "Hello World"
-                    expect(String.isNilOrEmpty(myString)) == false
+                    expect(String.isNilOrEmpty(myString)).to(beFalse())
                 }
                 
                 it("should return false when a string is not empty") {
                     
                     let myString: String = "Hello World"
-                    expect(String.isNilOrEmpty(myString)) == false
+                    expect(String.isNilOrEmpty(myString)).to(beFalse())
                 }
             }
             
@@ -138,19 +138,19 @@ class StringExtensionSpec: QuickSpec {
                 it("should return false when a string is not nil") {
                     
                     let myString: NSString? = "Hello World"
-                    expect(String.isNilOrEmpty(myString)) == false
+                    expect(String.isNilOrEmpty(myString)).to(beFalse())
                 }
                 
                 it("should return false when a string is not nil (implicitly unwrapped)") {
                     
                     let myString: NSString! = "Hello World"
-                    expect(String.isNilOrEmpty(myString)) == false
+                    expect(String.isNilOrEmpty(myString)).to(beFalse())
                 }
                 
                 it("should return false when a string is not empty") {
                     
                     let myString: NSString = "Hello World"
-                    expect(String.isNilOrEmpty(myString)) == false
+                    expect(String.isNilOrEmpty(myString)).to(beFalse())
                 }
             }
         }

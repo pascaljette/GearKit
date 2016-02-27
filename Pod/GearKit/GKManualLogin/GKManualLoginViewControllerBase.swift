@@ -182,7 +182,6 @@ extension GKManualLoginViewControllerBase {
     // MARK: Value changed callbacks
     //
 
-    
     /// Called when the username text field value changed.  Update the userName value and
     /// change the login button's enabled status.
     ///

@@ -48,17 +48,17 @@ class ArrayExtensionSpec: QuickSpec {
                 
                 it("should return true when in bounds") {
                     
-                    expect(myArray.isInBounds(1)) == true
+                    expect(myArray.isInBounds(1)).to(beTrue())
                 }
                 
                 it("should return false when out of bounds") {
                     
-                    expect(myArray.isInBounds(4)) == false
+                    expect(myArray.isInBounds(4)).to(beFalse())
                 }
                 
                 it("should return false when using an invalid index") {
                     
-                    expect(myArray.isInBounds(-1)) == false
+                    expect(myArray.isInBounds(-1)).to(beFalse())
                 }
             }
             
@@ -74,17 +74,17 @@ class ArrayExtensionSpec: QuickSpec {
                 
                 it("should return true when in bounds") {
                     
-                    expect(myArray.isInBounds(1)) == true
+                    expect(myArray.isInBounds(1)).to(beTrue())
                 }
                 
                 it("should return false when out of bounds") {
                     
-                    expect(myArray.isInBounds(4)) == false
+                    expect(myArray.isInBounds(4)).to(beFalse())
                 }
                 
                 it("should return false when using an invalid index") {
                     
-                    expect(myArray.isInBounds(-1)) == false
+                    expect(myArray.isInBounds(-1)).to(beFalse())
                 }
             }
 
@@ -100,17 +100,17 @@ class ArrayExtensionSpec: QuickSpec {
                 
                 it("should return true when in bounds") {
                     
-                    expect(myArray.isInBounds(1)) == true
+                    expect(myArray.isInBounds(1)).to(beTrue())
                 }
                 
                 it("should return false when out of bounds") {
                     
-                    expect(myArray.isInBounds(4)) == false
+                    expect(myArray.isInBounds(4)).to(beFalse())
                 }
                 
                 it("should return false when using an invalid index") {
                     
-                    expect(myArray.isInBounds(-1)) == false
+                    expect(myArray.isInBounds(-1)).to(beFalse())
                 }
             }
         }

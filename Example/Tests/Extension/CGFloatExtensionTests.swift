@@ -64,7 +64,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = 10.0
                     secondValue = 10.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == true
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beTrue())
                 }
                 
                 it("should return true when floats are negative and equal") {
@@ -72,7 +72,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = -10.0
                     secondValue = -10.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == true
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beTrue())
                 }
                 
                 it("should return false when floats are positive and not equal") {
@@ -80,7 +80,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = 10.0
                     secondValue = 10.1
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == false
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beFalse())
                 }
                 
                 it("should return false when floats are negative and not equal") {
@@ -88,7 +88,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = -10.0
                     secondValue = -10.1
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == false
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beFalse())
                 }
                 
                 it("should return false when floats are positive/negative and not equal") {
@@ -96,7 +96,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = 10.0
                     secondValue = -10.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == false
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beFalse())
                 }
                 
                 it("should return false when floats are negative and not equal") {
@@ -104,7 +104,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = -10.0
                     secondValue = 10.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == false
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beFalse())
                 }
             }
             
@@ -123,7 +123,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = 10.0
                     secondValue = 19.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == true
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beTrue())
                 }
                 
                 it("should return true when floats are negative and equal with epsilon") {
@@ -131,7 +131,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = -19.0
                     secondValue = -10.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == true
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beTrue())
                 }
                 
                 it("should return true when floats are positive/negative and equal with epsilon") {
@@ -139,7 +139,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = 6.0
                     secondValue = -3.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == true
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beTrue())
                 }
                 
                 it("should return true when floats are negative/positive and equal with epsilon") {
@@ -147,7 +147,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = -5.0
                     secondValue = 2.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == true
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beTrue())
                 }
                 
                 it("should return false when floats are positive and not equal with epsilon") {
@@ -155,7 +155,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = 10.0
                     secondValue = 21.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == false
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beFalse())
                 }
                 
                 it("should return false when floats are negative and not equal with epsilon") {
@@ -163,7 +163,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = -21.0
                     secondValue = -10.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == false
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beFalse())
                 }
                 
                 it("should return false when floats are positive/negative and not equal with epsilon") {
@@ -171,7 +171,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = 6.0
                     secondValue = -5.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == false
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beFalse())
                 }
                 
                 it("should return false when floats are negative/positive and not equal with epsilon") {
@@ -179,7 +179,7 @@ class CGFloatExtensionSpec: QuickSpec {
                     firstValue = -5.0
                     secondValue = 9.0
                     
-                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)) == false
+                    expect(firstValue.isEqualWithEpsilon(secondValue, epsilon: epsilon)).to(beFalse())
                 }
             }
         }
@@ -200,12 +200,12 @@ class CGFloatExtensionSpec: QuickSpec {
                 
                 it("should return 0 when converting degrees -> radians") {
                     
-                    expect(CGFloat.degreesToRadians(degrees: 0)) == 0
+                    expect(CGFloat.degreesToRadians(degrees: 0)).to(equal(0))
                 }
                 
                 it("should return 0 when converting radians -> degrees") {
                     
-                    expect(CGFloat.radiansToDegrees(radians: 0)) == 0
+                    expect(CGFloat.radiansToDegrees(radians: 0)).to(equal(0))
                 }
             }
             
@@ -213,12 +213,12 @@ class CGFloatExtensionSpec: QuickSpec {
                 
                 it("should return M_PI / 2 when converting 90 degrees -> radians") {
                     
-                    expect(CGFloat.degreesToRadians(degrees: 90)) == CGFloat(M_PI_2)
+                    expect(CGFloat.degreesToRadians(degrees: 90)).to(equal(CGFloat(M_PI_2)))
                 }
                 
                 it("should return 0 when converting radians -> degrees") {
                     
-                    expect(CGFloat.radiansToDegrees(radians: CGFloat(M_PI_2))) == 90
+                    expect(CGFloat.radiansToDegrees(radians: CGFloat(M_PI_2))).to(equal(90))
                 }
             }
             
@@ -226,12 +226,12 @@ class CGFloatExtensionSpec: QuickSpec {
                 
                 it("should return 0 when converting degrees -> radians") {
                     
-                    expect(CGFloat.degreesToRadians(degrees: 540)) == CGFloat(3 * M_PI)
+                    expect(CGFloat.degreesToRadians(degrees: 540)).to(equal(CGFloat(3 * M_PI)))
                 }
                 
                 it("should return 0 when converting radians -> degrees") {
                     
-                    expect(CGFloat.radiansToDegrees(radians: CGFloat(3 * M_PI))) == 540
+                    expect(CGFloat.radiansToDegrees(radians: CGFloat(3 * M_PI))).to(equal(540)) 
                 }
             }
 

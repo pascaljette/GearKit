@@ -55,6 +55,8 @@
 		5362481A1C78400E004EC051 /* GKKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536248191C78400E004EC051 /* GKKeyboardListener.swift */; };
 		53A1D5F61C789CFB009E83CB /* GKColorRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D5F41C789843009E83CB /* GKColorRGB.swift */; };
 		53A1D5FC1C789E00009E83CB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D5FA1C789D96009E83CB /* UIColorExtension.swift */; };
+		53A1D5FF1C804814009E83CB /* GKFirstResponderChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D5FE1C804814009E83CB /* GKFirstResponderChain.swift */; };
+		53A1D6021C80500C009E83CB /* GKDoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D6011C80500C009E83CB /* GKDoublyLinkedList.swift */; };
 		57777286FA55D7EBAC87D8FD9E82B9C1 /* GKManualLoginViewControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131811CF89927E2BF329EF2F3DFEC64A /* GKManualLoginViewControllerBase.swift */; };
 		58DE63B2FF3954F1467A5B41D8FF3932 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1EF76FE0C0FE0638FCD1666876DF45 /* XCTest.framework */; };
 		58EBA2C1A43283FB2188AB1FB592D32B /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D68C595A7CAF15BC8BF040ACA6450 /* DSL.swift */; };
@@ -313,6 +315,8 @@
 		536248191C78400E004EC051 /* GKKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKKeyboardListener.swift; sourceTree = "<group>"; };
 		53A1D5F41C789843009E83CB /* GKColorRGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKColorRGB.swift; sourceTree = "<group>"; };
 		53A1D5FA1C789D96009E83CB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		53A1D5FE1C804814009E83CB /* GKFirstResponderChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKFirstResponderChain.swift; sourceTree = "<group>"; };
+		53A1D6011C80500C009E83CB /* GKDoublyLinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKDoublyLinkedList.swift; sourceTree = "<group>"; };
 		542A67643521E1A85112D15CF6F15D4D /* GKTableCellCustom.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GKTableCellCustom.swift; sourceTree = "<group>"; };
 		5D1EF76FE0C0FE0638FCD1666876DF45 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5E0F6A5AD14204A8A8EDBDB1028C2F68 /* NimbleSnapshotsConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NimbleSnapshotsConfiguration.swift; sourceTree = "<group>"; };
@@ -700,6 +704,22 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		53A1D5FD1C8047D7009E83CB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				53A1D5FE1C804814009E83CB /* GKFirstResponderChain.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		53A1D6001C804FBF009E83CB /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				53A1D6011C80500C009E83CB /* GKDoublyLinkedList.swift */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
 		541FC1668390E986604AA4D883A27B09 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -1053,9 +1073,11 @@
 			isa = PBXGroup;
 			children = (
 				9FE253056FE7D12CB17B93C215D8280F /* Common */,
+				53A1D6001C804FBF009E83CB /* DataStructures */,
 				3C322D9012CA76AA8AFB04B80B04EB4F /* GKGraphs */,
 				436EBD37F553D83DFF90E60EF8942053 /* GKManualLogin */,
 				BE1F7AB6B8EFFA1094B0BF7B19F9616D /* GKTable */,
+				53A1D5FD1C8047D7009E83CB /* Views */,
 			);
 			path = GearKit;
 			sourceTree = "<group>";
@@ -1500,6 +1522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69DEBE7FB554C5331238F06367EB7A95 /* ArrayExtension.swift in Sources */,
+				53A1D6021C80500C009E83CB /* GKDoublyLinkedList.swift in Sources */,
 				26AC982EF1E3F7EFD7D92C46C3FBCB87 /* CGFloatExtension.swift in Sources */,
 				5F880131B885CDF272F7D20822DCC605 /* GearKit-dummy.m in Sources */,
 				89AF7E4A168485F1CBD7AB20EF6813F0 /* GKManualLoginDelegate.swift in Sources */,
@@ -1517,6 +1540,7 @@
 				53A1D5FC1C789E00009E83CB /* UIColorExtension.swift in Sources */,
 				5362481A1C78400E004EC051 /* GKKeyboardListener.swift in Sources */,
 				707A0498D85DE91200B1FBA1F9127D58 /* GKTableCellErrorBasic.xib in Sources */,
+				53A1D5FF1C804814009E83CB /* GKFirstResponderChain.swift in Sources */,
 				53A1D5F61C789CFB009E83CB /* GKColorRGB.swift in Sources */,
 				B4320FB821ED878F3E482AD9580BA34B /* GKTableSectionBase.swift in Sources */,
 				6BA0C04CDC4F5331B416375C3D8BCE39 /* GKTableSectionTitle.swift in Sources */,
