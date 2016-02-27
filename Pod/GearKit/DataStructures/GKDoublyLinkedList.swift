@@ -22,47 +22,103 @@
 
 import Foundation
 
+///
+/// MARK: GKDoublyLinkedListNode
+///
+
+/// Class representing a node in the doubly linked list.
 public class GKDoublyLinkedListNode<Element: Comparable> {
     
+    ///
+    /// MARK: Initializers
+    ///
+
+    /// Parameterless constructor.
     private init() {
         
     }
-    
+
+    /// Normal constructor.
+    ///
+    /// - parameter owner: The linked list owning this node.
+    /// - parameter element: The value associated with the node.
     private init(owner: GKDoublyLinkedList<Element>, element: Element?) {
     
         self.owner = owner
         self.element = element
     }
     
-    public var element: Element?
-    private(set) public var next: GKDoublyLinkedListNode?
-    private(set) public var previous: GKDoublyLinkedListNode?
+    ///
+    /// MARK: Stored properties
+    ///
     
-    private var owner: GKDoublyLinkedList<Element>?
+    /// Value associated with the node.
+    public var element: Element?
+    
+    /// Reference on the next node.  Nil if this is the last (tail) node.
+    private(set) public var next: GKDoublyLinkedListNode?
+    
+    /// Reference on the previous node.  Nil if this is the first (head) node.
+    private(set) public weak var previous: GKDoublyLinkedListNode?
+    
+    /// Reference to the linked list owning this node.
+    private weak var owner: GKDoublyLinkedList<Element>?
 }
 
 /// Doubly linked list.  Insertions are less expensive than a Swift array.
 /// Swift arrays are contiguous in memory and therefore, insertion is 0(n) whereas
-/// with doubly linked-list, insertion can be made in 0(1)
+/// with doubly linked-list, insertion can be made in 0(1).
+/// See: http://swiftdoc.org/v2.1/type/Array/
 public class GKDoublyLinkedList<Element: Comparable> {
+    
+    ///
+    /// MARK: Nested types
+    ///
     
     /// Typealias for the node.
     public typealias Node = GKDoublyLinkedListNode<Element>
     
-    /// Refrence on the first element of the list.
+    ///
+    /// MARK: Stored properties
+    ///
+    
+    /// Reference on the first element of the list.
     public var head: Node = Node()
     
     /// Reference on the last element of the list
     public var tail: Node? = nil
+    
+    ///
+    /// MARK: Initializers
+    ///
     
     /// Empty initializer
     public init() {
         
     }
     
-    /// Append an element at the end of the list.
+    /// TODO untested.
+    public init(fromArray: [Element]) {
+        
+        for element in fromArray {
+            
+            insertTail(element)
+        }
+    }
+}
+
+
+extension GKDoublyLinkedList {
+    
     ///
-    /// - parameter element: The element to append.
+    /// MARK: Node insertion
+    ///
+    
+    /// Insert an element at the beginning of the list.
+    ///
+    /// - parameter element: The element to insert.
+    ///
+    /// - returns: A Node containing the element that has just been added.
     public func insertHead(element: Element) -> Node {
         
         // If the list is empty
@@ -85,11 +141,13 @@ public class GKDoublyLinkedList<Element: Comparable> {
         return newNode
     }
     
-    /// Append an element at the end of the list.
+    /// Insert an element at the end of the list.
     ///
-    /// - parameter element: The element to append.
+    /// - parameter element: The element to insert.
+    ///
+    /// - returns: A Node containing the element that has just been added.
     public func insertTail(element: Element) -> Node {
-
+        
         // If the list is empty
         guard let currentTail = tail else {
             
@@ -101,7 +159,7 @@ public class GKDoublyLinkedList<Element: Comparable> {
         }
         
         let newNode: Node = Node(owner: self, element: element)
-
+        
         newNode.previous = currentTail
         currentTail.next = newNode
         tail = newNode
@@ -109,7 +167,13 @@ public class GKDoublyLinkedList<Element: Comparable> {
         return newNode
     }
     
-    // insertAfter
+    /// Insert an element after another known node.
+    ///
+    /// - parameter node: The node after which to insert a new element.
+    /// - parameter element: The element to insert.
+    ///
+    /// - returns: A Node containing the element that has just been added.
+    /// Nil if the operation failed.
     public func insertAfter(node: Node, element: Element) -> Node? {
         
         // If the list is empty
@@ -118,11 +182,13 @@ public class GKDoublyLinkedList<Element: Comparable> {
             return nil
         }
         
+        // If the node comes from a different list
         if node.owner !== self {
             
             return nil
         }
         
+        // Create the node
         let newNode = Node(owner: self, element: element)
         newNode.previous = node
         
@@ -130,7 +196,7 @@ public class GKDoublyLinkedList<Element: Comparable> {
             
             newNode.next = nil
             tail = newNode
-        
+            
         } else {
             
             newNode.next = node.next
@@ -138,19 +204,26 @@ public class GKDoublyLinkedList<Element: Comparable> {
         
         node.next?.previous = newNode
         node.next = newNode
-
+        
         return newNode
     }
     
-    // insertBefore
+    /// Insert an element before another known node.
+    ///
+    /// - parameter node: The node before which to insert a new element.
+    /// - parameter element: The element to insert.
+    ///
+    /// - returns: A Node containing the element that has just been added.
+    /// Nil if the operation failed.
     public func insertBefore(node: Node, element: Element) -> Node? {
         
-        // If the list is empty
+        // If the list is empty.
         guard let _ = tail else {
             
             return nil
         }
         
+        // If the node comes from another list.
         if node.owner !== self {
             
             return nil
@@ -174,9 +247,22 @@ public class GKDoublyLinkedList<Element: Comparable> {
         
         return newNode
     }
+}
 
+extension GKDoublyLinkedList {
     
-    // firstNodeOfValue
+    ///
+    /// MARK: Node find
+    ///
+    
+    
+    /// Get the first node in the list that has an element equal to the provided parameter.
+    ///
+    /// - parameter element: The element against which to compare.  The first (closest to the head)
+    /// node which satisfies the node.element == element condition will be returned.
+    ///
+    /// - returns: A Node containing the element that has just been added.
+    /// Nil if the list contains no such node.
     public func firstNodeOfValue(element: Element) -> Node? {
         
         var currentNode: Node? = head
@@ -194,37 +280,314 @@ public class GKDoublyLinkedList<Element: Comparable> {
         return nil
     }
     
-    // lastNodeOfValue
+    /// Get the last node in the list that has an element equal to the provided parameter.
+    ///
+    /// - parameter element: The element against which to compare.  The last (closest to the tail)
+    /// node which satisfies the node.element == element condition will be returned.
+    ///
+    /// - returns: A Node containing the element that has just been added.
+    /// Nil if the list contains no such node.
+    public func lastNodeOfValue(element: Element) -> Node? {
+        
+        var currentNode: Node? = tail
+        
+        while currentNode != nil {
+            
+            if currentNode?.element == element {
+                
+                return currentNode
+            }
+            
+            currentNode = currentNode?.previous
+        }
+        
+        return nil
+    }
+}
+
+extension GKDoublyLinkedList {
     
-    // removeFirst
+    ///
+    /// MARK: Node removal
+    ///
     
-    // removeLast
+    /// Remove a node from the list.
+    ///
+    /// - parameter node: The node to remove.
+    ///
+    /// - returns: True if the node could be removed, false otherwise.
+    public func removeNode(node: Node) -> Bool {
+        
+        if node.owner !== self {
+            
+            return false
+        }
+        
+        if node === head {
+            
+            return removeHead()
+        }
+        
+        if node === tail {
+            
+            return removeTail()
+        }
+        
+        guard let previousNode = node.previous, nextNode = node.next else {
+            
+            return false
+        }
+        
+        previousNode.next = nextNode
+        nextNode.previous = previousNode
+        
+        node.previous = nil
+        node.next = nil
+        
+        return true
+    }
     
-    // first (TODO rename)
-    public var first: Element? {
+    /// Remove the first (head) node in the list.
+    ///
+    /// - returns: True if the operation succeeds, false otherwise.
+    public func removeHead() -> Bool {
+        
+        // if the list is empty
+        if isEmpty {
+            
+            return false
+        }
+        
+        // If the list contains only one element.
+        if head === tail {
+            
+            head = Node()
+            tail = nil
+            return true
+        }
+        
+        // If the list contains multiple elements.
+        guard let newHead = head.next else {
+            
+            return false
+        }
+        
+        newHead.previous = nil
+        head = newHead
+        
+        return true
+    }
+    
+    /// Remove the last (tail) node in the list.
+    ///
+    /// - returns: True if the operation succeeds, false otherwise.
+    public func removeTail() -> Bool {
+        
+        
+        // if the list is empty
+        if isEmpty {
+            
+            return false
+        }
+        
+        // If the list contains only one element
+        if head === tail {
+            
+            head = Node()
+            tail = nil
+            return true
+        }
+        
+        // If the list contains multiple elements
+        guard let newTail = tail?.previous else {
+            
+            return false
+        }
+        
+        newTail.next = nil
+        tail = newTail
+        
+        return true
+    }
+    
+    
+    /// Remove the first (closest to the head) node in the list that
+    /// has an element equal to the provided parameter.
+    ///
+    /// - parameter element: The element against which to compare.  The first (closest to the head)
+    /// node which satisfies the node.element == element condition will be removed.
+    ///
+    /// - returns: True if the operation succeeds, false otherwise.
+    public func removeFirstNodeOfValue(element: Element) -> Bool {
+        
+        guard let node = firstNodeOfValue(element) else {
+            
+            return false
+        }
+        
+        return removeNode(node)
+    }
+    
+    /// Remove the last (closest to the tail) node in the list that
+    /// has an element equal to the provided parameter.
+    ///
+    /// - parameter element: The element against which to compare.  The first (closest to the head)
+    /// node which satisfies the node.element == element condition will be removed.
+    ///
+    /// - returns: True if the operation succeeds, false otherwise.
+    public func removeLastNodeOfValue(element: Element) -> Bool {
+        
+        guard let node = lastNodeOfValue(element) else {
+            
+            return false
+        }
+        
+        return removeNode(node)
+    }
+    
+    /// Clear the list by removing all nodes.
+    /// We must remove all references here to make sure memory is properly de-allocated.
+    public func clear() {
+        
+        guard let _ = tail else {
+            
+            return
+        }
+        
+        var currentNode: Node? = head
+        
+        while(currentNode != nil) {
+            
+            var nodeToDelete = currentNode
+            currentNode = currentNode!.next
+            
+            nodeToDelete!.previous = nil
+            nodeToDelete!.next = nil
+            nodeToDelete = nil
+        }
+    }
+}
+
+extension GKDoublyLinkedList {
+    
+    ///
+    /// MARK: List queries
+    ///
+    
+    /// Value contained in the first (head) node.  Nil for an empty list.
+    public var firstValue: Element? {
         
         return head.element
     }
     
-    // last (TODO rename)
-    public var last: Element? {
+    /// Value contained in the last (tail) node.  Nil for an empty list.
+    public var lastValue: Element? {
         
         return tail?.element
     }
     
-    // count
+    /// Whether the list is empty.  Returns false if the list contains at least 1 value.
+    public var isEmpty: Bool {
+        
+        return count == 0
+    }
     
+    // TODO-untested
+    /// Number of elements in the list.
+    public var count: Int {
+        
+        guard let _ = tail else {
+            
+            return 0
+        }
+        
+        var count: Int = 0
+        var currentNode: Node? = head
+        
+        while(currentNode != nil) {
+            
+            count += 1
+            currentNode = currentNode!.next
+        }
+        
+        return count
+    }
+    
+    // TODO-untested
+    /// Returns an array containing all the non-nil values in the list.
+    public var array: [Element] {
+        
+        var array: [Element] = []
+        
+        guard let _ = tail else {
+            
+            return array
+        }
+        
+        var currentNode: Node? = head
+        
+        while(currentNode != nil) {
+            
+            if let elementInstance = currentNode!.element {
+                
+                array.append(elementInstance)
+            }
+            
+            currentNode = currentNode!.next
+        }
+        
+        return array
+    }
+    
+    // TODO-untested
+    /// Check whether the list contains the provided element.
+    ///
+    /// - parameter element: Comparable element against which to check for equality (==)
+    ///
+    /// - returns: True if the list contains the element, false otherwise.
+    public func contains(element: Element) -> Bool {
+        
+        return firstNodeOfValue(element) != nil
+    }
+}
+
+
+
+extension GKDoublyLinkedList where Element: CustomStringConvertible {
+    
+    ///
+    /// MARK: Functions for CustomStringConvertible elements
+    ///
+    
+    /// Print all values (elements) contained in the list
+    /// to the console.
+    public func printAllElements() {
+        
+        var currentNode: Node? = head
+        
+        while currentNode != nil {
+            
+            print(currentNode!.element)
+            currentNode = currentNode?.next
+        }
+    }
 }
 
 extension GKDoublyLinkedList where Element: CustomDebugStringConvertible {
     
+    ///
+    /// MARK: Functions for CustomDebugStringConvertible elements
+    ///
+    
+    /// Print all values (elements) contained in the list
+    /// to the console.  More suited for debugging.
     public func debugPrintAllElements() {
         
         var currentNode: Node? = head
         
         while currentNode != nil {
             
-            debugPrint(currentNode)
+            debugPrint(currentNode!.element)
             currentNode = currentNode?.next
         }
     }
