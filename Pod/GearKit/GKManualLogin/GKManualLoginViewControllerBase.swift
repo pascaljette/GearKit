@@ -22,42 +22,60 @@
 
 import UIKit
 
-//
-// MARK: Stored properties
-//
-
 /// Base class for a view controller with login.
+/// Uses IBOutlets for all fields.
 public class GKManualLoginViewControllerBase: GKViewControllerBase {
-    
+
+    //
+    // MARK: IBOutlets
+    //
+
+    /// Textfield for the username box.
     @IBOutlet weak public var userNameTextField: UITextField?
+    
+    /// Textfield for the password box.
     @IBOutlet weak public var passwordTextField: UITextField?
     
+    /// Button that starts the login procedure.
     @IBOutlet weak public var loginButton: UIButton?
 
+    /// Switch to activate auto-login (remember authentication credentials)
     @IBOutlet weak public var rememberMeSwitch: UISwitch?
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Username value from the textfield.
     public var userName: String?
+    
+    /// Password value from the textfield.
     public var password: String?
     
+    /// Delegate that performs the actual login operations
     public weak var loginDelegate: GKManualLoginDelegate?
-    
-    private var _activeField: UITextInputTraits?
 }
 
-//
-// MARK: Computed properties
-//
-/// Base class for a view controller with login.
 extension GKManualLoginViewControllerBase {
-
+    //
+    // MARK: Computed properties
+    //
+    
+    /// Returns the value of the remember switch.  If the switch instance is nil, returns the
+    /// default value (false)
     public var rememberMe: Bool {
         return rememberMeSwitch?.on ?? false
     }
 }
 
-/// IBActions
 extension GKManualLoginViewControllerBase {
+    //
+    // MARK: IBActions
+    //
     
+    /// Called when the login button is pressed.  Attach your Touch Up Inside event from 
+    /// the login button to this ib action.  The actual login action will be performed in the delegate's
+    /// performLogin() implementation
     @IBAction func loginButtonPressed(sender: AnyObject) {
         
         self.view.endEditing(true)
@@ -65,12 +83,12 @@ extension GKManualLoginViewControllerBase {
     }
 }
 
-//
-// MARK: UIViewController overrides
-//
 extension GKManualLoginViewControllerBase {
+    //
+    // MARK: UIViewController overrides
+    //
     
-    /// View did load
+    /// View did load.  Setup all the actions and parameters of our UI elements.
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,21 +112,25 @@ extension GKManualLoginViewControllerBase {
         
         // Set the delegates for the done button
         userNameTextField?.delegate = self
-        
         passwordTextField?.delegate = self
         
         // When the view loads, both fields are empty so the login button shouldn't be enabled
         loginButton?.enabled = !isUsernameOrPasswordEmpty()
     }
     
-    /// View did appear
+    /// View did appear.  Make the username textfield the first responder when the view appears.
+    ///
+    /// - parameter animated: Whether to animate the viewDidAppear action.
     public override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         userNameTextField?.becomeFirstResponder()
     }
     
-    /// View did disappear
+    /// View did disappear.  Make sure the keyboard is dismissed when the view disappears
+    /// (sanity check)
+    ///
+    /// - parameter animated: Whether to animate the viewDidDisappear action.
     public override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -116,12 +138,15 @@ extension GKManualLoginViewControllerBase {
     }
 }
 
-//
-// MARK: UITextFieldDelegate implementation
-//
 extension GKManualLoginViewControllerBase: UITextFieldDelegate {
     
-    /// Executed when the 'Return' or 'Done' button is pressed
+    //
+    // MARK: UITextFieldDelegate implementation
+    //
+    
+    /// Executed when the 'Return' or 'Done' button is pressed.
+    /// If the username is the currently active textfield, automatically go to the password
+    /// textfield.  If the password is the currently active textfield, perform the login operation.
     public func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         guard !String.isNilOrEmpty(textField.text) else {
@@ -149,26 +174,16 @@ extension GKManualLoginViewControllerBase: UITextFieldDelegate {
         
         return true
     }
-    
-    // became first responder
-    public func textFieldDidBeginEditing(textField: UITextField) {
-        
-        _activeField = textField
-    }
-    
-    public func textFieldDidEndEditing(textField: UITextField)  {
-        
-        _activeField = nil
-    }
-
 }
 
-//
-// MARK: Value changed methods
-//
 extension GKManualLoginViewControllerBase {
     
-    /// Called when the username text field value changed
+    //
+    // MARK: Value changed callbacks
+    //
+
+    /// Called when the username text field value changed.  Update the userName value and
+    /// change the login button's enabled status.
     ///
     /// - parameter sender: The textfield sending the event
     internal func usernameTextFieldValueChanged(sender: AnyObject) {
@@ -182,7 +197,8 @@ extension GKManualLoginViewControllerBase {
         loginButton?.enabled = !isUsernameOrPasswordEmpty()
     }
     
-    /// Called when the username text field value changed
+    /// Called when the password text field value changed.  Update the userName value and
+    /// change the login button's enabled status.
     ///
     /// - parameter sender: The textfield sending the event
     internal func passwordTextFieldValueChanged(sender: AnyObject) {
@@ -197,11 +213,12 @@ extension GKManualLoginViewControllerBase {
     }
 }
 
-//
-// MARK: Private methods
-//
 extension GKManualLoginViewControllerBase {
 
+    //
+    // MARK: Private methods
+    //
+    
     /// Check whether the username and password fields are empty.
     ///
     /// - returns True if either the username or password values are empty, false otherwise.

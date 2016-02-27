@@ -21,31 +21,10 @@
 // SOFTWARE.
 
 import Foundation
-import UIKit
 
-/// Extension for the Swift Standard UIImage class
-extension UIImage {
-    
-    /// Generate an image from a solid color.
-    ///
-    /// - parameter color: The color to use
-    /// - parameter size:  Size of the image.  Defaults to one pixel.UIColor
-    ///
-    /// - returns: The generated solid color image.
-    public static func fromColor(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
-        
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        
-        UIGraphicsBeginImageContext(rect.size)
-        
-        let context = UIGraphicsGetCurrentContext()
-        
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
-        
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return img
-    }
+/// Constants for fields defined in the main bundle's plist file that can be used by GearKit
+public final class GKPlistKeyConstants {
+
+    /// Plist key for the navigation bar default color.
+    public static let NAVIGATION_BAR_DEFAULT_COLOR_KEY: String = "GKNavigationBarDefaultColor"
 }

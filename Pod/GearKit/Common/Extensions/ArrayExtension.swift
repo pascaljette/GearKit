@@ -30,7 +30,7 @@ extension Array {
     /// - parameter index: The index to check.
     ///
     /// - returns True if the index is within the array's bounds, false otherwise.
-    func isInBounds(index: Int) -> Bool {
+    public func isInBounds(index: Int) -> Bool {
         
         return indices ~= index
     }

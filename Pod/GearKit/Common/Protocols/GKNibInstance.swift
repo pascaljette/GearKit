@@ -25,7 +25,7 @@ import UIKit
 
 /// Protocol for all classes that are directly tied to a .xib file.
 /// It is normally expected that the class will have the same name as the .xib file.
-protocol GKNibInstance {
+public protocol GKNibInstance {
 
     /// Name of the .xib file associated with the class.
     /// It is normally expected that the class will have the same name as the .xib file.

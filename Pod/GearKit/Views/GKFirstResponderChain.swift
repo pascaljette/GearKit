@@ -23,29 +23,22 @@
 import Foundation
 import UIKit
 
-/// Extension for the Swift Standard UIImage class
-extension UIImage {
+class GKFirstResponderChain {
     
-    /// Generate an image from a solid color.
-    ///
-    /// - parameter color: The color to use
-    /// - parameter size:  Size of the image.  Defaults to one pixel.UIColor
-    ///
-    /// - returns: The generated solid color image.
-    public static func fromColor(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+    typealias OnCompletion = () -> Void
+    
+    class GKResponderObject {
         
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        init(responder: UIResponder
+            , onCompletion: OnCompletion?) {
+            
+            self.responder = responder
+            self.onCompletion = onCompletion
+        }
         
-        UIGraphicsBeginImageContext(rect.size)
-        
-        let context = UIGraphicsGetCurrentContext()
-        
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
-        
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return img
+        var responder: UIResponder
+        var onCompletion: OnCompletion?
     }
+    
+    var responders: [GKResponderObject] = []
 }

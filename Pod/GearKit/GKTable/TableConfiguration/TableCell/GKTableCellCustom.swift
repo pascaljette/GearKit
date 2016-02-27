@@ -32,6 +32,7 @@ public class GKTableCellCustom<ModelType> : GKTableCellBase {
     // MARK: Stored properties
     //
     
+    /// Model associated with the cell.  Will be used to populate the actual UI element instance.
     public var model: ModelType?
     
     //

@@ -22,32 +22,35 @@
 
 import UIKit
 
-//
-// MARK: Stored properties
-//
-
-/// Base class for a navigation view controller
+/// Base class for a navigation view controller.  Implements some functions
+/// useful for common cases across navigation controller implementations.
 public class GKNavigationControllerBase: UINavigationController {
     
+    //
+    // MARK: Computed properties
+    //
+    
     /// Navigation bar color.  Override this to set a different color in child classes.
-    var navigationBarColor: UIColor {
+    /// By default, this will retrieve the color in the main bundle's plist file defined by
+    /// the GKPlistKeyConstants.NAVIGATION_BAR_DEFAULT_COLOR_KEY constants.  If not found, defaults
+    /// defaults to white.
+    public var navigationBarColor: UIColor {
         
-        // TODO-pk put this in constants (hardcoded string)
-        if let plistDefinition = NSBundle.mainBundle().objectForInfoDictionaryKey("GKNavigationBarDefaultColor") {
+        if let plistDefinition = NSBundle.mainBundle().objectForInfoDictionaryKey(GKPlistKeyConstants.NAVIGATION_BAR_DEFAULT_COLOR_KEY) {
             
             if let colorDefinition = plistDefinition as? String {
-                
-                return UIColor(rgbaString: colorDefinition) ?? UIColor.whiteColor()
+                                
+                return GKColorRGB(rgbaString: colorDefinition)?.uiColor ?? UIColor.whiteColor()
             }
         }
         return UIColor.whiteColor()
     }
     
-    /// Force white navigation text.
-    var forceWhiteNavigationText: Bool {
+    /// Force white navigation text.  Forces the text on the navigation bar to be white.
+    /// By default, take the grayscale value of the background color and returns true if the
+    /// color is judged to be white.
+    public var forceWhiteNavigationText: Bool {
 
-        // By default, we want the greatest contrast between the text color and the background color.
-        // Text colors are considered to be either white or black.
         var white: CGFloat = 0.0
         
         if navigationBarColor.getWhite(&white, alpha: nil) {
@@ -62,19 +65,22 @@ public class GKNavigationControllerBase: UINavigationController {
     }
 }
 
-//
-// MARK: UIViewController overrides
-//
-
 extension GKNavigationControllerBase {
+
+    //
+    // MARK: UIViewController overrides
+    //
     
-    /// View did loads
+    /// View did load.  Set the bar tint color (
     override public func viewDidLoad() {
         
         super.viewDidLoad()
         
         navigationBar.barTintColor = navigationBarColor
-        navigationBar.tintColor = UIColor.whiteColor()
+        
+        navigationBar.tintColor = forceWhiteNavigationText
+            ? UIColor.whiteColor()
+            : UIColor.blackColor()
         
         navigationBar.barStyle = forceWhiteNavigationText
             ? UIBarStyle.Black

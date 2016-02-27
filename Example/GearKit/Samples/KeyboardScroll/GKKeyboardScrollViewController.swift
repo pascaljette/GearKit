@@ -23,9 +23,6 @@
 import UIKit
 import GearKit
 
-//
-// MARK: Class declaration
-//
 class GKKeyboardScrollViewController: UIViewController {
     
     

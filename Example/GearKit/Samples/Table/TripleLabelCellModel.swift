@@ -21,31 +21,11 @@
 // SOFTWARE.
 
 import Foundation
-import UIKit
 
-/// Extension for the Swift Standard UIImage class
-extension UIImage {
+class TripleLabelCellModel {
     
-    /// Generate an image from a solid color.
-    ///
-    /// - parameter color: The color to use
-    /// - parameter size:  Size of the image.  Defaults to one pixel.UIColor
-    ///
-    /// - returns: The generated solid color image.
-    public static func fromColor(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
-        
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        
-        UIGraphicsBeginImageContext(rect.size)
-        
-        let context = UIGraphicsGetCurrentContext()
-        
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
-        
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return img
-    }
+    var string1: String?
+    var string2: String?
+    var string3: String?
+    
 }

@@ -20,32 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
 import UIKit
+import GearKit
 
-/// Extension for the Swift Standard UIImage class
-extension UIImage {
+class GKTableCustomCellViewController : GKTableViewControllerBase {
+
+    enum CellIdentifiers: String {
+        
+        case TRIPLE_LABEL = "TripleLabelCell"
+        case LABEL_BUTTON = "LabelButtonCell"
+    }
     
-    /// Generate an image from a solid color.
-    ///
-    /// - parameter color: The color to use
-    /// - parameter size:  Size of the image.  Defaults to one pixel.UIColor
-    ///
-    /// - returns: The generated solid color image.
-    public static func fromColor(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+    override func viewDidLoad() {
         
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        
-        UIGraphicsBeginImageContext(rect.size)
-        
-        let context = UIGraphicsGetCurrentContext()
-        
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
-        
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return img
+        super.viewDidLoad()
     }
 }

@@ -23,10 +23,10 @@
 import Foundation
 import UIKit
 
-// Extension for CGFloat
+/// Extension for Swift Standard CGFloat type
 extension CGFloat {
     
-    /// Check whether self is equal to another float provided with an epsilon (margin of error0
+    /// Check whether self is equal to another float provided with an epsilon (margin of error)
     ///
     /// - parameter otherFloat: Other value used for comparison
     /// - parameter epsilon: The accepted margin of error for which we will accept equality.
@@ -42,10 +42,18 @@ extension CGFloat {
     /// - parameter degrees: The degree value to convert to radians.
     ///
     /// - returns The value converted to radians.
-    static func degreesToRadians(degrees degrees: CGFloat) -> CGFloat {
+    public static func degreesToRadians(degrees degrees: CGFloat) -> CGFloat {
         
-        let b = CGFloat(M_PI) * (degrees/180)
-        return b
+        return CGFloat(M_PI) * (degrees/180)
     }
-
+    
+    /// Convert radians to degrees
+    ///
+    /// - parameter radians: The radian value to convert to degrees.
+    ///
+    /// - returns The value converted to degrees.
+    public static func radiansToDegrees(radians radians: CGFloat) -> CGFloat {
+        
+        return (radians * 180) / CGFloat(M_PI)
+    }
 }

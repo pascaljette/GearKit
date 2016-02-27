@@ -23,25 +23,21 @@
 import Foundation
 import UIKit
 
+
 /// Base ViewController class to use for functional table views.  Derive your UIViewController from this.
 /// UITableViewController is not supported.
-
-//
-// MARK: Stored properties
-//
-
 public class GKTableViewControllerBase : GKViewControllerBase {
     
     //
     // MARK: IBOutlets
     //
     
-    /// IBOutlet for the table view.  Make sure to connect it from the storyboard.
+    /// IBOutlet for the table view.  Make sure to connect it from the storyboard/xib.
     /// Setting the delegate and datasource is not required and will be overridden in viewDidLoad anyways.
     @IBOutlet public var tableView: UITableView!
     
     //
-    // MARK: Properties
+    // MARK: Stored properties
     //
 
     /// An array of sections that contain all the configuration information to draw the table.
@@ -53,10 +49,6 @@ public class GKTableViewControllerBase : GKViewControllerBase {
         }
     }
 }
-
-//
-// MARK: Computed properties
-//
 extension GKTableViewControllerBase {
     
     //
@@ -69,7 +61,7 @@ extension GKTableViewControllerBase {
     }
     
     //
-    // MARK: Properties
+    // MARK: Computed properties
     //
     
     /// Override this to provide the default estimated row height for your table view.
@@ -80,10 +72,11 @@ extension GKTableViewControllerBase {
     }
 }
 
-//
-// MARK: Methods
-//
 extension GKTableViewControllerBase {
+    
+    //
+    // MARK: Methods
+    //
     
     /// Get cell info corresponding to an index path.
     ///
@@ -145,10 +138,11 @@ extension GKTableViewControllerBase {
     }
 }
 
-//
-// MARK: UIViewController overrides
-//
 extension GKTableViewControllerBase {
+    
+    //
+    // MARK: UIViewController overrides
+    //
     
     /// viewDidLoad.  Sets the delegate and datasource as well as setting up the table for automatic cell sizing.
     override public func viewDidLoad() {
@@ -165,7 +159,6 @@ extension GKTableViewControllerBase {
     }
 }
 
-/// UITableViewDataSource implementation
 extension GKTableViewControllerBase: UITableViewDataSource {
     
     //
@@ -173,18 +166,29 @@ extension GKTableViewControllerBase: UITableViewDataSource {
     //
     
     /// Number of sections
+    ///
+    /// - parameter tableView: Table view instance requesting the number of sections.
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return tableSections.count
     }
     
     /// Number of rows in each section.  Simply calculated from the data in our section array.
+    ///
+    /// - parameter tableView: Table view instance requesting the number of rows.
+    /// - parameter section: Section requesting the number of rows.
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return tableSections[section].cells.count
     }
     
     /// Generate the cell from our configuration array and returns the generated instance.
+    ///
+    /// - parameter tableView: Table view instance requesting the cell generation function.
+    /// - parameter indexPath: Index of the cell to generate
+    ///
+    /// - returns: The generate table view cell. Not optional.  Will return the default 
+    /// UITableViewCell() on unhandled exception.
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let generatedCell: UITableViewCell
@@ -209,7 +213,12 @@ extension GKTableViewControllerBase: UITableViewDataSource {
         return generatedCell
     }
     
-    /// Generate the title for a section header
+    /// Generate the title for a section header.
+    ///
+    /// - parameter tableView: Table view instance requesting the header title.
+    /// - parameter section Section for which to assign the header string.
+    ///
+    /// - returns: Header title string.  Nil for no header.
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         guard let sectionWithTitle = tableSections[section] as? GKTableSectionTitle else {
@@ -220,7 +229,12 @@ extension GKTableViewControllerBase: UITableViewDataSource {
         return sectionWithTitle.headerTitle
     }
     
-    /// Generate the title for a section footer
+    /// Generate the title for a section footer.
+    ///
+    /// - parameter tableView: Table view instance requesting section title.
+    /// - parameter section Section for which to assign the footer string.
+    ///
+    /// - returns: Footer title string.  Nil for no footer.
     public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         guard let sectionWithTitle = tableSections[section] as? GKTableSectionTitle else {
@@ -233,7 +247,6 @@ extension GKTableViewControllerBase: UITableViewDataSource {
 
 }
 
-/// UITableViewDelegate implementation
 extension GKTableViewControllerBase: UITableViewDelegate {
     
     //
@@ -241,6 +254,9 @@ extension GKTableViewControllerBase: UITableViewDelegate {
     //
     
     /// Call the callback from the cell configuration array when a row is selected.
+    ///
+    /// - parameter tableView: Table view instance requesting cell selection.
+    /// - parameter indexPath: Index of the selected cell
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //
@@ -257,6 +273,11 @@ extension GKTableViewControllerBase: UITableViewDelegate {
     }
     
     /// View for a section header.  Set to nil to have no header.
+    ///
+    /// - parameter tableView: Table view instance requesting header view.
+    /// - parameter section: The section index for which to generate the view.
+    ///
+    /// - returns: View for header.  Nil for no header.
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         guard let sectionWithView = tableSections[section] as? GKTableSectionView else {
@@ -268,6 +289,11 @@ extension GKTableViewControllerBase: UITableViewDelegate {
     }
     
     /// View for a section footer.  Set to nil to have no footer.
+    ///
+    /// - parameter tableView: Table view instance requesting footer view.
+    /// - parameter section: The section index for which to generate the view.
+    ///
+    /// - returns: View for footer.  Nil for no footer.
     public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
         guard let sectionWithView = tableSections[section] as? GKTableSectionView else {

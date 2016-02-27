@@ -22,7 +22,7 @@
 
 import Foundation
 
-/// Utilities for string in extension
+/// Extension for the Swift Standard String class
 extension String {
     
     /// Check whether a string is nil or empty
@@ -37,6 +37,29 @@ extension String {
             
             return true
         }
+        
         return nonOptionalString.isEmpty
+    }
+    
+    /// Check whether a string is nil or empty (NSString version).
+    /// We need an NSString version because the following:
+    ///
+    /// let myString: NSString? = nil
+    /// let mySwiftString: String = String(myString)
+    ///
+    /// will create a string equal to "nil" and not a nil string.
+    ///
+    /// - parameter stringToCheck: Optional string to check
+    ///
+    /// - returns True if the string is nil or empty, false otherwise.  Note that it will return true
+    /// even if the string contains only whitespace characters.
+    public static func isNilOrEmpty(stringToCheck: NSString?) -> Bool {
+        
+        guard let nonOptionalString = stringToCheck else {
+            
+            return true
+        }
+        
+        return nonOptionalString.length == 0
     }
 }

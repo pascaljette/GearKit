@@ -23,71 +23,21 @@
 import Foundation
 import UIKit
 
-@objc
-public protocol GKScrollingKeyboardListener  {
+/// Protocol for a listener on a screen that can display the keyboard and also contains
+/// a scrollView.  Handles automatic scrollling of the scroll view to display 
+/// fields over the keyboard when it is shown.
+public protocol GKScrollingKeyboardListener : GKKeyboardListener {
     
+    /// ScrollView for the keyboard listener.
     var scrollView: UIScrollView? { get set }
-    
-    // We need to force implementation of these methods because 
-    // we cannot declare selectors in protocol extensions.
-    var activeField: UITextInputTraits? { get set }
-    
-    // The keyboard visibility isn't automatically updated.  It must be implemented
-    // by implementing classes.
-    var keyboardVisible: Bool { get set }
-    
-    optional func keyboardWillAppear(notification: NSNotification)
-    optional func keyboardDidAppear(notification: NSNotification)
-    optional func keyboardWillDisappear(notification: NSNotification)
-    optional func keyboardDidDisappear(notification: NSNotification)
 }
 
 extension GKScrollingKeyboardListener where Self : UIViewController {
-    
-    /// Call this in viewDidLoad
-    public func addKeyboardObserver() {
-        
-        // Setup keyboard observers.  No need to add an observer if the method
-        // is not implemented.
-        if let _ = keyboardWillAppear {
-            
-            NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "keyboardWillAppear:",
-                name: UIKeyboardWillShowNotification,
-                object: nil)
-        }
-        
-        if let _ = keyboardDidAppear {
-            
-            NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "keyboardDidAppear:",
-                name: UIKeyboardDidShowNotification,
-                object: nil)
-        }
-        
-        if let _ = keyboardWillDisappear {
-            
-            NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "keyboardWillDisappear:",
-                name: UIKeyboardWillHideNotification,
-                object: nil)
-        }
-        
-        if let _ = keyboardDidDisappear {
-            
-            NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "keyboardDidDisappear:",
-                name: UIKeyboardDidHideNotification,
-                object: nil)
-        }
-    }
-    
-    /// Call this in both viewWillDisappear and deinit
-    public func removeKeyboardObserver() {
-        
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
 
+    //
+    // MARK: Auto-scrolling implementations
+    //
+    
     /// Call in keyboardDidAppear
     public final func adjustInsetsOnKeyboardShow(notification: NSNotification) {
         

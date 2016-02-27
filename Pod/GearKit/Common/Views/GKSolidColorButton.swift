@@ -23,9 +23,31 @@
 import Foundation
 import UIKit
 
-/// Button with a solid color that shows an highlighted state
+/// Button with a solid color that shows an highlighted state.  UIButton with a background
+/// color does not support a different color on highlighted and disabled states by default.
+/// Therefore, we create a single pixel of a certain color and set it as background image.
+/// That way, we can set a different color for highlighted and disabled states.
 public class GKSolidColorButton: UIButton {
     
+    //
+    // MARK: Stored properties
+    //
+
+    /// Store the current highlighted background color
+    private var _highlightedBackgroundColor: UIColor?
+    
+    /// Store the current disabled background color
+    private var _disabledBackgroundColor: UIColor?
+}
+
+extension GKSolidColorButton {
+    
+    //
+    // MARK: UIButton overrides
+    //
+    
+    /// Sets the background color as a single pixel image of the given color for the
+    /// NORMAL state.
     override public var backgroundColor: UIColor? {
         
         get {
@@ -45,9 +67,16 @@ public class GKSolidColorButton: UIButton {
             self.setBackgroundImage(UIImage.fromColor(colorInstance), forState: .Normal)
         }
     }
+}
+
+extension GKSolidColorButton {
     
-    private var _highlightedBackgroundColor: UIColor?
+    //
+    // MARK: Computed properties
+    //
     
+    /// Sets the background color as a single pixel image of the given color for the
+    /// Highlighted state.
     @IBInspectable
     public var highlightedBackgroundColor: UIColor? {
         
@@ -63,7 +92,7 @@ public class GKSolidColorButton: UIButton {
             if let colorInstance = _highlightedBackgroundColor {
                 
                 self.setBackgroundImage(UIImage.fromColor(colorInstance), forState: .Highlighted)
-
+                
             } else {
                 
                 self.setBackgroundImage(nil, forState: .Highlighted)
@@ -71,8 +100,8 @@ public class GKSolidColorButton: UIButton {
         }
     }
     
-    private var _disabledBackgroundColor: UIColor?
-
+    /// Sets the background color as a single pixel image of the given color for the
+    /// Disabled state.
     @IBInspectable
     public var disabledBackgroundColor: UIColor? {
         
@@ -96,6 +125,4 @@ public class GKSolidColorButton: UIButton {
             
         }
     }
-
-
 }

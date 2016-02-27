@@ -23,11 +23,11 @@
 import Foundation
 import UIKit
 
-/// Extension for the NSNotification class
+/// Extension for the Swift Standard NSNotification class
 extension NSNotification {
 
     /// Get the keyboard size.  Will return 0 for all non-keyboard-related notifications
-    var keyboardSize: CGSize {
+    public var keyboardSize: CGSize {
         
         guard let notificationDict: Dictionary = self.userInfo else {
             
@@ -36,5 +36,4 @@ extension NSNotification {
         
         return notificationDict[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue.size ?? CGSize(width: 0, height: 0)
     }
-    
 }

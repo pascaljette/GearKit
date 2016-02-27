@@ -22,7 +22,7 @@
 
 import UIKit
 
-/// Base class for all view controllers.  Use it to make your life easier.
+/// Base class for all view controllers.
 public class GKViewControllerBase: UIViewController {
     
     //
@@ -30,23 +30,22 @@ public class GKViewControllerBase: UIViewController {
     //
 }
 
-//
-// MARK: UIViewController overrides
-//
 extension GKViewControllerBase {
     
+    //
+    // MARK: UIViewController overrides
+    //
 }
 
-//
-// MARK: Methods
-//
 extension GKViewControllerBase {
-    
+  
+    //
+    // MARK: Methods
+    //
 }
 
-//
-// MARK: Private Methods
-//
 extension GKViewControllerBase {
-    
+    //
+    // MARK: Private Methods
+    // 
 }
