@@ -626,7 +626,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                     myList.insertTail(1)
                     myList.insertTail(2)
                     myList.insertTail(5)
-                    
+                                        
                     expect(myList.removeLastNodeOfValue(2)).to(beTrue())
                     expect(myList.isEmpty).to(beFalse())
                     

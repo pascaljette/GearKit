@@ -27,7 +27,7 @@ import Foundation
 ///
 
 /// Class representing a node in the doubly linked list.
-public class GKDoublyLinkedListNode<Element: Comparable> {
+public final class GKDoublyLinkedListNode<Element: Comparable> {
     
     ///
     /// MARK: Initializers
@@ -69,7 +69,7 @@ public class GKDoublyLinkedListNode<Element: Comparable> {
 /// Swift arrays are contiguous in memory and therefore, insertion is 0(n) whereas
 /// with doubly linked-list, insertion can be made in 0(1).
 /// See: http://swiftdoc.org/v2.1/type/Array/
-public class GKDoublyLinkedList<Element: Comparable> {
+public final class GKDoublyLinkedList<Element: Comparable> {
     
     ///
     /// MARK: Nested types
@@ -512,33 +512,7 @@ extension GKDoublyLinkedList {
         
         return count
     }
-    
-    // TODO-untested
-    /// Returns an array containing all the non-nil values in the list.
-    public var array: [Element] {
         
-        var array: [Element] = []
-        
-        guard let _ = tail else {
-            
-            return array
-        }
-        
-        var currentNode: Node? = head
-        
-        while(currentNode != nil) {
-            
-            if let elementInstance = currentNode!.element {
-                
-                array.append(elementInstance)
-            }
-            
-            currentNode = currentNode!.next
-        }
-        
-        return array
-    }
-    
     // TODO-untested
     /// Check whether the list contains the provided element.
     ///
@@ -551,7 +525,35 @@ extension GKDoublyLinkedList {
     }
 }
 
+// TODO-untested
+extension GKDoublyLinkedList : SequenceType {
+    
+    ///
+    /// MARK: SequenceType implementation
+    ///
+    
+    /// Generate the sequence from the list.
+    ///
+    /// - returns: The generator that builds the sequence.
+    public func generate() -> AnyGenerator<Element> {
+        
+        var current : GKDoublyLinkedList.Node? = head
+        
+        return anyGenerator {
 
+            while (current != nil) {
+                
+                if let currentInstance = current {
+                    
+                    current = current?.next
+                    return currentInstance.element
+                }
+            }
+            
+            return nil
+        }
+    }
+}
 
 extension GKDoublyLinkedList where Element: CustomStringConvertible {
     
