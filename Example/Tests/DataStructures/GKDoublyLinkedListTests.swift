@@ -42,6 +42,10 @@ class GKDoublyLinkedListTests: QuickSpec {
         lastNodeOfValueTests()
         
         removeNodeTests()
+        
+        listQueryTests()
+        
+        sequenceTypeTests()
     }
     
     //
@@ -647,6 +651,193 @@ class GKDoublyLinkedListTests: QuickSpec {
                     
                     nodeToCheck = nodeToCheck!.next
                     expect(nodeToCheck).to(beNil())
+                }
+            }
+        }
+    }
+    
+    //
+    // MARK: listQueryTests
+    //
+
+    func listQueryTests() {
+        
+        describe("GKDoublyLinkedList lastNodeOfValue tests") {
+            
+            context("count tests") {
+                
+                it("Should return 0 for an empty list") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    
+                    expect(myList.count).to(equal(0))
+                }
+                
+                it("Should return 1 for a list with a single value") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    myList.insertTail(1)
+                    
+                    expect(myList.count).to(equal(1))
+                }
+                
+                it("Should return proper count for a list with multiple values") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    myList.insertTail(1)
+                    myList.insertTail(2)
+                    myList.insertTail(3)
+                    myList.insertTail(4)
+
+                    expect(myList.count).to(equal(4))
+                }
+                
+                it("Should return proper count for a list with multiple values after removal") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    myList.insertTail(1)
+                    myList.insertTail(2)
+                    myList.insertTail(3)
+                    myList.insertTail(4)
+                    
+                    myList.removeFirstNodeOfValue(3)
+                    
+                    expect(myList.count).to(equal(3))
+                }
+                
+                it("Should return 0 for a cleared list") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    myList.insertTail(1)
+                    myList.insertTail(2)
+                    myList.insertTail(3)
+                    myList.insertTail(4)
+                    
+                    myList.clear()
+                                        
+                    expect(myList.count).to(equal(0))
+                }
+            }
+            
+            context("contains tests") {
+            
+                it("Should return false for an empty list") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    
+                    expect(myList.contains(0)).to(beFalse())
+                }
+                
+                it("Should return true for a single value list containing the value") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    myList.insertTail(1)
+                    
+                    expect(myList.contains(1)).to(beTrue())
+                }
+                
+                it("Should return false for a single value list containing the value") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    myList.insertTail(1)
+                    
+                    expect(myList.contains(2)).to(beFalse())
+                }
+                
+                it("Should return true for a multiple value list containing the value") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    myList.insertTail(1)
+                    myList.insertTail(2)
+                    myList.insertTail(3)
+                    myList.insertTail(4)
+
+                    expect(myList.contains(4)).to(beTrue())
+                }
+
+                it("Should return false for a multiple value list not containing the value") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    myList.insertTail(1)
+                    myList.insertTail(2)
+                    myList.insertTail(3)
+                    myList.insertTail(4)
+
+                    expect(myList.contains(5)).to(beFalse())
+                }
+            }
+        }
+    }
+    
+    
+    //
+    // MARK: sequenceTypeTests
+    //
+    
+    func sequenceTypeTests() {
+        
+        describe("SequenceType tests") {
+            
+            context("Array from list") {
+                
+                it("Should create an empty array from an empty list") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    let myArray = Array(myList)
+                    
+                    expect(myArray).to(beEmpty())
+                }
+                
+                it("Should create an array from a single value list") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    myList.insertTail(1)
+                    let myArray = Array(myList)
+                    
+                    expect(myArray).to(equal([1]))
+                }
+                
+                it("Should create an array from a multiple value list") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    myList.insertTail(1)
+                    myList.insertTail(2)
+                    myList.insertTail(3)
+                    myList.insertTail(4)
+
+                    let myArray = Array(myList)
+                    
+                    expect(myArray).to(equal([1, 2, 3, 4]))
+                }                
+            }
+            
+            context("List from array") {
+                
+                it("Should create an empty list from an empty array") {
+                    
+                    let myArray: [Int] = []
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>(myArray)
+                    
+                    expect(myList.isEmpty).to(beTrue())
+                }
+                
+                it("Should create a single value list from a single value array") {
+                    
+                    let myArray: [Int] = [1]
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>(myArray)
+                    
+                    expect(myList.count).to(equal(1))
+                    expect(myList.firstValue).to(equal(1))
+                }
+                
+                it("Should create a proper list from a multiple value array") {
+                    
+                    let myArray: [Int] = [1, 2, 3, 4]
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>(myArray)
+                    
+                    expect(myList.count).to(equal(4))
+                    expect(myList.firstValue).to(equal(1))
+                    expect(myList.lastValue).to(equal(4))
                 }
             }
         }

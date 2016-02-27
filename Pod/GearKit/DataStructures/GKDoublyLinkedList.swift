@@ -97,12 +97,14 @@ public final class GKDoublyLinkedList<Element: Comparable> {
         
     }
     
-    /// TODO untested.
-    public init(fromArray: [Element]) {
+    /// Initialize from another sequence.
+    public init<S : SequenceType where S.Generator.Element: Comparable>(_ s: S) {
+     
+        var generator = s.generate()
         
-        for element in fromArray {
+        while let nextElement = generator.next() {
             
-            insertTail(element)
+            insertTail(nextElement as! Element)
         }
     }
 }
@@ -459,12 +461,16 @@ extension GKDoublyLinkedList {
         while(currentNode != nil) {
             
             var nodeToDelete = currentNode
-            currentNode = currentNode!.next
             
             nodeToDelete!.previous = nil
             nodeToDelete!.next = nil
             nodeToDelete = nil
+            
+            currentNode = currentNode!.next
         }
+        
+        head = Node()
+        tail = nil
     }
 }
 
@@ -492,7 +498,6 @@ extension GKDoublyLinkedList {
         return count == 0
     }
     
-    // TODO-untested
     /// Number of elements in the list.
     public var count: Int {
         
@@ -513,7 +518,6 @@ extension GKDoublyLinkedList {
         return count
     }
         
-    // TODO-untested
     /// Check whether the list contains the provided element.
     ///
     /// - parameter element: Comparable element against which to check for equality (==)
@@ -525,7 +529,6 @@ extension GKDoublyLinkedList {
     }
 }
 
-// TODO-untested
 extension GKDoublyLinkedList : SequenceType {
     
     ///
@@ -555,42 +558,54 @@ extension GKDoublyLinkedList : SequenceType {
     }
 }
 
-extension GKDoublyLinkedList where Element: CustomStringConvertible {
+extension GKDoublyLinkedList: CustomStringConvertible {
     
     ///
     /// MARK: Functions for CustomStringConvertible elements
     ///
     
-    /// Print all values (elements) contained in the list
-    /// to the console.
-    public func printAllElements() {
+    /// Description of the list based on all contained elements.
+    public var description: String {
         
-        var currentNode: Node? = head
+        let currentNode: Node? = head
+        var fullDescription: String = ""
         
         while currentNode != nil {
+
+            if currentNode !== head {
+                
+                fullDescription += ", "
+            }
             
-            print(currentNode!.element)
-            currentNode = currentNode?.next
+            fullDescription += "[\((currentNode as? CustomStringConvertible)?.description)]"
         }
+
+        return fullDescription
     }
 }
 
-extension GKDoublyLinkedList where Element: CustomDebugStringConvertible {
+extension GKDoublyLinkedList: CustomDebugStringConvertible {
     
     ///
     /// MARK: Functions for CustomDebugStringConvertible elements
     ///
     
-    /// Print all values (elements) contained in the list
-    /// to the console.  More suited for debugging.
-    public func debugPrintAllElements() {
+    /// Description of the list based on all contained elements.
+    public var debugDescription: String {
         
-        var currentNode: Node? = head
+        let currentNode: Node? = head
+        var fullDescription: String = ""
         
         while currentNode != nil {
             
-            debugPrint(currentNode!.element)
-            currentNode = currentNode?.next
+            if currentNode !== head {
+                
+                fullDescription += ", "
+            }
+            
+            fullDescription += "[\(currentNode.debugDescription)]"
         }
+        
+        return fullDescription
     }
 }
