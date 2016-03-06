@@ -36,11 +36,11 @@ extension GKRadarGraphViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let hpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "HP")
-        let mpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "MP")
-        let strengthParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Strength")
-        let defenseParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Defense")
-        let magicParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Magic", nameOffset: CGPoint(x: 10, y: -20))
+        let hpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Serie 1")
+        let mpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Serie 2")
+        let strengthParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Serie 3")
+        let defenseParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Serie 4")
+        let magicParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Serie 5", nameOffset: CGPoint(x: 10, y: -20))
         
         radarGraphView.parameter = [hpParameter, mpParameter, strengthParameter, defenseParameter, magicParameter]
         
@@ -48,10 +48,9 @@ extension GKRadarGraphViewController {
         let firstSerie = GKRadarGraphView.Serie()
         firstSerie.strokeColor = UIColor.blackColor()
         
-        let firstColor: UIColor = UIColor(red: 0.8, green: 0.6, blue: 0.0, alpha: 0.96)
-        let finalColor: UIColor = UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 0.96)
+        let fillColor: UIColor = UIColor(red: 0.8, green: 0.6, blue: 0.0, alpha: 0.96)
         
-        firstSerie.fillMode = .GRADIENT(firstColor, finalColor)
+        firstSerie.fillMode = .SOLID(fillColor)
         
         firstSerie.percentageValues = [0.9, 0.5, 0.6, 0.2, 0.9]
         

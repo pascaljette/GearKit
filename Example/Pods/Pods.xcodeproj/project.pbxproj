@@ -35,7 +35,7 @@
 		33514FEE6EA65605EFB6F1801834B692 /* AssertionDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E1FAB84B5FD3C6248F3D54C5599E56 /* AssertionDispatcher.swift */; };
 		347333CB56DFC99BCBDA86EA2976D5F0 /* GKTableCellBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF59B5002811032788FC6ED30385C0 /* GKTableCellBasic.swift */; };
 		35848D70EAC9237246BDF63457729694 /* FBSnapshotTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEC4C198587CE8BFF1144D7CD614F35 /* FBSnapshotTestCase.m */; };
-		35DBE8A3833E47EDE6EF12FEC2D45759 /* GKRadarGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9018D05CF817D2406439E6C4B0A2AD16 /* GKRadarGraph.swift */; };
+		35DBE8A3833E47EDE6EF12FEC2D45759 /* GKRadarGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9018D05CF817D2406439E6C4B0A2AD16 /* GKRadarGraphView.swift */; };
 		3859B57D192738B05DD59A859B253938 /* GKNavigationControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ADB2DDB0197553F9D2E5E040868246 /* GKNavigationControllerBase.swift */; };
 		3A92AEE86034356AF8987F20EE1F82DF /* EndWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446AA3EA645EEF4129EE6FF752768DC7 /* EndWith.swift */; };
 		3AEAC447B09E7AABC140654C8529BC94 /* MatcherFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66CC4243D51B5BC2CBB0D7C867A15C3 /* MatcherFunc.swift */; };
@@ -348,7 +348,7 @@
 		8A382644FE83AF4F776230B7A3ED2EDF /* Nimble-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nimble-prefix.pch"; sourceTree = "<group>"; };
 		8A61EF4BBB5588FD26257AF5E1102FE3 /* Pods-GearKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GearKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8DEC1FBF04886DCE84159B97E1B4FB1B /* Pods-GearKit_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GearKit_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		9018D05CF817D2406439E6C4B0A2AD16 /* GKRadarGraph.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GKRadarGraph.swift; sourceTree = "<group>"; };
+		9018D05CF817D2406439E6C4B0A2AD16 /* GKRadarGraphView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GKRadarGraphView.swift; sourceTree = "<group>"; };
 		923F02878EFE1AAF9DCB5CF75696FC09 /* Quick.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Quick.xcconfig; sourceTree = "<group>"; };
 		933AE39FA3E14AECAD42ABEC26131D0C /* Stringers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stringers.swift; path = Nimble/Utils/Stringers.swift; sourceTree = "<group>"; };
 		93AD55831A3B61BCFD12CA19D4547C2F /* BeLessThan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeLessThan.swift; path = Nimble/Matchers/BeLessThan.swift; sourceTree = "<group>"; };
@@ -620,7 +620,7 @@
 		2A8C45C517309A1FCD63801381EA9F56 /* GKRadarGraph */ = {
 			isa = PBXGroup;
 			children = (
-				9018D05CF817D2406439E6C4B0A2AD16 /* GKRadarGraph.swift */,
+				9018D05CF817D2406439E6C4B0A2AD16 /* GKRadarGraphView.swift */,
 			);
 			path = GKRadarGraph;
 			sourceTree = "<group>";
@@ -1530,7 +1530,7 @@
 				3859B57D192738B05DD59A859B253938 /* GKNavigationControllerBase.swift in Sources */,
 				536248181C78356B004EC051 /* GKPlistKeyConstants.swift in Sources */,
 				1D7CD7AA05DF24A0004FDF69F9AB11EB /* GKNibInstance.swift in Sources */,
-				35DBE8A3833E47EDE6EF12FEC2D45759 /* GKRadarGraph.swift in Sources */,
+				35DBE8A3833E47EDE6EF12FEC2D45759 /* GKRadarGraphView.swift in Sources */,
 				4CD4F241E8F53B5BA90A9A0FEBBCBF4B /* GKScrollingKeyboardListener.swift in Sources */,
 				85DC3054CAD3F256F35F5CFD08383A9A /* GKSolidColorButton.swift in Sources */,
 				FBC714B6C9100335C0E2081EAF90B168 /* GKTableCellBase.swift in Sources */,
