@@ -199,33 +199,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5j-r7-poT" customClass="GKRadarGraphView" customModule="GearKit">
-                                <rect key="frame" x="40" y="104" width="520" height="456"/>
-                                <color key="backgroundColor" red="0.24970474140429008" green="0.85292851594997487" blue="0.86000001430511475" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="outerStrokeColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="outerStrokeWidth">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="gradationStrokeColor">
-                                        <color key="value" red="0.42068957740000001" green="0.83495592949999997" blue="0.37698748970000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyH-mZ-Gg8" customClass="GKRadarGraphView" customModule="GearKit">
+                                <rect key="frame" x="8" y="184" width="584" height="296"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Y5j-r7-poT" firstAttribute="leading" secondItem="fu3-iR-G5O" secondAttribute="leading" constant="40" id="Jux-Y9-FvB"/>
-                            <constraint firstItem="Y5j-r7-poT" firstAttribute="top" secondItem="dws-G2-uX2" secondAttribute="bottom" constant="40" id="fg8-Oh-FQx"/>
-                            <constraint firstItem="f2d-v1-meW" firstAttribute="top" secondItem="Y5j-r7-poT" secondAttribute="bottom" constant="40" id="gE0-P9-Szw"/>
-                            <constraint firstAttribute="trailing" secondItem="Y5j-r7-poT" secondAttribute="trailing" constant="40" id="qi3-UI-9r8"/>
+                            <constraint firstAttribute="trailing" secondItem="NyH-mZ-Gg8" secondAttribute="trailing" constant="8" id="bIE-Is-tUg"/>
+                            <constraint firstItem="NyH-mZ-Gg8" firstAttribute="top" secondItem="dws-G2-uX2" secondAttribute="bottom" constant="120" id="dOJ-lT-7dP"/>
+                            <constraint firstItem="NyH-mZ-Gg8" firstAttribute="leading" secondItem="fu3-iR-G5O" secondAttribute="leading" constant="8" id="jPU-a8-JDb"/>
+                            <constraint firstItem="f2d-v1-meW" firstAttribute="top" secondItem="NyH-mZ-Gg8" secondAttribute="bottom" constant="120" id="thL-lp-3Wv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="GKRadarGraphView" id="yWM-tm-tUj"/>
                     <connections>
-                        <outlet property="radarGraphView" destination="Y5j-r7-poT" id="RpL-fC-jTL"/>
+                        <outlet property="radarGraphView" destination="NyH-mZ-Gg8" id="hLh-zc-nBT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CM6-Tl-hbM" userLabel="First Responder" sceneMemberID="firstResponder"/>

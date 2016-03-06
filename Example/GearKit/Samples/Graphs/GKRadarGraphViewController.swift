@@ -40,7 +40,7 @@ extension GKRadarGraphViewController {
         let mpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Serie 2")
         let strengthParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Serie 3")
         let defenseParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Serie 4")
-        let magicParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Serie 5", nameOffset: CGPoint(x: 10, y: -20))
+        let magicParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "abcdefghijkl")
         
         radarGraphView.parameter = [hpParameter, mpParameter, strengthParameter, defenseParameter, magicParameter]
         
@@ -48,13 +48,13 @@ extension GKRadarGraphViewController {
         let firstSerie = GKRadarGraphView.Serie()
         firstSerie.strokeColor = UIColor.blackColor()
         
-        let fillColor: UIColor = UIColor(red: 0.8, green: 0.6, blue: 0.0, alpha: 0.96)
+        let fillColor: UIColor = UIColor.blueColor()
         
         firstSerie.fillMode = .SOLID(fillColor)
         
         firstSerie.percentageValues = [0.9, 0.5, 0.6, 0.2, 0.9]
         
-        radarGraphView.margin = 36
+        radarGraphView.margin = 0
         radarGraphView.series = [firstSerie]
     }
 }
