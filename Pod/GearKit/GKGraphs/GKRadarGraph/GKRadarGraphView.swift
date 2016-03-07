@@ -23,6 +23,15 @@
 import Foundation
 import UIKit
 
+//
+// TODO: Make all calculations in a background thread and then draw everything in the main thread
+//
+
+//
+// TODO: Add a circle type as well as a polygon type
+//
+
+
 /// Draw a fully customizable radar graph.  A simple preview is also visible in 
 /// Interface Builder thanks tot he IBDesignable property.
 @IBDesignable
@@ -45,6 +54,19 @@ public class GKRadarGraphView : UIView {
             case NONE
         }
         
+        /// Type for decorations on each vertex of the serie
+        public enum DecorationType {
+            
+            /// Square shape.  Takes the shape radius as a parameter.
+            case SQUARE(CGFloat)
+            
+            /// Diamond shape (square rotated 45 degrees). Takes the shape radius as a parameter.
+            case DIAMOND(CGFloat)
+            
+            /// Circle shape. Takes the shape radius as a parameter.
+            case CIRCLE(CGFloat)
+        }
+        
         /// Empty initializer.
         public init() {
             
@@ -56,7 +78,7 @@ public class GKRadarGraphView : UIView {
         /// Serie's name.
         public var name: String?
         
-        /// Stroke color for the serie
+        /// Stroke color for the serie.  Also controls the color of the vertex decorations.
         public var strokeColor: UIColor?
         
         /// Stroke width for the serie.
@@ -65,6 +87,12 @@ public class GKRadarGraphView : UIView {
         /// Percentage of the max value for each of the serie's attributes.  This must follow
         /// the same order as the owning graph parameters.
         public var percentageValues: [CGFloat] = []
+        
+        /// Decoration to put on each of the serie's vertices.
+        public var decoration: DecorationType?
+        
+        /// Array of verties for that serie
+        private var vertices: [CGPoint] = []
     }
     
     /// Parameter for the Radar Graph View.  A parameter correspondes to a spoke
@@ -211,11 +239,23 @@ extension GKRadarGraphView {
     // MARK: Class variables
     //
 
-    /// Default offset of the polygon.  -PI/2 insures that
+    /// Vertical offset of the polygon.  -PI/2 insures that
     /// the polygon is always vertically symmetrical.
+    private class var VERTICAL_OFFSET: CGFloat {
+        return CGFloat(-M_PI_2)
+    }
+    
+    /// Square offset for a polygon.  Make sure that it contains
+    /// only lines parallel to the x and y axis.
+    private class var SQUARE_OFFSET: CGFloat {
+        return CGFloat(M_PI_4)
+    }
+
+    
+    /// Default offset of the polygon.
     /// Override this to rotate your polygon.
     public class var DEFAULT_OFFSET: CGFloat {
-        return CGFloat(-M_PI_2)
+        return VERTICAL_OFFSET
     }
     
     /// Margin for auto-adjust
@@ -470,14 +510,11 @@ extension GKRadarGraphView {
             }
         }
     }
-
     
-    /// Calculate the bezier path for a given serie to render in the radar chart.
+    /// Draw a serie in the radar chart.
     ///
-    /// - parameter serie: The serie info to render.
-    ///
-    /// - returns: The generated bezier path.
-    private func serieBezierPath(serie: Serie) -> UIBezierPath {
+    /// - parameter serie; The serie containing all the info to render.
+    private func drawSerie(serie: Serie) {
         
         let bezierPath: UIBezierPath = UIBezierPath()
         
@@ -501,6 +538,8 @@ extension GKRadarGraphView {
             
             let vertex: CGPoint = CGPoint(x: pointX, y: pointY)
             
+            serie.vertices.append(vertex)
+            
             if i == 0 {
                 
                 bezierPath.moveToPoint(vertex)
@@ -512,16 +551,6 @@ extension GKRadarGraphView {
         }
         
         bezierPath.closePath()
-        
-        return bezierPath
-    }
-    
-    /// Draw a serie in the radar chart.
-    ///
-    /// - parameter serie; The serie containing all the info to render.
-    private func drawSerie(serie: Serie) {
-        
-        let bezierPath = serieBezierPath(serie)
         
         switch serie.fillMode {
             
@@ -539,6 +568,74 @@ extension GKRadarGraphView {
             strokeColor.setStroke()
             bezierPath.lineWidth = serie.strokeWidth
             bezierPath.stroke()
+        }
+    }
+    
+    /// Draw the vertex decorations (shape or image at each serie's vertex)
+    ///
+    /// - parameter serie: Serie containing information on how to draw the shape.
+    /// - parameter vertex: The vertex on which to draw the shape.  It will act as the circle center.
+    private func drawVertexDecoration(decorationType: Serie.DecorationType, decorationColor: UIColor, decorationCenter: CGPoint) {
+        
+        let bezierPath: UIBezierPath
+        
+        switch(decorationType) {
+            
+        case .CIRCLE(let radius):
+            bezierPath = UIBezierPath(arcCenter: decorationCenter, radius: radius, startAngle: 0, endAngle: CGFloat(M_2_PI), clockwise: false)
+        case .DIAMOND(let radius):
+            bezierPath = traceDecorationPolygonBezierPath(4, radius: radius, center: decorationCenter, rotation: GKRadarGraphView.VERTICAL_OFFSET)
+        case .SQUARE(let radius):
+            bezierPath = traceDecorationPolygonBezierPath(4, radius: radius, center: decorationCenter, rotation: GKRadarGraphView.SQUARE_OFFSET)
+        }
+        
+        bezierPath.closePath()
+        
+        decorationColor.setFill()
+        bezierPath.fill()
+    }
+    
+    /// TODO-pk document
+    private func traceDecorationPolygonBezierPath(numEdges: Int, radius: CGFloat, center: CGPoint, rotation: CGFloat) -> UIBezierPath {
+        
+        let angle = CGFloat.degreesToRadians(degrees: (360 / CGFloat(numEdges)))
+        let bezierPath: UIBezierPath = UIBezierPath()
+        
+        for i in 0..<numEdges {
+            
+            let vertexAngle = angle * CGFloat(i) + rotation
+            
+            let xPosition = center.x + (radius * cos(vertexAngle))
+            let yPosition = center.y + (radius * sin(vertexAngle))
+            
+            let vertex: CGPoint = CGPoint(x: xPosition, y: yPosition)
+            
+            if i == 0 {
+                
+                bezierPath.moveToPoint(vertex)
+                
+            } else {
+                
+                bezierPath.addLineToPoint(vertex)
+            }
+        }
+        
+        return bezierPath
+    }
+    
+    /// Draw a decoration on each of the serie's vertices.
+    ///
+    /// - parameter serie: The serie for which to draw decorations.
+    private func drawSerieVertexDecoration(serie: Serie) {
+        
+        guard let decorationInstance = serie.decoration, decorationColor = serie.strokeColor else {
+            
+            return
+        }
+        
+        for vertex in serie.vertices {
+            
+            drawVertexDecoration(decorationInstance, decorationColor: decorationColor, decorationCenter: vertex)
         }
     }
     
@@ -560,7 +657,7 @@ extension GKRadarGraphView {
         // Do a next pass so we can save the final position and parameters of the vertices.
         calculateOuterVertices(rect, passmode: .DRAW_TEXT)
         
-        // Draw outer polygon
+        // Draw outer polygon.
         drawOuterPolygon()
         
         // Draw the gradations
@@ -570,6 +667,11 @@ extension GKRadarGraphView {
         for serie in series {
             
             drawSerie(serie)
+            
+            // Vertex decorations have to be drawn after the serie itself.
+            // This is because the decoration have to be drawn on top of
+            // the serie itself.
+            drawSerieVertexDecoration(serie)
         }
     }
 }
@@ -600,15 +702,26 @@ extension GKRadarGraphView {
         
         firstSerie.fillMode = .SOLID(firstFillColor)
         firstSerie.percentageValues = [0.9, 0.5, 0.6, 0.2, 0.9]
+        firstSerie.decoration = .SQUARE(8.0)
         
         let secondSerie = GKRadarGraphView.Serie()
         secondSerie.strokeColor = UIColor.greenColor()
         secondSerie.strokeWidth = 4.0
-        let secondFilleColor: UIColor = UIColor(red: 0.1, green: 0.7, blue: 0.1, alpha: 0.7)
+        let secondFillColor: UIColor = UIColor(red: 0.1, green: 0.7, blue: 0.1, alpha: 0.7)
         
-        secondSerie.fillMode = .SOLID(secondFilleColor)
+        secondSerie.fillMode = .SOLID(secondFillColor)
         secondSerie.percentageValues = [0.9, 0.1, 0.2, 0.9, 0.3]
+        secondSerie.decoration = .CIRCLE(6.0)
+
+        let thirdSerie = GKRadarGraphView.Serie()
+        thirdSerie.strokeColor = UIColor.redColor()
+        thirdSerie.strokeWidth = 4.0
+        let thirdSerieFillColor: UIColor = UIColor(red: 0.7, green: 0.1, blue: 0.1, alpha: 0.7)
         
-        self.series = [firstSerie, secondSerie]
+        thirdSerie.fillMode = .SOLID(thirdSerieFillColor)
+        thirdSerie.percentageValues = [0.5, 0.9, 0.5, 0.5, 0.6]
+        thirdSerie.decoration = .DIAMOND(8.0)
+        
+        self.series = [firstSerie, secondSerie, thirdSerie]
     }
 }
