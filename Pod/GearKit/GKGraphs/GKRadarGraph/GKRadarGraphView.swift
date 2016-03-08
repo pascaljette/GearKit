@@ -595,7 +595,14 @@ extension GKRadarGraphView {
         bezierPath.fill()
     }
     
-    /// TODO-pk document
+    /// Generate the bezier path for the decorations at the bottom of the series vertices.
+    ///
+    /// - parameter numEdges: Number of edges for the decoration.
+    /// - parameter radius: Radius of the decoration's outlying circle.
+    /// - parameter center: Center point of the decoration.
+    /// - parameter rotation: Rotation of the decoration shape.
+    ///
+    /// - returns: The unclosed bezier path generated for the given decoration.
     private func traceDecorationPolygonBezierPath(numEdges: Int, radius: CGFloat, center: CGPoint, rotation: CGFloat) -> UIBezierPath {
         
         let angle = CGFloat.degreesToRadians(degrees: (360 / CGFloat(numEdges)))
