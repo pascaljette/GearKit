@@ -95,19 +95,19 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjI-05-tnO" userLabel="label1">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="119.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BV-xF-Gsv" userLabel="label2">
                                                     <rect key="frame" x="200" y="0.0" width="200" height="119.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MtN-Kg-K9Z" userLabel="label3">
                                                     <rect key="frame" x="400" y="0.0" width="200" height="119.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -137,7 +137,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1m-Fa-0g2">
                                                     <rect key="frame" x="0.0" y="0.0" width="520" height="239.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PId-G2-vAw" customClass="GKSolidColorButton" customModule="GearKit">
@@ -199,22 +199,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5j-r7-poT" customClass="GKRadarGraphView" customModule="GearKit">
-                                <rect key="frame" x="40" y="104" width="520" height="456"/>
-                                <color key="backgroundColor" red="0.24970474140429008" green="0.85292851594997487" blue="0.86000001430511475" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyH-mZ-Gg8" customClass="GKRadarGraphView" customModule="GearKit">
+                                <rect key="frame" x="8" y="184" width="584" height="296"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="margin">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="outerStrokeColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="outerStrokeWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="gradationStrokeWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="numberOfGradations">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Y5j-r7-poT" firstAttribute="leading" secondItem="fu3-iR-G5O" secondAttribute="leading" constant="40" id="Jux-Y9-FvB"/>
-                            <constraint firstItem="Y5j-r7-poT" firstAttribute="top" secondItem="dws-G2-uX2" secondAttribute="bottom" constant="40" id="fg8-Oh-FQx"/>
-                            <constraint firstItem="f2d-v1-meW" firstAttribute="top" secondItem="Y5j-r7-poT" secondAttribute="bottom" constant="40" id="gE0-P9-Szw"/>
-                            <constraint firstAttribute="trailing" secondItem="Y5j-r7-poT" secondAttribute="trailing" constant="40" id="qi3-UI-9r8"/>
+                            <constraint firstAttribute="trailing" secondItem="NyH-mZ-Gg8" secondAttribute="trailing" constant="8" id="bIE-Is-tUg"/>
+                            <constraint firstItem="NyH-mZ-Gg8" firstAttribute="top" secondItem="dws-G2-uX2" secondAttribute="bottom" constant="120" id="dOJ-lT-7dP"/>
+                            <constraint firstItem="NyH-mZ-Gg8" firstAttribute="leading" secondItem="fu3-iR-G5O" secondAttribute="leading" constant="8" id="jPU-a8-JDb"/>
+                            <constraint firstItem="f2d-v1-meW" firstAttribute="top" secondItem="NyH-mZ-Gg8" secondAttribute="bottom" constant="120" id="thL-lp-3Wv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="GKRadarGraphView" id="yWM-tm-tUj"/>
                     <connections>
-                        <outlet property="radarGraphView" destination="Y5j-r7-poT" id="RpL-fC-jTL"/>
+                        <outlet property="radarGraphView" destination="NyH-mZ-Gg8" id="hLh-zc-nBT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CM6-Tl-hbM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -259,7 +279,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember me?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wc-3J-Hh4">
                                         <rect key="frame" x="422" y="187.5" width="101" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSI-U1-Tz2" userLabel="LoginButton" customClass="GKSolidColorButton" customModule="GearKit">
