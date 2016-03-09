@@ -26,7 +26,7 @@ import Foundation
 /// MARK: GKDoublyLinkedListNode
 ///
 
-/// Class representing a node in the doubly linked list.
+/// Class representing a node in the doubly linked list. 
 public final class GKDoublyLinkedListNode<Element: Comparable> {
     
     ///
@@ -104,7 +104,7 @@ public final class GKDoublyLinkedList<Element: Comparable> {
         
         while let nextElement = generator.next() {
             
-            insertTail(nextElement as! Element)
+            append(nextElement as! Element)
         }
     }
 }
@@ -148,7 +148,7 @@ extension GKDoublyLinkedList {
     /// - parameter element: The element to insert.
     ///
     /// - returns: A Node containing the element that has just been added.
-    public func insertTail(element: Element) -> Node {
+    public func append(element: Element) -> Node {
         
         // If the list is empty
         guard let currentTail = tail else {

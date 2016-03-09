@@ -1,5 +1,5 @@
 # TODO
-[] SwiftDoc
+[] SwiftDoc proper markup https://developer.apple.com/library/ios/documentation/Xcode/Reference/xcode_markup_formatting_ref/MarkupFunctionality.html
 [] Add documentation as well in the ReadMe.md
 [] Add tests
 [] Remove storyboard and use only xibs as per https://medium.com/ios-os-x-development/dependency-injection-in-view-controllers-9fd7d2c77e55#.979fzwc6r
