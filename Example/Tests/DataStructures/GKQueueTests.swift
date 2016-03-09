@@ -33,6 +33,8 @@ class GKQueueTests: QuickSpec {
         
         emptyQueueTests()
         dequeueTests()
+        peekTests()
+        structTests()
     }
     
     //
@@ -45,10 +47,17 @@ class GKQueueTests: QuickSpec {
             
             context("GKQueue empty int ist") {
                 
-                var myQueue: GKQueue<Int> = GKQueue<Int>()
-                
-                expect(myQueue.dequeue()).to(beNil())
-                expect(myQueue.peek()).to(beNil())
+                it("should return nil for peek/dequeue") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    
+                    expect(myQueue.count).to(equal(0))
+
+                    expect(myQueue.dequeue()).to(beNil())
+                    expect(myQueue.peek()).to(beNil())
+                    
+                    expect(myQueue.count).to(equal(0))
+                }
             }
         }
     }
@@ -63,25 +72,170 @@ class GKQueueTests: QuickSpec {
             
             context("GKQueue dequeue Int one value") {
                 
-                var myQueue: GKQueue<Int> = GKQueue<Int>()
-                myQueue.append(1)
-                
-                expect(myQueue.dequeue()).to(equal(1))
-                expect(myQueue.dequeue()).to(beNil())
+                it("should dequeue the first element and return a nil list") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    myQueue.append(1)
+                    
+                    expect(myQueue.count).to(equal(1))
+                    
+                    expect(myQueue.dequeue()).to(equal(1))
+                    
+                    expect(myQueue.count).to(equal(0))
+                    
+                    expect(myQueue.dequeue()).to(beNil())
+                    
+                    expect(myQueue.count).to(equal(0))
+                }
             }
             
             context("GKQueue dequeue Int multiple values") {
                 
-                var myQueue: GKQueue<Int> = GKQueue<Int>()
-                myQueue.append(1)
-                myQueue.append(2)
-                myQueue.append(3)
-                myQueue.append(4)
+                it("should dequeue values in a FIFO order") {
+                   
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    myQueue.append(1)
+                    myQueue.append(2)
+                    myQueue.append(3)
+                    myQueue.append(4)
+                    
+                    expect(myQueue.count).to(equal(4))
+                    
+                    expect(myQueue.dequeue()).to(equal(1))
+                    expect(myQueue.count).to(equal(3))
 
-                expect(myQueue.dequeue()).to(equal(1))
-                expect(myQueue.dequeue()).to(equal(2))
-                expect(myQueue.dequeue()).to(equal(3))
-                expect(myQueue.dequeue()).to(equal(4))
+                    expect(myQueue.dequeue()).to(equal(2))
+                    expect(myQueue.count).to(equal(2))
+
+                    expect(myQueue.dequeue()).to(equal(3))
+                    expect(myQueue.count).to(equal(1))
+
+                    expect(myQueue.dequeue()).to(equal(4))
+                    expect(myQueue.count).to(equal(0))
+                }
+            }
+        }
+    }
+    
+    //
+    // MARK: peekTests
+    //
+    
+    func peekTests() {
+        
+        describe("GKQueue peekTests") {
+            
+            context("GKQueue peek Int one value") {
+                
+                it("should peek the first element and not dequeue it") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    myQueue.append(1)
+
+                    expect(myQueue.count).to(equal(1))
+                    
+                    expect(myQueue.peek()).to(equal(1))
+                    expect(myQueue.peek()).to(equal(1))
+                    
+                    expect(myQueue.count).to(equal(1))
+                }
+            }
+            
+            context("GKQueue peek Int multiple values") {
+                
+                it("should peek and dequeue values in the proper order") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    myQueue.append(1)
+                    myQueue.append(2)
+                    myQueue.append(3)
+                    myQueue.append(4)
+                    
+                    expect(myQueue.peek()).to(equal(1))
+                    expect(myQueue.dequeue()).to(equal(1))
+                    
+                    expect(myQueue.peek()).to(equal(2))
+                    expect(myQueue.dequeue()).to(equal(2))
+                    
+                    expect(myQueue.peek()).to(equal(3))
+                    expect(myQueue.dequeue()).to(equal(3))
+                    
+                    expect(myQueue.peek()).to(equal(4))
+                    expect(myQueue.dequeue()).to(equal(4))
+                    
+                    expect(myQueue.peek()).to(beNil())
+                }
+            }
+        }
+    }
+    
+    //
+    // MARK: struct tests
+    //
+    func structTests() {
+        
+        describe("GKQueue structTests") {
+            
+            context("GKQueue struct Int one value") {
+                
+                it("should reflect the value in both copies") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    myQueue.append(1)
+                    
+                    var myOtherQueue = myQueue
+                    
+                    expect(myQueue.peek()).to(equal(1))
+                    expect(myOtherQueue.peek()).to(equal(1))
+                    
+                    expect(myQueue.dequeue()).to(equal(1))
+                    expect(myQueue.dequeue()).to(beNil())
+
+                    expect(myOtherQueue.dequeue()).to(equal(1))
+                    expect(myOtherQueue.dequeue()).to(beNil())
+                }
+            }
+            
+            context("GKQueue struct Int multiple values") {
+                
+                it("should reflect the value in both copies") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    myQueue.append(1)
+                    myQueue.append(2)
+                    myQueue.append(3)
+                    myQueue.append(4)
+                    
+                    var myOtherQueue = myQueue
+                    
+                    expect(myQueue.peek()).to(equal(1))
+                    expect(myQueue.dequeue()).to(equal(1))
+                    
+                    expect(myQueue.peek()).to(equal(2))
+                    expect(myQueue.dequeue()).to(equal(2))
+                    
+                    expect(myQueue.peek()).to(equal(3))
+                    expect(myQueue.dequeue()).to(equal(3))
+                    
+                    expect(myQueue.peek()).to(equal(4))
+                    expect(myQueue.dequeue()).to(equal(4))
+                    
+                    expect(myQueue.peek()).to(beNil())
+                    
+                    expect(myOtherQueue.peek()).to(equal(1))
+                    expect(myOtherQueue.dequeue()).to(equal(1))
+                    
+                    expect(myOtherQueue.peek()).to(equal(2))
+                    expect(myOtherQueue.dequeue()).to(equal(2))
+                    
+                    expect(myOtherQueue.peek()).to(equal(3))
+                    expect(myOtherQueue.dequeue()).to(equal(3))
+                    
+                    expect(myOtherQueue.peek()).to(equal(4))
+                    expect(myOtherQueue.dequeue()).to(equal(4))
+                    
+                    expect(myOtherQueue.peek()).to(beNil())
+                }
             }
         }
     }

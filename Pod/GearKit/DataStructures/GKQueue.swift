@@ -53,16 +53,17 @@ private class GKQueueImplementation<Element> {
         
     }
     
-    private init(head: NodeType?, tail: NodeType?) {
+    private init(head: NodeType?) {
         
         guard let headInstance = head else {
             
             return
         }
         
-        self.head = NodeType(value: headInstance.value)
-    
-        var sequencer = self.head?.next
+        self.tail = GKQueueNode(value: headInstance.value)
+        self.head = self.tail
+        
+        var sequencer = headInstance.next
         
         while let sequencerInstance = sequencer {
             
@@ -77,9 +78,9 @@ private class GKQueueImplementation<Element> {
     private func append(newElement: Element) {
         
         let oldTail = tail
-        self.tail = GKQueueNode(value: newElement)
+        tail = GKQueueNode(value: newElement)
         
-        if  head == nil {
+        if head == nil {
             head = tail
         }
         else {
@@ -110,7 +111,7 @@ private class GKQueueImplementation<Element> {
     }
     
     func copy() -> QueueType {
-        return QueueType(head: self.head, tail: self.tail)
+        return QueueType(head: self.head)
     }
 
 }
@@ -156,6 +157,25 @@ extension GKQueue {
     }
     
     // Count
+    public var count: Int {
+
+        var sequencer = implementation.head
+        
+        if sequencer == nil {
+            
+            return 0
+        }
+        
+        var returnCount: Int = 0
+        
+        while sequencer != nil {
+            
+            returnCount += 1
+            sequencer = sequencer!.next
+        }
+        
+        return returnCount
+    }
     
     // Clear
     

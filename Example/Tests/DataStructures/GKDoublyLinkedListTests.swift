@@ -45,7 +45,7 @@ class GKDoublyLinkedListTests: QuickSpec {
         
         listQueryTests()
         
-        sequenceTypeTests()
+        sequenceTypeTests()        
     }
     
     //
@@ -58,10 +58,13 @@ class GKDoublyLinkedListTests: QuickSpec {
             
             context("Empty Int ist") {
                 
-                let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
-                
-                expect(myList.firstValue).to(beNil())
-                expect(myList.lastValue).to(beNil())
+                it("Should return nil for all values") {
+                    
+                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    
+                    expect(myList.firstValue).to(beNil())
+                    expect(myList.lastValue).to(beNil())
+                }
             }
         }
 
