@@ -45,7 +45,9 @@ class GKDoublyLinkedListTests: QuickSpec {
         
         listQueryTests()
         
-        sequenceTypeTests()        
+        sequenceTypeTests()
+        
+        structTests()
     }
     
     //
@@ -82,7 +84,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("append from an empty list should add the first element") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let newNode = myList.insertHead(1)
                     
                     expect(myList.firstValue).to(equal(1))
@@ -94,7 +96,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("append from a list with only 1 element should update head and tail") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let tailAppend = myList.insertHead(1)
                     let headAppend = myList.insertHead(2)
                     
@@ -110,7 +112,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("append from a list with multiple elements should update head and tail") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let tailAppend = myList.insertHead(1)
                     myList.insertHead(2)
                     myList.insertHead(3)
@@ -142,7 +144,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("append from an empty list should add the first element") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let newNode = myList.append(1)
                     
                     expect(myList.firstValue).to(equal(1))
@@ -154,7 +156,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("append from a list with only 1 element should update head and tail") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let headAppend = myList.append(1)
                     let tailAppend = myList.append(2)
                     
@@ -170,7 +172,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("append from a list with multiple elements should update head and tail") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let headAppend = myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -196,16 +198,15 @@ class GKDoublyLinkedListTests: QuickSpec {
     
     func insertBeforeTests() {
         
-        
         describe("GKDoublyLinkedList insertBefore tests") {
             
             context("Normal cases with Int list") {
                 
                 it("Insert to a list with only 1 element should update the head") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let lastNode = myList.append(1)
-                    let newNode = myList.insertBefore(lastNode, element: 2)
+                    let newNode = try! myList.insertBefore(lastNode, element: 2)
                     
                     expect(myList.firstValue).to(equal(2))
                     expect(myList.lastValue).to(equal(1))
@@ -219,10 +220,10 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Append from a list with several elements ") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let firstNode = myList.append(1)
                     let lastNode = myList.append(3)
-                    let newNode = myList.insertBefore(lastNode, element: 2)
+                    let newNode = try! myList.insertBefore(lastNode, element: 2)
                     
                     expect(myList.firstValue).to(equal(1))
                     expect(myList.lastValue).to(equal(3))
@@ -253,9 +254,9 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Insert to a list with only 1 element should update the tail") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let firstNode = myList.append(1)
-                    let newNode = myList.insertAfter(firstNode, element: 2)
+                    let newNode = try! myList.insertAfter(firstNode, element: 2)
                     
                     expect(myList.firstValue).to(equal(1))
                     expect(myList.lastValue).to(equal(2))
@@ -269,10 +270,10 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Insert to a list with several elements ") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let firstNode = myList.append(1)
                     let lastNode = myList.append(3)
-                    let newNode = myList.insertAfter(firstNode, element: 2)
+                    let newNode = try! myList.insertAfter(firstNode, element: 2)
                     
                     expect(myList.firstValue).to(equal(1))
                     expect(myList.lastValue).to(equal(3))
@@ -310,7 +311,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return the value for a list with a single value") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
 
                     expect(myList.firstNodeOfValue(1)).toNot(beNil())
@@ -322,7 +323,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return the value for a list with multiple values") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -359,7 +360,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return the value for a list with a single value") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     
                     expect(myList.lastNodeOfValue(1)).toNot(beNil())
@@ -371,7 +372,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return the value for a list with multiple values") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -401,14 +402,14 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return false when removing from an empty list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     
                     expect(myList.removeHead()).to(beFalse())
                 }
                 
                 it("Should return true when removing from a single value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     
                     expect(myList.removeHead()).to(beTrue())
@@ -417,7 +418,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return true when removing from a multiple value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -434,14 +435,14 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return false when removing from an empty list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     
                     expect(myList.removeTail()).to(beFalse())
                 }
                 
                 it("Should return true when removing from a single value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     
                     expect(myList.removeTail()).to(beTrue())
@@ -450,7 +451,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return true when removing from a multiple value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -467,25 +468,25 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return true when removing from a single value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let headNode = myList.append(1)
                     
-                    expect(myList.removeNode(headNode)).to(beTrue())
+                    expect(try! myList.removeNode(headNode)).to(beTrue())
                     expect(myList.isEmpty).to(beTrue())
                 }
                 
                 it("Should return true when removing from a multiple value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     let node = myList.append(3)
                     myList.append(4)
                     
-                    expect(myList.removeNode(node)).to(beTrue())
+                    expect(try! myList.removeNode(node)).to(beTrue())
                     expect(myList.isEmpty).to(beFalse())
                     
-                    var nodeToCheck: GKDoublyLinkedList<Int>.Node? = myList.head
+                    var nodeToCheck: GKDoublyLinkedList<Int>.NodeType? = myList.head
                     expect(nodeToCheck!.element).to(equal(1))
                     
                     nodeToCheck = nodeToCheck!.next
@@ -503,25 +504,25 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return true when removing from a single value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     let headNode = myList.append(1)
                     
-                    expect(myList.removeNode(headNode)).to(beTrue())
+                    expect(try! myList.removeNode(headNode)).to(beTrue())
                     expect(myList.isEmpty).to(beTrue())
                 }
                 
                 it("Should return true when removing from a multiple value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     let node = myList.append(3)
                     myList.append(4)
                     
-                    expect(myList.removeNode(node)).to(beTrue())
+                    expect(try! myList.removeNode(node)).to(beTrue())
                     expect(myList.isEmpty).to(beFalse())
                     
-                    var nodeToCheck: GKDoublyLinkedList<Int>.Node? = myList.head
+                    var nodeToCheck: GKDoublyLinkedList<Int>.NodeType? = myList.head
                     expect(nodeToCheck!.element).to(equal(1))
                     
                     nodeToCheck = nodeToCheck!.next
@@ -539,7 +540,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return false when removing from an empty list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     
                     expect(myList.removeFirstNodeOfValue(1)).to(beFalse())
                     expect(myList.isEmpty).to(beTrue())
@@ -547,7 +548,7 @@ class GKDoublyLinkedListTests: QuickSpec {
             
                 it("Should return false when removing a non-existing value") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     
                     expect(myList.removeFirstNodeOfValue(2)).to(beFalse())
@@ -556,7 +557,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return true when removing from a single value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     
                     expect(myList.removeFirstNodeOfValue(1)).to(beTrue())
@@ -565,7 +566,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return true when removing from a multiple value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -576,7 +577,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                     expect(myList.removeFirstNodeOfValue(2)).to(beTrue())
                     expect(myList.isEmpty).to(beFalse())
                     
-                    var nodeToCheck: GKDoublyLinkedList<Int>.Node? = myList.head
+                    var nodeToCheck: GKDoublyLinkedList<Int>.NodeType? = myList.head
                     expect(nodeToCheck!.element).to(equal(1))
                     
                     nodeToCheck = nodeToCheck!.next
@@ -600,7 +601,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return false when removing from an empty list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     
                     expect(myList.removeLastNodeOfValue(1)).to(beFalse())
                     expect(myList.isEmpty).to(beTrue())
@@ -608,7 +609,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return false when removing a non-existing value") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     
                     expect(myList.removeLastNodeOfValue(2)).to(beFalse())
@@ -617,7 +618,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return true when removing from a single value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     
                     expect(myList.removeLastNodeOfValue(1)).to(beTrue())
@@ -626,7 +627,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return true when removing from a multiple value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -637,7 +638,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                     expect(myList.removeLastNodeOfValue(2)).to(beTrue())
                     expect(myList.isEmpty).to(beFalse())
                     
-                    var nodeToCheck: GKDoublyLinkedList<Int>.Node? = myList.head
+                    var nodeToCheck: GKDoublyLinkedList<Int>.NodeType? = myList.head
                     expect(nodeToCheck!.element).to(equal(1))
                     
                     nodeToCheck = nodeToCheck!.next
@@ -678,7 +679,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return 1 for a list with a single value") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     
                     expect(myList.count).to(equal(1))
@@ -686,7 +687,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return proper count for a list with multiple values") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -697,7 +698,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return proper count for a list with multiple values after removal") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -710,7 +711,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return 0 for a cleared list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -733,7 +734,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return true for a single value list containing the value") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     
                     expect(myList.contains(1)).to(beTrue())
@@ -741,7 +742,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return false for a single value list containing the value") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     
                     expect(myList.contains(2)).to(beFalse())
@@ -749,7 +750,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should return true for a multiple value list containing the value") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -760,7 +761,7 @@ class GKDoublyLinkedListTests: QuickSpec {
 
                 it("Should return false for a multiple value list not containing the value") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -793,7 +794,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should create an array from a single value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     let myArray = Array(myList)
                     
@@ -802,7 +803,7 @@ class GKDoublyLinkedListTests: QuickSpec {
                 
                 it("Should create an array from a multiple value list") {
                     
-                    let myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
+                    var myList: GKDoublyLinkedList<Int> = GKDoublyLinkedList<Int>()
                     myList.append(1)
                     myList.append(2)
                     myList.append(3)
@@ -841,6 +842,59 @@ class GKDoublyLinkedListTests: QuickSpec {
                     expect(myList.count).to(equal(4))
                     expect(myList.firstValue).to(equal(1))
                     expect(myList.lastValue).to(equal(4))
+                }
+            }
+        }
+    }
+    
+    
+    //
+    // MARK: sequenceTypeTests
+    //
+    
+    func structTests() {
+        
+        describe("structTests") {
+            
+            context("Two lists, write to both and see that both copies are preserved") {
+                
+                it("Should have 2 distinct lists when writing to both references") {
+                    
+                    var myList: GKDoublyLinkedList<Int?> = GKDoublyLinkedList<Int?>()
+                    myList.append(1)
+                    myList.append(2)
+                    myList.append(nil)
+                    myList.append(4)
+                    
+                    var myList2 = myList
+                    myList2.append(99)
+
+                    let myArray = Array(myList)
+                    let myArray2 = Array(myList2)
+
+                    expect(myArray).to(equal([1,2,nil,4]))
+                    expect(myArray2).to(equal([1,2,nil,4,99]))
+                }
+            }
+            
+            context("Node not owned exception") {
+                
+                it("Should return an exception when processing a node from an unowned list") {
+                    
+                    var myList: GKDoublyLinkedList<Int?> = GKDoublyLinkedList<Int?>()
+                    myList.append(1)
+                    let node2 = myList.append(2)
+                    myList.append(nil)
+                    let node4 = myList.append(4)
+
+                    var myList2 = myList
+                    myList2.append(99)
+                    
+                    expect { try myList2.removeNode(node2) }.to(throwError())
+                        
+                    try! myList.removeNode(node4)
+                    
+                    expect(Array(myList)).to(equal([1,2,nil]))
                 }
             }
         }
