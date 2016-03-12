@@ -32,17 +32,32 @@ import UIKit
 @objc
 public protocol GKKeyboardListener : class {
 
-    // We need to force implementation of these methods because
-    // we cannot declare selectors in protocol extensions.
+    /// We need to force implementation of these methods because
+    /// we cannot declare selectors in protocol extensions.
     var activeField: UITextInputTraits? { get set }
     
-    // The keyboard visibility isn't automatically updated.  It must be implemented
-    // by implementing classes.
+    /// The keyboard visibility isn't automatically updated.  It must be implemented
+    /// by implementing classes.
     var keyboardVisible: Bool { get set }
     
+    /// Keyboard will appear implementation.
+    ///
+    /// - parameter notification The notification that triggered the keyboard show event.
     optional func keyboardWillAppear(notification: NSNotification)
+    
+    /// Keyboard did appear implementation.
+    ///
+    /// - parameter notification The notification that triggered the keyboard show event.
     optional func keyboardDidAppear(notification: NSNotification)
+    
+    /// Keyboard will disappear implementation.
+    ///
+    /// - parameter notification The notification that triggered the keyboard hide event.
     optional func keyboardWillDisappear(notification: NSNotification)
+    
+    /// Keyboard did disappear implementation.
+    ///
+    /// - parameter notification The notification that triggered the keyboard hide event.
     optional func keyboardDidDisappear(notification: NSNotification)
 }
 

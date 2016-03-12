@@ -286,6 +286,8 @@ extension GKRadarGraphView {
     //
     // MARK: UIView overrides
     //
+    
+    /// Override the view's background color to be the background of the graph only.
     override public var backgroundColor: UIColor? {
         
         get {
