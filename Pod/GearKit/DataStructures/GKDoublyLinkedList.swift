@@ -257,7 +257,6 @@ extension GKDoublyLinkedList {
     /// MARK: Node find
     ///
     
-    
     /// Get the first node in the list that has an element equal to the provided parameter.
     ///
     /// - parameter element: The element against which to compare.  The first (closest to the head)

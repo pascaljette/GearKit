@@ -37,7 +37,7 @@ private final class GKQueueNode<Element> {
     
     init(value: Element) {
         self.value = value
-    }
+    }    
 }
 
 private class GKQueueImplementation<Element> {
@@ -45,15 +45,14 @@ private class GKQueueImplementation<Element> {
     typealias NodeType = GKQueueNode<Element>
     typealias QueueType = GKQueueImplementation<Element>
 
-    
-    private var head: NodeType? = nil
-    private var tail: NodeType? = nil
+    var head: NodeType? = nil
+    var tail: NodeType? = nil
 
-    private init() {
+    init() {
         
     }
     
-    private init(head: NodeType?) {
+    init(head: NodeType?) {
         
         guard let headInstance = head else {
             
@@ -75,7 +74,7 @@ private class GKQueueImplementation<Element> {
         }
     }
     
-    private func append(newElement: Element) {
+    func append(newElement: Element) {
         
         let oldTail = tail
         tail = GKQueueNode(value: newElement)
@@ -89,7 +88,7 @@ private class GKQueueImplementation<Element> {
 
     }
     
-    private func dequeue() -> Element? {
+    func dequeue() -> Element? {
         
         guard let headInstance = self.head else {
             
@@ -105,7 +104,7 @@ private class GKQueueImplementation<Element> {
         return headInstance.value
     }
     
-    private func peek() -> Element? {
+    func peek() -> Element? {
         
         return head?.value
     }
@@ -113,8 +112,59 @@ private class GKQueueImplementation<Element> {
     func copy() -> QueueType {
         return QueueType(head: self.head)
     }
-
+    
+    func clear() {
+        
+        // ARC ensures that setting the head and tail to nil will free
+        // all nodes.
+        head = nil
+        tail = nil
+    }
+    
+    var count: Int {
+        
+        var sequencer = head
+        
+        if sequencer == nil {
+            
+            return 0
+        }
+        
+        var returnCount: Int = 0
+        
+        while sequencer != nil {
+            
+            returnCount += 1
+            sequencer = sequencer!.next
+        }
+        
+        return returnCount
+    }
+    
+    /// Generate the sequence from the queue.
+    ///
+    /// - returns: The generator that builds the sequence.
+    func generate() -> AnyGenerator<Element> {
+        
+        var current : NodeType? = self.head
+        
+        return anyGenerator {
+            
+            while (current != nil) {
+                
+                if let currentInstance = current {
+                    
+                    current = current?.next
+                    return currentInstance.value
+                }
+            }
+            
+            return nil
+        }
+    }
 }
+
+
 
 public struct GKQueue<Element> {
 
@@ -122,6 +172,17 @@ public struct GKQueue<Element> {
     
     public init() {
         
+    }
+    
+    /// Initialize from another sequence.
+    public init<S : SequenceType where S.Generator.Element: Comparable>(_ s: S) {
+        
+        var generator = s.generate()
+        
+        while let nextElement = generator.next() {
+            
+            append(nextElement as! Element)
+        }
     }
 
     private var implementation: ImplementationType = ImplementationType()
@@ -159,25 +220,35 @@ extension GKQueue {
     // Count
     public var count: Int {
 
-        var sequencer = implementation.head
+        return implementation.count
+    }
+    
+    // isEmpty
+    public var isEmpty: Bool {
         
-        if sequencer == nil {
-            
-            return 0
-        }
-        
-        var returnCount: Int = 0
-        
-        while sequencer != nil {
-            
-            returnCount += 1
-            sequencer = sequencer!.next
-        }
-        
-        return returnCount
+        return count == 0
     }
     
     // Clear
-    
-    // SequenceType
+    public mutating func clear() {
+        
+        ensureUnique()
+        return implementation.clear()
+    }
 }
+
+extension GKQueue : SequenceType {
+    
+    ///
+    /// MARK: SequenceType implementation
+    ///
+    
+    /// Generate the sequence from the queue.
+    ///
+    /// - returns: The generator that builds the sequence.
+    public func generate() -> AnyGenerator<Element> {
+        
+        return implementation.generate()
+    }
+}
+

@@ -35,6 +35,9 @@ class GKQueueTests: QuickSpec {
         dequeueTests()
         peekTests()
         structTests()
+        
+        clearTests()
+        sequenceTypeTests()
     }
     
     //
@@ -235,6 +238,137 @@ class GKQueueTests: QuickSpec {
                     expect(myOtherQueue.dequeue()).to(equal(4))
                     
                     expect(myOtherQueue.peek()).to(beNil())
+                }
+            }
+        }
+    }
+    
+    func clearTests() {
+        
+        describe("GKQueue clear tests") {
+            
+            context("Empty int ist") {
+                
+                it("should keep a count of 0") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    
+                    expect(myQueue.count).to(equal(0))
+                    
+                    myQueue.clear()
+                    
+                    expect(myQueue.count).to(equal(0))
+                }
+            }
+            
+            context("Single int ist") {
+                
+                it("should keep a count of 0") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    
+                    myQueue.append(1)
+                    
+                    expect(myQueue.count).to(equal(1))
+                    
+                    myQueue.clear()
+                    
+                    expect(myQueue.count).to(equal(0))
+                }
+            }
+            
+            context("Multiple int ist") {
+                
+                it("should keep a count of 0") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    
+                    myQueue.append(1)
+                    myQueue.append(2)
+                    myQueue.append(3)
+                    myQueue.append(4)
+                    
+                    expect(myQueue.count).to(equal(4))
+                    
+                    myQueue.clear()
+                    
+                    expect(myQueue.count).to(equal(0))
+                }
+            }
+
+        }
+    }
+    
+    //
+    // MARK: sequenceTypeTests
+    //
+    
+    func sequenceTypeTests() {
+        
+        describe("SequenceType tests") {
+            
+            context("Array from queue") {
+                
+                it("Should create an empty array from an empty queue") {
+                    
+                    let myQueue: GKQueue<Int> = GKQueue<Int>()
+                    let myArray = Array(myQueue)
+                    
+                    expect(myArray).to(beEmpty())
+                }
+                
+                it("Should create an array from a single value queue") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    myQueue.append(1)
+                    let myArray = Array(myQueue)
+                    
+                    expect(myArray).to(equal([1]))
+                }
+                
+                it("Should create an array from a multiple value queue") {
+                    
+                    var myQueue: GKQueue<Int> = GKQueue<Int>()
+                    myQueue.append(1)
+                    myQueue.append(2)
+                    myQueue.append(3)
+                    myQueue.append(4)
+                    
+                    let myArray = Array(myQueue)
+                    
+                    expect(myArray).to(equal([1, 2, 3, 4]))
+                }
+            }
+            
+            context("Queue from array") {
+                
+                it("Should create an empty queue from an empty array") {
+                    
+                    let myArray: [Int] = []
+                    let myQueue: GKQueue<Int> = GKQueue<Int>(myArray)
+                    
+                    expect(myQueue.isEmpty).to(beTrue())
+                }
+                
+                it("Should create a single value queue from a single value array") {
+                    
+                    let myArray: [Int] = [1]
+                    let myQueue: GKQueue<Int> = GKQueue<Int>(myArray)
+                    
+                    expect(myQueue.count).to(equal(1))
+                    expect(myQueue.peek()).to(equal(1))
+                }
+                
+                it("Should create a proper queue from a multiple value array") {
+                    
+                    let myArray: [Int] = [1, 2, 3, 4]
+                    var myQueue: GKQueue<Int> = GKQueue<Int>(myArray)
+                    
+                    expect(myQueue.count).to(equal(4))
+                    expect(myQueue.dequeue()).to(equal(1))
+                    expect(myQueue.dequeue()).to(equal(2))
+                    expect(myQueue.dequeue()).to(equal(3))
+                    expect(myQueue.dequeue()).to(equal(4))
                 }
             }
         }
