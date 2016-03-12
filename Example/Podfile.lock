@@ -4,22 +4,22 @@ PODS:
   - FBSnapshotTestCase/Core (2.0.7)
   - FBSnapshotTestCase/SwiftSupport (2.0.7):
     - FBSnapshotTestCase/Core
-  - GearKit (0.1.0):
+  - GearKit (0.1.3):
     - SwiftyJSON (~> 2)
-  - Nimble (3.0.0)
+  - Nimble (3.1.0)
   - Nimble-Snapshots (3.0.0):
     - FBSnapshotTestCase (~> 2.0.7)
     - Nimble
     - Quick
-  - Quick (0.8.0)
+  - Quick (0.9.1)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - FBSnapshotTestCase
   - GearKit (from `../`)
-  - Nimble (= 3.0.0)
+  - Nimble (= 3.1.0)
   - Nimble-Snapshots
-  - Quick (~> 0.8.0)
+  - Quick (~> 0.9.0)
   - SwiftyJSON (> 2)
 
 EXTERNAL SOURCES:
@@ -28,10 +28,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
-  GearKit: 3047af061e2edbb2914202f0942132d462e54d5f
-  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
+  GearKit: b1e1023f298eb5c6447e20afdd102120cee9c95d
+  Nimble: 79d40f4d69d47314229bbabacaa02b8838c779b9
   Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
-  Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
+  Quick: a5221fc21788b6aeda934805e68b061839bc3165
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

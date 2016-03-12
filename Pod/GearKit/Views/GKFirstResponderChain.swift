@@ -23,6 +23,10 @@
 import Foundation
 import UIKit
 
+//
+// TODO: This is not implemented yet
+//
+
 class GKFirstResponderChain {
     
     typealias OnCompletion = () -> Void
