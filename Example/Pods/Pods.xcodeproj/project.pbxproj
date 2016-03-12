@@ -57,6 +57,7 @@
 		52B0263F90696E7FD87CB146D5C5E2C1 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = E2C0B659A9CF4975A0684D64A51651DA /* UIImage+Diff.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		52BACCF4B2EBDD47540CB213A2870315 /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38AB341E56247728D688BFAF6CF555D /* ThrowError.swift */; };
 		52F7A46AB0053D8BB1D793B917D37BB2 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6AA3960C692437A164D70C1E7D23C /* SwiftSupport.swift */; };
+		53298FB51C9449F6004CA2E0 /* GKRadarGraphContainerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53298FB31C9448C8004CA2E0 /* GKRadarGraphContainerLayer.swift */; };
 		534778D346BE2E8988F9369B062CA2E7 /* GKTableCellErrorBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905906183EF33E129F612B8AA15EEEC9 /* GKTableCellErrorBasic.swift */; };
 		54AE9AF18CB7EEA4401D254DFE44974F /* AssertionDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6256685B28E1AAD9699422B405D3F3 /* AssertionDispatcher.swift */; };
 		58DE63B2FF3954F1467A5B41D8FF3932 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1EF76FE0C0FE0638FCD1666876DF45 /* XCTest.framework */; };
@@ -314,6 +315,7 @@
 		51A04F0E2720102734D81E9FE176A3F6 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51B14F591C5012797AA9778EDDFC0E64 /* Example.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Example.swift; path = Sources/Quick/Example.swift; sourceTree = "<group>"; };
 		51D053396D121527BB6685681A20AEBA /* HooksPhase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HooksPhase.swift; path = Sources/Quick/Hooks/HooksPhase.swift; sourceTree = "<group>"; };
+		53298FB31C9448C8004CA2E0 /* GKRadarGraphContainerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphContainerLayer.swift; sourceTree = "<group>"; };
 		54977F881E571219BF5FBB3AE8EA4B70 /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = "<group>"; };
 		54B9A17E905F7B745AF531895A5419D5 /* Quick.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Quick.modulemap; sourceTree = "<group>"; };
 		5573D3A64AEDC2B9246D33758DEB58F6 /* ArrayExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
@@ -891,6 +893,7 @@
 			isa = PBXGroup;
 			children = (
 				954E927DAA6E75CD1A328E3F8FBC1752 /* GKRadarGraphView.swift */,
+				53298FB31C9448C8004CA2E0 /* GKRadarGraphContainerLayer.swift */,
 			);
 			path = GKRadarGraph;
 			sourceTree = "<group>";
@@ -1478,6 +1481,7 @@
 				0C7DAF96F2A49C086A74E6E4404842F4 /* GKSolidColorButton.swift in Sources */,
 				ADD320AAF0345881044A8EF710F83D2A /* GKTableCellBase.swift in Sources */,
 				E83E517B3560E8F7FDB32A1EF87914D1 /* GKTableCellBasic.swift in Sources */,
+				53298FB51C9449F6004CA2E0 /* GKRadarGraphContainerLayer.swift in Sources */,
 				F5039E1F5CD05CC1656FF1C63EBFF521 /* GKTableCellCustom.swift in Sources */,
 				534778D346BE2E8988F9369B062CA2E7 /* GKTableCellErrorBasic.swift in Sources */,
 				D8E612EA4D4E42201FBADA5DF082AE3C /* GKTableCellErrorBasic.xib in Sources */,

@@ -39,11 +39,12 @@ extension GKRadarGraphViewController {
         
         let hpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "HP")
         let mpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "MP")
-        let strengthParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Strength")
-        let defenseParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Defense")
-        let magicParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Magic")
+        let strengthParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "STR")
+        let defenseParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "DF")
+        let magicParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "MGC")
         
         radarGraphView.parameter = [hpParameter, mpParameter, strengthParameter, defenseParameter, magicParameter]
+        radarGraphView.backgroundColor = GKColorRGB(red: 0, green: 200, blue: 100, alpha: 150).uiColor
         
         // We only support gradients for a single serie radar graph
         let firstSerie = GKRadarGraphView.Serie()

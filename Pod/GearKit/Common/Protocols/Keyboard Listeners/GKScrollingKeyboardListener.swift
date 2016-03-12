@@ -38,6 +38,12 @@ extension GKScrollingKeyboardListener where Self : UIViewController {
     // MARK: Auto-scrolling implementations
     //
     
+    /// Margin for a smoother UI when adjusting the insets.  This also determines the distance there will be
+    /// between the keyboard and the textfield after auto-scrolling.
+    private var INSET_DEFAULT_MARGIN: CGFloat {
+        return 16.0
+    }
+    
     /// Call in keyboardDidAppear
     public final func adjustInsetsOnKeyboardShow(notification: NSNotification) {
         
@@ -54,21 +60,23 @@ extension GKScrollingKeyboardListener where Self : UIViewController {
         if !keyboardVisible {
             
             var contentInsets: UIEdgeInsets = scrollViewInstance.contentInset
-            contentInsets.bottom += notification.keyboardSize.height
+            contentInsets.bottom += notification.keyboardSize.height + INSET_DEFAULT_MARGIN
             
             scrollViewInstance.contentInset = contentInsets;
             scrollViewInstance.scrollIndicatorInsets = contentInsets
         }
-        
-        var aRect: CGRect = self.view.frame
-        aRect.size.height -= notification.keyboardSize.height
         
         guard let activeView = activeField as? UIView else {
             
             return
         }
         
-        scrollViewInstance.scrollRectToVisible(activeView.frame, animated: true)
+        let rect = CGRect(x: activeView.frame.origin.x
+            , y: activeView.frame.origin.y
+            , width: activeView.frame.width
+            , height: activeView.frame.height)
+        
+        scrollViewInstance.scrollRectToVisible(rect, animated: true)
     }
     
     /// Call in keyboardWillDisappear

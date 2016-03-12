@@ -136,7 +136,7 @@ public class GKRadarGraphView : UIView {
         public var textOffset: CGPoint = CGPoint(x: 0, y: 0)
         
         /// Location of the outer vertex
-        private class OuterVertex {
+        internal class OuterVertex {
             
             /// Initialize with a point and angle.
             ///
@@ -156,20 +156,26 @@ public class GKRadarGraphView : UIView {
         }
         
         /// Point where the spoke is located on the graph.
-        private var outerVertex: OuterVertex?
+        internal var outerVertex: OuterVertex?
         
         /// Point of the top left of the text label
-        private var textTopLeftPoint: CGPoint?
+        internal var textTopLeftPoint: CGPoint?
     }
     
-    /// Enum to determine what to do in the rendering functions
-    private enum PassMode {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        /// Auto-adjust the circle radius (no rendering).
-        case AUTO_ADJUST
+        containerLayer.contentsScale = self.layer.contentsScale
+        containerLayer.backgroundColor = backgroundColor?.CGColor
+        self.layer.addSublayer(containerLayer)
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         
-        /// Buffer the vertices before rendering.  Draw text at the same time.
-        case DRAW_TEXT
+        containerLayer.contentsScale = self.layer.contentsScale
+        containerLayer.backgroundColor = backgroundColor?.CGColor
+        self.layer.addSublayer(containerLayer)
     }
     
     //
@@ -177,7 +183,15 @@ public class GKRadarGraphView : UIView {
     //
     
     /// Array of parameters to generate the graph.
-    public var parameter: [Parameter] = []
+    public var parameter: [Parameter] = [] {
+        
+        didSet {
+            
+            containerLayer.parameter = parameter
+        }
+    }
+    
+    private var containerLayer = GKRadarGraphContainerLayer()
     
     /// Array of series populating the graph's data.
     public var series: [Serie] = []
@@ -200,7 +214,13 @@ public class GKRadarGraphView : UIView {
     
     /// Width of the outermost polygon's edges.
     @IBInspectable
-    public var outerStrokeWidth: CGFloat = 1.0
+    public var outerStrokeWidth: CGFloat = 1.0 {
+        
+        didSet {
+            
+            containerLayer.outerStrokeWidth = outerStrokeWidth
+        }
+    }
 
     /// Color of the inner (gradation) polygons's edges.
     @IBInspectable
@@ -210,27 +230,28 @@ public class GKRadarGraphView : UIView {
     @IBInspectable
     public var gradationStrokeWidth: CGFloat = 1.0
     
-    /// Maximum value of the chart's parameters
-    @IBInspectable
-    public var maxValue: CGFloat = 100
-    
     /// Number of gradations (inner polygons) to assign to the chart.
     @IBInspectable
     public var numberOfGradations: Int = 3
     
+    @IBInspectable
+    public var graphBackgroundColor: UIColor = UIColor.clearColor() {
+        
+        didSet {
+            
+            containerLayer.graphBackgroundColor = graphBackgroundColor.CGColor
+        }
+    }
     //
     // MARK: Private stored properties
     //
     
     /// Center of the graph's circle.  The circle is used to draw the regular polygons inside.
-    private var circleCenter: CGPoint = CGPoint(x: 0, y: 0)
+    internal var circleCenter: CGPoint = CGPoint(x: 0, y: 0)
     
     /// Radius of the circle.  Will be the full radius for the outer polygon and a smaller
     /// radius for the inner gradations.
-    private var circleRadius: CGFloat = 0
-
-    /// Used to override UIView's background color property.
-    private var _backgroundColor: UIColor?
+    internal var circleRadius: CGFloat = 0
 }
 
 extension GKRadarGraphView {
@@ -241,13 +262,13 @@ extension GKRadarGraphView {
 
     /// Vertical offset of the polygon.  -PI/2 insures that
     /// the polygon is always vertically symmetrical.
-    private class var VERTICAL_OFFSET: CGFloat {
+    internal class var VERTICAL_OFFSET: CGFloat {
         return CGFloat(-M_PI_2)
     }
     
     /// Square offset for a polygon.  Make sure that it contains
     /// only lines parallel to the x and y axis.
-    private class var SQUARE_OFFSET: CGFloat {
+    internal class var SQUARE_OFFSET: CGFloat {
         return CGFloat(M_PI_4)
     }
 
@@ -259,7 +280,7 @@ extension GKRadarGraphView {
     }
     
     /// Margin for auto-adjust
-    private var AUTO_ADJUST_MARGIN: CGFloat {
+    internal var AUTO_ADJUST_MARGIN: CGFloat {
         return 2.0
     }
 }
@@ -284,234 +305,8 @@ extension GKRadarGraphView {
 extension GKRadarGraphView {
     
     //
-    // MARK: UIView overrides
-    //
-    
-    /// Override the view's background color to be the background of the graph only.
-    override public var backgroundColor: UIColor? {
-        
-        get {
-            
-            return _backgroundColor
-        }
-        
-        set {
-            
-            super.backgroundColor = UIColor.clearColor()
-            _backgroundColor = newValue
-        }
-    }
-}
-
-extension GKRadarGraphView {
-    
-    //
     // MARK: Drawing functions
     //
-    
-    /// Calculate the outer vertices for the regular polygon.
-    ///
-    /// - parameter radiusRatio: The percentage of the full radius to use.  1.0 for the outermost polygon.
-    private func calculateOuterVertices(rect: CGRect, passmode: PassMode) {
-            
-        for i in 0..<parameter.count {
-            
-            let angle: CGFloat = calculateExteriorAngleForVertexIndex(i)
-            
-            let xPosition = circleCenter.x + (circleRadius * cos(angle))
-            let yPosition = circleCenter.y + (circleRadius * sin(angle))
-            
-            let vertex: CGPoint = CGPoint(x: xPosition, y: yPosition)
-            parameter[i].outerVertex = Parameter.OuterVertex(point: vertex, angle: angle)
-            
-            let fontColor: UIColor = parameter[i].nameFontColor
-            let stringAttributes: NSDictionary = [NSFontAttributeName: parameter[i].nameFont, NSForegroundColorAttributeName: fontColor]
-            
-            let attributedString: NSAttributedString = NSAttributedString(string: parameter[i].name, attributes: stringAttributes as? [String : AnyObject])
-            
-            // Get the size of the string
-            let stringRect: CGRect = attributedString.boundingRectWithSize(CGSize(width: CGFloat.max, height: CGFloat.max), options: [.UsesLineFragmentOrigin, .UsesFontLeading], context: nil)
-            
-            // Normally, the drawAtPoint chooses the top left position of the string to draw.
-            var adjustedPosition: CGPoint
-            
-            // For the top and bottom string, we want to center the string horizontally with the vertex.
-            if vertex.x.isEqualWithEpsilon(circleCenter.x, epsilon: positionEpsilon) {
-                
-                if vertex.y < circleCenter.y {
-                    
-                    // Top position
-                    adjustedPosition = CGPoint(x: vertex.x - stringRect.width / 2, y: vertex.y - (stringRect.height + textMargin))
-                } else {
-                    
-                    // Bottom position
-                    adjustedPosition = CGPoint(x: vertex.x - stringRect.width / 2, y: vertex.y + textMargin)
-                }
-                
-            } else {
-                
-                if vertex.x > circleCenter.x {
-                    
-                    let topLeftX = vertex.x + textMargin
-                    let topLeftY = vertex.y - stringRect.height / 2
-                    
-                    // Right position
-                    adjustedPosition = CGPoint(x: topLeftX, y: topLeftY)
-                    
-                    
-                } else {
-                    
-                    // Left position
-                    adjustedPosition = CGPoint(x: vertex.x - (stringRect.width + textMargin), y: vertex.y - stringRect.height / 2)
-                }
-            }
-            
-            adjustedPosition.x += parameter[i].textOffset.x
-            adjustedPosition.y += parameter[i].textOffset.y
-            
-            parameter[i].textTopLeftPoint = adjustedPosition
-            
-            switch(passmode) {
-                
-            case .AUTO_ADJUST:
-                let minimumRadius = calculateMinimumCircleRadius(adjustedPosition, outerVertex: parameter[i].outerVertex!, drawRect: rect, stringRect: stringRect)
-                
-                circleRadius = min(minimumRadius, minimumRadius)
-
-            case .DRAW_TEXT:
-                attributedString.drawAtPoint(adjustedPosition)
-            }
-        }
-    }
-    
-    /// Auto-calculate the new maximum radius based on the strings.  The radar chart will
-    /// always fit in its parent view with this.
-    ///
-    /// - parameter textTopLeft: Top left corner of the text.
-    /// - parameter vertexPosition: Vertex position of the radar chart to which the text should be attached
-    /// - parameter drawRect: The rectangle in which the radar chart is drawn.
-    /// - parameter stringRect: The rectangle in which the string is rendered.
-    /// - parameter angle: Angle of the vertex with respect to the polygon outlying circle.
-    ///
-    /// - returns: The new maximum radius of the polygon's outlying circle.
-    private func calculateMinimumCircleRadius(textTopLeft: CGPoint, outerVertex: Parameter.OuterVertex, drawRect: CGRect, stringRect: CGRect) -> CGFloat {
-        
-        var newRadius: CGFloat = circleRadius
-        
-        let topPositionDifference = textTopLeft.y - AUTO_ADJUST_MARGIN
-        let bottomPositionDifference = drawRect.maxY - (textTopLeft.y + stringRect.height + AUTO_ADJUST_MARGIN)
-        
-        let leftPositionDifference = textTopLeft.x - AUTO_ADJUST_MARGIN
-        let rightPositionDifference = drawRect.maxX - (textTopLeft.x + stringRect.width + AUTO_ADJUST_MARGIN)
-        
-        if topPositionDifference < 0 {
-         
-            newRadius = ((outerVertex.point.y - topPositionDifference) - circleCenter.y) / sin(outerVertex.angle)
-        }
-        
-        if bottomPositionDifference < 0 {
-            
-            newRadius = ((outerVertex.point.y + bottomPositionDifference) - circleCenter.y) / sin(outerVertex.angle)
-        }
-        
-        if leftPositionDifference < 0 {
-            
-            newRadius = ((outerVertex.point.x - leftPositionDifference) - circleCenter.x) / cos(outerVertex.angle)
-        }
-        
-        if rightPositionDifference < 0 {
-            
-            newRadius = ((outerVertex.point.x + rightPositionDifference) - circleCenter.x) / cos(outerVertex.angle)
-        }
-        
-        return newRadius
-    }
-    
-    /// Calcualte the exterior angle value of a vertex based on its index.
-    ///
-    /// - parameter vertexIndex: Index of the vertex in the polygon.
-    ///
-    /// - returns The exterior angle value of the vertex.
-    private func calculateExteriorAngleForVertexIndex(vertexIndex: Int) -> CGFloat {
-        
-        return exteriorAngleValue * CGFloat(vertexIndex) + GKRadarGraphView.DEFAULT_OFFSET
-    }
-    
-    /// Draw the outer polygon.  This draws the outmost edge of the polygon.
-    private func drawOuterPolygon() {
-        
-        let bezierPath: UIBezierPath = UIBezierPath()
-        
-        for i in 0..<parameter.count {
-            
-            guard let outerVertex = parameter[i].outerVertex?.point else {
-                
-                continue
-            }
-            
-            if i == 0 {
-                
-                bezierPath.moveToPoint(outerVertex)
-                
-            } else {
-                
-                bezierPath.addLineToPoint(outerVertex)
-            }
-        }
-        
-        bezierPath.closePath()
-        
-        if let fillColor: UIColor = backgroundColor {
-            
-            fillColor.setFill()
-            bezierPath.fill()
-        }
-        
-        if let stokeColor: UIColor = outerStrokeColor {
-            
-            stokeColor.setStroke()
-            bezierPath.lineWidth = outerStrokeWidth
-            bezierPath.stroke()
-        }
-     
-    }
-    
-    /// Draw the outer polygon.  This draws the outmost edge of the polygon.
-    private func drawGradations() {
-        
-        let bezierPath: UIBezierPath = UIBezierPath()
-        
-        for i in 0..<numberOfGradations {
-            
-            let radiusRatio: CGFloat = (1.0 / (CGFloat(numberOfGradations) + 1.0)) * CGFloat(i + 1)
-            
-            for i in 0..<parameter.count {
-                
-                let xPosition = circleCenter.x + (circleRadius * radiusRatio * cos(parameter[i].outerVertex!.angle))
-                let yPosition = circleCenter.y + (circleRadius * radiusRatio * sin(parameter[i].outerVertex!.angle))
-                
-                let vertex: CGPoint = CGPoint(x: xPosition, y: yPosition)
-                
-                if i == 0 {
-                    
-                    bezierPath.moveToPoint(vertex)
-                    
-                } else {
-                    
-                    bezierPath.addLineToPoint(vertex)
-                }
-            }
-            
-            bezierPath.closePath()
-            
-            if let stokeColor: UIColor = gradationStrokeColor {
-                
-                stokeColor.setStroke()
-                bezierPath.lineWidth = gradationStrokeWidth
-                bezierPath.stroke()
-            }
-        }
-    }
     
     /// Draw a serie in the radar chart.
     ///
@@ -651,41 +446,40 @@ extension GKRadarGraphView {
     /// Called with the UIView requires new rendering.
     ///
     /// - parameter rect: The rectangle in which the UIView is to be rendered.
-    override public func drawRect(rect: CGRect) {
-        
-        // Set the center of our polygon.
-        circleCenter = CGPoint(x: rect.midX, y: rect.midY)
-        
-        // Estimate the initial circle radius to half of the parent view.
-        // This estimate will be correct if there are no text labels.
-        circleRadius = min(rect.width / 2.0, rect.height / 2.0) - margin
-        
-        // Do a first pass without rendering so that we can adjust the circle radius.
-        calculateOuterVertices(rect, passmode: .AUTO_ADJUST)
-        
-        // Do a next pass so we can save the final position and parameters of the vertices.
-        calculateOuterVertices(rect, passmode: .DRAW_TEXT)
-        
-        // Draw outer polygon.
-        drawOuterPolygon()
-        
-        // Draw the gradations
-        drawGradations()
-        
-        // Draw values
-        for serie in series {
-            
-            drawSerie(serie)
-            
-            // Vertex decorations have to be drawn after the serie itself.
-            // This is because the decoration have to be drawn on top of
-            // the serie itself.
-            drawSerieVertexDecoration(serie)
-        }
-    }
+//    override public func drawRect(rect: CGRect) {
+//        
+//        super.drawRect(rect)
+//        // Set the center of our polygon.
+//        circleCenter = CGPoint(x: rect.midX, y: rect.midY)
+//        
+//        // Estimate the initial circle radius to half of the parent view.
+//        // This estimate will be correct if there are no text labels.
+//        circleRadius = min(rect.width / 2.0, rect.height / 2.0) - margin
+//        
+//        print(rect)
+//        
+//        // Draw values
+//        for serie in series {
+//            
+//            drawSerie(serie)
+//            
+//            // Vertex decorations have to be drawn after the serie itself.
+//            // This is because the decoration have to be drawn on top of
+//            // the serie itself.
+//            drawSerieVertexDecoration(serie)
+//        }
+//    }
 }
 
 extension GKRadarGraphView {
+    
+    public override func layoutSubviews() {
+        
+        super.layoutSubviews()
+        
+        // Layers do not auto-resize!
+        containerLayer.frame = self.bounds
+    }
     
     //
     // MARK: IBDesignable implementation
@@ -702,7 +496,7 @@ extension GKRadarGraphView {
         let magicParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Param 5")
         
         self.parameter = [hpParameter, mpParameter, strengthParameter, defenseParameter, magicParameter]
-        
+
         // We only support gradients for a single serie radar graph
         let firstSerie = GKRadarGraphView.Serie()
         firstSerie.strokeColor = UIColor.blueColor()
