@@ -59,7 +59,7 @@
 		52F7A46AB0053D8BB1D793B917D37BB2 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6AA3960C692437A164D70C1E7D23C /* SwiftSupport.swift */; };
 		53298FB51C9449F6004CA2E0 /* GKRadarGraphContainerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53298FB31C9448C8004CA2E0 /* GKRadarGraphContainerLayer.swift */; };
 		53298FB81C953B83004CA2E0 /* GKRadarGraphSerieLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53298FB61C953B34004CA2E0 /* GKRadarGraphSerieLayer.swift */; };
-		53298FBC1C954788004CA2E0 /* GKRadarGraphViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53298FBB1C954788004CA2E0 /* GKRadarGraphViewDatasource.swift */; };
+		53298FBC1C954788004CA2E0 /* GKRadarGraphParameterDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53298FBB1C954788004CA2E0 /* GKRadarGraphParameterDatasource.swift */; };
 		53298FBE1C954D49004CA2E0 /* GKRadarGraphPlotAppearanceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53298FBD1C954D49004CA2E0 /* GKRadarGraphPlotAppearanceDelegate.swift */; };
 		534778D346BE2E8988F9369B062CA2E7 /* GKTableCellErrorBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905906183EF33E129F612B8AA15EEEC9 /* GKTableCellErrorBasic.swift */; };
 		54AE9AF18CB7EEA4401D254DFE44974F /* AssertionDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6256685B28E1AAD9699422B405D3F3 /* AssertionDispatcher.swift */; };
@@ -320,7 +320,7 @@
 		51D053396D121527BB6685681A20AEBA /* HooksPhase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HooksPhase.swift; path = Sources/Quick/Hooks/HooksPhase.swift; sourceTree = "<group>"; };
 		53298FB31C9448C8004CA2E0 /* GKRadarGraphContainerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphContainerLayer.swift; sourceTree = "<group>"; };
 		53298FB61C953B34004CA2E0 /* GKRadarGraphSerieLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphSerieLayer.swift; sourceTree = "<group>"; };
-		53298FBB1C954788004CA2E0 /* GKRadarGraphViewDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphViewDatasource.swift; sourceTree = "<group>"; };
+		53298FBB1C954788004CA2E0 /* GKRadarGraphParameterDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphParameterDatasource.swift; sourceTree = "<group>"; };
 		53298FBD1C954D49004CA2E0 /* GKRadarGraphPlotAppearanceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphPlotAppearanceDelegate.swift; sourceTree = "<group>"; };
 		54977F881E571219BF5FBB3AE8EA4B70 /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = "<group>"; };
 		54B9A17E905F7B745AF531895A5419D5 /* Quick.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Quick.modulemap; sourceTree = "<group>"; };
@@ -901,7 +901,7 @@
 				954E927DAA6E75CD1A328E3F8FBC1752 /* GKRadarGraphView.swift */,
 				53298FB31C9448C8004CA2E0 /* GKRadarGraphContainerLayer.swift */,
 				53298FB61C953B34004CA2E0 /* GKRadarGraphSerieLayer.swift */,
-				53298FBB1C954788004CA2E0 /* GKRadarGraphViewDatasource.swift */,
+				53298FBB1C954788004CA2E0 /* GKRadarGraphParameterDatasource.swift */,
 				53298FBD1C954D49004CA2E0 /* GKRadarGraphPlotAppearanceDelegate.swift */,
 			);
 			path = GKRadarGraph;
@@ -1473,7 +1473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				128F322F67F9421BCD9704E1634AE45C /* ArrayExtension.swift in Sources */,
-				53298FBC1C954788004CA2E0 /* GKRadarGraphViewDatasource.swift in Sources */,
+				53298FBC1C954788004CA2E0 /* GKRadarGraphParameterDatasource.swift in Sources */,
 				12D4CCF40B9096A9EDE54EF3C5E9C8F8 /* CGFloatExtension.swift in Sources */,
 				36B64768CF692D821B3DCEA3BD888126 /* GearKit-dummy.m in Sources */,
 				A9AC30421C5151FBF6A51A5A26FA5B3F /* GKColorRGB.swift in Sources */,

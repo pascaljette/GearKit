@@ -55,88 +55,38 @@ internal class GKRadarGraphContainerLayer : CALayer {
     //
     
     /// Global data source
-    internal weak var parameterDatasource: GKRadarGraphParameterDatasource?
+    internal var parameterDatasource: GKRadarGraphParameterDatasource?
     
-    /// Array of parameters to generate the graph.
+    /// Array of parameters to generate the graph.  Shortcut to access the datasource.
     private var parameters: [GKRadarGraphView.Parameter] {
-        return parameterDatasource?.parameters ?? []
+        return parameterDatasource?._parameters ?? []
     }
     
-    internal weak var plotApperanceDelegate: GKRadarGraphPlotAppearanceDelegate?
+    /// Delegate for plot appearance.
+    internal var plotApperanceDelegate: GKRadarGraphPlotAppearanceDelegate?
 
-    
     //
-    // MARK: IBInspectable stored properties
+    // MARK: Initialization
     //
-    
-    /// Margin of the chart relative to it's containing view's edge.
-    internal var margin: CGFloat = 0
-    
-    /// Margin between the vertices and the text rendering.
-    private var textMargin: CGFloat = 3.0
-    
-    /// Color of the outermost polygon's edges.
-    private var outerStrokeColor: UIColor = UIColor.blackColor()
-    
-    /// Width of the outermost polygon's edges.
-    private var outerStrokeWidth: CGFloat = 1.0
-    
-    /// Color of the inner (gradation) polygons's edges.
-    private var gradationStrokeColor: UIColor = UIColor.grayColor()
-    
-    /// Width of the inner (gradation0 polygons's edges.
-    private var gradationStrokeWidth: CGFloat = 1.0
-    
-    /// Number of gradations (inner polygons) to assign to the chart.
-    private var numberOfGradations: Int = 3
-    
-    /// Override the view's background color to be the background of the graph only.
-    internal var graphBackgroundColor: CGColor = UIColor.clearColor().CGColor
-    
+
+    /// Parameterless constructor.
     override internal init() {
         super.init()
         
+        // Default is false, meaning the layer is not re-drawn when its bounds change.
         needsDisplayOnBoundsChange = true
     }
 
+    /// Required initializer with coder.
+    ///
+    /// - param coder The coder used to initialize.
     required internal init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        // Default is false, meaning the layer is not re-drawn when its bounds change.
         needsDisplayOnBoundsChange = true
     }
     
-    //
-    // MARK: Private stored properties
-    //
-    
-    /// Center of the graph's circle.  The circle is used to draw the regular polygons inside.
-    private var circleCenter: CGPoint {
-        
-        get {
-           
-            return parameterDatasource?.circleCenter ?? CGPointZero
-        }
-        
-        set {
-            
-            parameterDatasource?.circleCenter = newValue
-        }
-    }
-    
-    /// Radius of the circle.  Will be the full radius for the outer polygon and a smaller
-    /// radius for the inner gradations.
-    private var circleRadius: CGFloat {
-        
-        get {
-            
-            return parameterDatasource?.circleRadius ?? 0
-        }
-        
-        set {
-            
-            parameterDatasource?.circleRadius = newValue
-        }
-    }
 }
 
 extension GKRadarGraphContainerLayer {
@@ -153,6 +103,88 @@ extension GKRadarGraphContainerLayer {
     /// Epsilon to respect for equality of vertex positions.
     private var positionEpsilon: CGFloat {
         return 0.01
+    }
+    
+    //
+    // MARK: Computed properties (shortcuts)
+    //
+
+    
+    /// Margin of the chart relative to it's containing view's edge.
+    private var margin: CGFloat {
+        return plotApperanceDelegate?._margin
+            ?? GKRadarGraphView.MARGIN_DEFAULT
+    }
+    
+    /// Margin between the vertices and the text rendering.
+    private var textMargin: CGFloat {
+        return plotApperanceDelegate?._textMargin
+            ?? GKRadarGraphView.TEXT_MARGIN_DEFAULT
+    }
+    
+    /// Color of the outermost polygon's edges.
+    private var outerStrokeColor: UIColor {
+        return plotApperanceDelegate?._outerStrokeColor
+            ?? GKRadarGraphView.OUTER_STROKE_COLOR_DEFAULT
+    }
+    
+    /// Width of the outermost polygon's edges.
+    private var outerStrokeWidth: CGFloat {
+        return plotApperanceDelegate?._outerStrokeWidth
+            ?? GKRadarGraphView.OUTER_STROKE_WIDTH_DEFAULT
+    }
+    
+    /// Color of the inner (gradation) polygons's edges.
+    private var gradationStrokeColor: UIColor {
+        return plotApperanceDelegate?._gradationStrokeColor
+            ?? GKRadarGraphView.GRADATION_STROKE_COLOR_DEFAULT
+    }
+    
+    /// Width of the inner (gradation0 polygons's edges.
+    private var gradationStrokeWidth: CGFloat {
+        return plotApperanceDelegate?._gradationStrokeWidth
+            ?? GKRadarGraphView.GRADATION_STROKE_WIDTH_DEFAULT
+    }
+    
+    /// Number of gradations (inner polygons) to assign to the chart.
+    private var numberOfGradations: Int {
+        return plotApperanceDelegate?._numberOfGradations
+            ?? GKRadarGraphView.NUMBER_OF_GRADATIONS_DEFAULT
+    }
+    
+    /// Override the view's background color to be the background of the graph only.
+    internal var graphBackgroundColor: CGColor {
+        return plotApperanceDelegate?._graphBackgroundColor.CGColor
+            ?? GKRadarGraphView.GRAPH_BACKGROUND_COLOR_DEFAULT.CGColor
+    }
+    
+    /// Center of the graph's circle.  The circle is used to draw the regular polygons inside.
+    private var circleCenter: CGPoint {
+        
+        get {
+            
+            return parameterDatasource?._circleCenter ?? CGPointZero
+        }
+        
+        set {
+            
+            parameterDatasource?._circleCenter = newValue
+        }
+    }
+    
+    /// Radius of the circle.  Will be the full radius for the outer polygon and a smaller
+    /// radius for the inner gradations.
+    private var circleRadius: CGFloat {
+        
+        get {
+            
+            return parameterDatasource?._circleRadius ?? 0
+        }
+        
+        set {
+            
+            parameterDatasource?._circleRadius = newValue
+        }
     }
 }
 
@@ -306,6 +338,8 @@ extension GKRadarGraphContainerLayer {
     }
     
     /// Draw the outer polygon.  This draws the outmost edge of the polygon.
+    ///
+    /// - parameter ctx: The context in which the gradations are drawn.
     private func drawOuterPolygon(ctx: CGContextRef) {
         
         let bezierPath: UIBezierPath = UIBezierPath()
@@ -341,6 +375,8 @@ extension GKRadarGraphContainerLayer {
     }
     
     /// Draw the outer polygon.  This draws the outmost edge of the polygon.
+    ///
+    /// - parameter ctx: The context in which the gradations are drawn.
     private func drawGradations(ctx: CGContextRef) {
         
         if let strokeColor: CGColor = gradationStrokeColor.CGColor {
@@ -380,6 +416,9 @@ extension GKRadarGraphContainerLayer {
         }
     }
     
+    /// Draw the layer in the given context.
+    ///
+    /// - parameter ctx: The context in which to draw the layer.
     override func drawInContext(ctx: CGContext) {
                 
         // Set the center of our polygon.

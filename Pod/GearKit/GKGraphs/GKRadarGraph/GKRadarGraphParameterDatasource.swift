@@ -23,31 +23,15 @@
 import Foundation
 import UIKit
 
-/// Delegate for plot appearance.  Typically, passed to the layer that draws the plot
-/// from the GKRadarGraphView
-internal protocol GKRadarGraphPlotAppearanceDelegate {
-
-    /// Margin of the chart relative to it's containing view's edge.
-    var _margin: CGFloat { get }
+/// Used as a datasource delegate to share data between the radar graph layers.
+internal protocol GKRadarGraphParameterDatasource {
     
-    /// Margin between the vertices and the text rendering.
-    var _textMargin: CGFloat { get }
+    /// Parameters (read-only)
+    var _parameters: [GKRadarGraphView.Parameter] { get }
     
-    /// Color of the outermost polygon's edges.
-    var _outerStrokeColor: UIColor { get }
+    /// Circle center.  Must be writable for auto-adjust in the plot layer.
+    var _circleCenter: CGPoint { get set }
     
-    /// Width of the outermost polygon's edges.
-    var _outerStrokeWidth: CGFloat { get }
-    
-    /// Color of the inner (gradation) polygons's edges.
-    var _gradationStrokeColor: UIColor { get }
-    
-    /// Width of the inner (gradation0 polygons's edges.
-    var _gradationStrokeWidth: CGFloat { get }
-    
-    /// Number of gradations (inner polygons) to assign to the chart.
-    var _numberOfGradations: Int { get }
-    
-    /// Override the view's background color to be the background of the graph only.
-    var _graphBackgroundColor: UIColor { get }
+    /// Circle radius.  Must be writable for auto-adjust in the plot layer.
+    var _circleRadius: CGFloat { get set }
 }

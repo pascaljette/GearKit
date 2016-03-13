@@ -1,58 +1,98 @@
+// The MIT License (MIT)
 //
-//  GKRadarGraphSerieLayer.swift
-//  Pods
+// Copyright (c) 2015 pascaljette
 //
-//  Created by Pascal Jette on 3/13/16.
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
 
 import Foundation
 import UIKit
 
-class GKRadarGraphSerieLayer: CALayer {
+/// Layer that draws a serie in the radar graph.
+internal class GKRadarGraphSerieLayer: CALayer {
     
-    internal var containerLayer: GKRadarGraphContainerLayer?
+    //
+    // MARK: Initialization
+    //
     
+    /// Parameterless constructor.
     override init() {
         super.init()
         
+        // Default is false, meaning the layer is not re-drawn when its bounds change.
         needsDisplayOnBoundsChange = true
     }
     
+    /// Required initializer with coder.
+    ///
+    /// - param coder The coder used to initialize.
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        // Default is false, meaning the layer is not re-drawn when its bounds change.
         needsDisplayOnBoundsChange = true
     }
     
+    //
+    // MARK: Stored properties
+    //
+    
     /// Global data source
-    internal weak var parameterDatasource: GKRadarGraphParameterDatasource?
+    var parameterDatasource: GKRadarGraphParameterDatasource?
 
+    /// Serie containing the data and draw info for this layer.
+    var serie: GKRadarGraphView.Serie?
+}
+
+extension GKRadarGraphSerieLayer {
+    
+    //
+    // MARK: Computed properties
+    //
+    
     /// Array of parameters to generate the graph.
     private var parameters: [GKRadarGraphView.Parameter] {
         
-        return parameterDatasource?.parameters ?? []
+        return parameterDatasource?._parameters ?? []
     }
-
-    var serie: GKRadarGraphView.Serie?
     
-    //
-    // MARK: Private stored properties
-    //
     
     /// Center of the graph's circle.  The circle is used to draw the regular polygons inside.
     private var circleCenter: CGPoint {
-        return parameterDatasource?.circleCenter ?? CGPointZero
+        return parameterDatasource?._circleCenter ?? CGPointZero
     }
     
     /// Radius of the circle.  Will be the full radius for the outer polygon and a smaller
     /// radius for the inner gradations.
     private var circleRadius: CGFloat {
-        return parameterDatasource?.circleRadius ?? 0
+        return parameterDatasource?._circleRadius ?? 0
     }
+}
+
+extension GKRadarGraphSerieLayer {
     
+    //
+    // MARK: Drawing functions
+    //
+
     /// Draw a serie in the radar chart.
     ///
+    /// - parameter ctx The context in which to draw the serie.
     /// - parameter serie; The serie containing all the info to render.
     private func drawSerie(ctx: CGContext, serie: GKRadarGraphView.Serie) {
         
@@ -92,15 +132,27 @@ class GKRadarGraphSerieLayer: CALayer {
         
         bezierPath.closePath()
         
+        guard let strokeColorInstance = serie.strokeColor else {
+        
+            switch serie.fillMode {
+                
+            case .NONE:
+                break
+                
+            case .SOLID(let fillColor):
+                CGContextAddPath(ctx, bezierPath.CGPath)
+                CGContextSetFillColorWithColor(ctx, fillColor.CGColor)
+                CGContextDrawPath(ctx, .Fill)
+            }
+            
+            return
+        }
         
         CGContextAddPath(ctx, bezierPath.CGPath)
         
-        if let strokeColorInstance = serie.strokeColor {
-            
-            CGContextSetStrokeColorWithColor(ctx, strokeColorInstance.CGColor)
-            CGContextSetLineWidth(ctx, serie.strokeWidth)
-        }
-        
+        CGContextSetStrokeColorWithColor(ctx, strokeColorInstance.CGColor)
+        CGContextSetLineWidth(ctx, serie.strokeWidth)
+
         switch serie.fillMode {
             
         case .NONE:
@@ -110,13 +162,31 @@ class GKRadarGraphSerieLayer: CALayer {
             CGContextSetFillColorWithColor(ctx, color.CGColor)
             CGContextDrawPath(ctx, .FillStroke)
         }
+    }
+    
+    /// Draw a decoration on each of the serie's vertices.
+    ///
+    /// - parameter ctx: The context in which to draw the decorations.
+    /// - parameter serie: The serie for which to draw decorations.
+    private func drawAllVertexDecorations(ctx: CGContext, serie: GKRadarGraphView.Serie) {
         
+        guard let decorationInstance = serie.decoration, decorationColor = serie.strokeColor else {
+            
+            return
+        }
+        
+        for vertex in serie.vertices {
+            
+            drawVertexDecoration(ctx, decorationType: decorationInstance, decorationColor: decorationColor, decorationCenter: vertex)
+        }
     }
     
     /// Draw the vertex decorations (shape or image at each serie's vertex)
     ///
-    /// - parameter serie: Serie containing information on how to draw the shape.
-    /// - parameter vertex: The vertex on which to draw the shape.  It will act as the circle center.
+    /// - parameter ctx: The context in which to draw the decoration.
+    /// - parameter decorationType: The decoration type to draw.
+    /// - parameter decorationColor: Color used to fill the decoration.  
+    /// - parameter decorationCenter: It will act as the circle center.
     private func drawVertexDecoration(ctx: CGContext, decorationType: GKRadarGraphView.Serie.DecorationType, decorationColor: UIColor, decorationCenter: CGPoint) {
         
         let bezierPath: UIBezierPath
@@ -174,22 +244,9 @@ class GKRadarGraphSerieLayer: CALayer {
         return bezierPath
     }
     
-    /// Draw a decoration on each of the serie's vertices.
+    /// Draw the layer in the given context.
     ///
-    /// - parameter serie: The serie for which to draw decorations.
-    private func drawSerieVertexDecoration(ctx: CGContext, serie: GKRadarGraphView.Serie) {
-        
-        guard let decorationInstance = serie.decoration, decorationColor = serie.strokeColor else {
-            
-            return
-        }
-        
-        for vertex in serie.vertices {
-            
-            drawVertexDecoration(ctx, decorationType: decorationInstance, decorationColor: decorationColor, decorationCenter: vertex)
-        }
-    }
-    
+    /// - parameter ctx: The context in which to draw the layer.
     internal override func drawInContext(ctx: CGContext) {
         
         if let serieInstance = serie {
@@ -199,7 +256,7 @@ class GKRadarGraphSerieLayer: CALayer {
             // Vertex decorations have to be drawn after the serie itself.
             // This is because the decoration have to be drawn on top of
             // the serie itself.
-            drawSerieVertexDecoration(ctx, serie: serieInstance)
+            drawAllVertexDecorations(ctx, serie: serieInstance)
         }
     }
 }

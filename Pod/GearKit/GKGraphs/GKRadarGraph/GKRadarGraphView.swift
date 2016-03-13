@@ -35,7 +35,7 @@ import UIKit
 /// Draw a fully customizable radar graph.  A simple preview is also visible in 
 /// Interface Builder thanks tot he IBDesignable property.
 @IBDesignable
-public class GKRadarGraphView : UIView {
+public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
     
     //
     // MARK: Inner types
@@ -167,8 +167,8 @@ public class GKRadarGraphView : UIView {
         
         containerLayer.contentsScale = self.layer.contentsScale
         containerLayer.backgroundColor = backgroundColor?.CGColor
-        containerLayer.parameterDatasource = self.parameterDatasource
-        containerLayer.plotApperanceDelegate = self.plotApperanceDelegate
+        containerLayer.parameterDatasource = self
+        containerLayer.plotApperanceDelegate = self
         
         self.layer.addSublayer(containerLayer)
     }
@@ -178,8 +178,8 @@ public class GKRadarGraphView : UIView {
         
         containerLayer.contentsScale = self.layer.contentsScale
         containerLayer.backgroundColor = backgroundColor?.CGColor
-        containerLayer.parameterDatasource = self.parameterDatasource
-        containerLayer.plotApperanceDelegate = self.plotApperanceDelegate
+        containerLayer.parameterDatasource = self
+        containerLayer.plotApperanceDelegate = self
 
         self.layer.addSublayer(containerLayer)
     }
@@ -189,23 +189,9 @@ public class GKRadarGraphView : UIView {
     //
     
     /// Array of parameters to generate the graph.
-    public var parameter: [Parameter] {
-        
-        get {
-            
-            return parameterDatasource.parameters
-        }
-        
-        set {
-            
-            parameterDatasource.parameters = newValue
-        }
-    }
+    public var parameters: [Parameter] = []
     
     private var containerLayer = GKRadarGraphContainerLayer()
-    internal var parameterDatasource: GKRadarGraphParameterDatasource = GKRadarGraphParameterDatasource()
-
-    internal var plotApperanceDelegate: GKRadarGraphPlotAppearanceDelegate = GKRadarGraphPlotAppearanceDelegate()
     
     /// Array of series populating the graph's data.
     public var series: [Serie] = [] {
@@ -240,13 +226,31 @@ public class GKRadarGraphView : UIView {
                 
                 if let sublayerInstance = containerLayer.sublayers?[i] as? GKRadarGraphSerieLayer {
                     
-                    sublayerInstance.containerLayer = containerLayer
                     sublayerInstance.serie = singleSerie
-                    sublayerInstance.parameterDatasource = self.parameterDatasource
+                    sublayerInstance.parameterDatasource = self
                 }
             }
         }
     }
+    
+    //
+    // MARK: GKRadarGraphParameterDatasource implementation
+    //
+    
+    //
+    // NOTE: This contains stored properties so it cannot be put into an extension.
+    //
+    
+    /// Parameters (read-only)
+    var _parameters: [GKRadarGraphView.Parameter] {
+        return parameters
+    }
+    
+    /// Circle center for plot adjustments.
+    var _circleCenter: CGPoint = CGPointZero
+    
+    /// Circle radius for plot adjustments.  Needs to be settable for when we auto-adjust.
+    var _circleRadius: CGFloat = 0.0
     
     //
     // MARK: IBInspectable stored properties
@@ -259,58 +263,76 @@ public class GKRadarGraphView : UIView {
     
     /// Margin of the chart relative to it's containing view's edge.
     @IBInspectable
-    public var margin: CGFloat = GKRadarGraphPlotAppearanceDelegate.MARGIN_DEFAULT {
-        didSet {
-            plotApperanceDelegate.margin = margin
-        }
-    }
+    public var margin: CGFloat = MARGIN_DEFAULT
     
     /// Margin between the vertices and the text rendering.
     @IBInspectable
-    public var textMargin: CGFloat = GKRadarGraphPlotAppearanceDelegate.TEXT_MARGIN_DEFAULT {
-        didSet {
-            plotApperanceDelegate.textMargin = textMargin
-        }
-    }
+    public var textMargin: CGFloat = TEXT_MARGIN_DEFAULT
     
     /// Color of the outermost polygon's edges.
     @IBInspectable
-    public var outerStrokeColor: UIColor = GKRadarGraphPlotAppearanceDelegate.OUTER_STROKE_COLOR_DEFAULT {
-        didSet {
-            plotApperanceDelegate.outerStrokeColor = outerStrokeColor
-        }
-    }
+    public var outerStrokeColor: UIColor = OUTER_STROKE_COLOR_DEFAULT
     
     /// Width of the outermost polygon's edges.
     @IBInspectable
-    public var outerStrokeWidth: CGFloat = GKRadarGraphPlotAppearanceDelegate.OUTER_STROKE_WIDTH_DEFAULT {
-        didSet {
-            plotApperanceDelegate.outerStrokeWidth = outerStrokeWidth
-        }
-    }
+    public var outerStrokeWidth: CGFloat = OUTER_STROKE_WIDTH_DEFAULT
 
     /// Color of the inner (gradation) polygons's edges.
     @IBInspectable
-    public var gradationStrokeColor: UIColor = GKRadarGraphPlotAppearanceDelegate.GRADATION_STROKE_COLOR_DEFAULT
+    public var gradationStrokeColor: UIColor = GRADATION_STROKE_COLOR_DEFAULT
     
     /// Width of the inner (gradation0 polygons's edges.
     @IBInspectable
-    public var gradationStrokeWidth: CGFloat = GKRadarGraphPlotAppearanceDelegate.GRADATION_STROKE_WIDTH_DEFAULT
+    public var gradationStrokeWidth: CGFloat = GRADATION_STROKE_WIDTH_DEFAULT
     
     /// Number of gradations (inner polygons) to assign to the chart.
     @IBInspectable
-    public var numberOfGradations: Int = GKRadarGraphPlotAppearanceDelegate.NUMBER_OF_GRADATIONS_DEFAULT {
-        
-        didSet {
-            plotApperanceDelegate.numberOfGradations = numberOfGradations
-        }
-    }
+    public var numberOfGradations: Int = NUMBER_OF_GRADATIONS_DEFAULT
     
     @IBInspectable
-    public var graphBackgroundColor: UIColor = UIColor.clearColor() {
-        didSet {
-            plotApperanceDelegate.graphBackgroundColor = graphBackgroundColor
-        }
+    public var graphBackgroundColor: UIColor = GRAPH_BACKGROUND_COLOR_DEFAULT
+}
+
+extension GKRadarGraphView : GKRadarGraphPlotAppearanceDelegate {
+    
+    /// Margin of the chart relative to it's containing view's edge.
+    var _margin: CGFloat {
+        return margin
+    }
+    
+    /// Margin between the vertices and the text rendering.
+    var _textMargin: CGFloat {
+        return textMargin
+    }
+    
+    /// Color of the outermost polygon's edges.
+    var _outerStrokeColor: UIColor {
+        return outerStrokeColor
+    }
+    
+    /// Width of the outermost polygon's edges.
+    var _outerStrokeWidth: CGFloat {
+        return outerStrokeWidth
+    }
+    
+    /// Color of the inner (gradation) polygons's edges.
+    var _gradationStrokeColor: UIColor {
+        return gradationStrokeColor
+    }
+    
+    /// Width of the inner (gradation0 polygons's edges.
+    var _gradationStrokeWidth: CGFloat {
+        return gradationStrokeWidth
+    }
+    
+    /// Number of gradations (inner polygons) to assign to the chart.
+    var _numberOfGradations: Int {
+        return numberOfGradations
+    }
+    
+    /// Override the view's background color to be the background of the graph only.
+    var _graphBackgroundColor: UIColor {
+        return graphBackgroundColor
     }
 }
 
@@ -342,6 +364,46 @@ extension GKRadarGraphView {
     /// Margin for auto-adjust
     internal class var AUTO_ADJUST_MARGIN: CGFloat {
         return 2.0
+    }
+    
+    /// Default margin value.
+    internal class var MARGIN_DEFAULT: CGFloat {
+        return 0
+    }
+    
+    /// Default text margin value.
+    internal class var TEXT_MARGIN_DEFAULT: CGFloat {
+        return 3
+    }
+    
+    /// Default stroke color for outermost edges.
+    internal class var OUTER_STROKE_COLOR_DEFAULT: UIColor {
+        return UIColor.blackColor()
+    }
+    
+    /// Default stroke width for outermost edges.
+    internal class var OUTER_STROKE_WIDTH_DEFAULT: CGFloat {
+        return 1
+    }
+    
+    /// Default stroke color for inner gradation edges.
+    internal class var GRADATION_STROKE_COLOR_DEFAULT: UIColor {
+        return UIColor.grayColor()
+    }
+    
+    /// Default stroke width for inner gradation edges.
+    internal class var GRADATION_STROKE_WIDTH_DEFAULT: CGFloat {
+        return 1
+    }
+    
+    /// Default number of gradations.
+    internal class var NUMBER_OF_GRADATIONS_DEFAULT: Int {
+        return 4
+    }
+    
+    /// Default graph background color.
+    internal class var GRAPH_BACKGROUND_COLOR_DEFAULT: UIColor {
+        return UIColor.clearColor()
     }
 }
 
@@ -384,7 +446,7 @@ extension GKRadarGraphView {
         let defenseParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Param 4")
         let magicParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "Param 5")
         
-        self.parameter = [hpParameter, mpParameter, strengthParameter, defenseParameter, magicParameter]
+        self.parameters = [hpParameter, mpParameter, strengthParameter, defenseParameter, magicParameter]
 
         // We only support gradients for a single serie radar graph
         let firstSerie = GKRadarGraphView.Serie()
