@@ -50,6 +50,7 @@ extension GKRadarGraphViewController {
         let firstSerie = GKRadarGraphView.Serie()
         firstSerie.strokeColor = UIColor.blueColor()
         firstSerie.strokeWidth = 4.0
+        firstSerie.name = "blue"
         let firstFillColor: UIColor = UIColor(red: 0.1, green: 0.1, blue: 0.7, alpha: 0.7)
         
         firstSerie.fillMode = .SOLID(firstFillColor)
@@ -59,6 +60,7 @@ extension GKRadarGraphViewController {
         let secondSerie = GKRadarGraphView.Serie()
         secondSerie.strokeColor = UIColor.greenColor()
         secondSerie.strokeWidth = 4.0
+        secondSerie.name = "green"
         let secondFillColor: UIColor = UIColor(red: 0.1, green: 0.7, blue: 0.1, alpha: 0.7)
         
         secondSerie.fillMode = .SOLID(secondFillColor)
@@ -68,6 +70,7 @@ extension GKRadarGraphViewController {
         let thirdSerie = GKRadarGraphView.Serie()
         thirdSerie.strokeColor = UIColor.redColor()
         thirdSerie.strokeWidth = 4.0
+        thirdSerie.name = "red"
         let thirdSerieFillColor: UIColor = UIColor(red: 0.7, green: 0.1, blue: 0.1, alpha: 0.7)
         
         thirdSerie.fillMode = .SOLID(thirdSerieFillColor)

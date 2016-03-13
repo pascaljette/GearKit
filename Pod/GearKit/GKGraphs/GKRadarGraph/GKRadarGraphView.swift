@@ -206,7 +206,7 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
                 for _: Int in 0..<difference {
                     
                     let serieLayer = GKRadarGraphSerieLayer()
-                    serieLayer.frame = self.bounds;
+                    serieLayer.frame = self.bounds
                     
                     containerLayer.addSublayer(serieLayer)
                 }
@@ -226,8 +226,17 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
                 
                 if let sublayerInstance = containerLayer.sublayers?[i] as? GKRadarGraphSerieLayer {
                     
+                    let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+                    scaleAnimation.fromValue = 0.0
+                    scaleAnimation.toValue = 1.0
+                    scaleAnimation.duration = 1
+                    scaleAnimation.removedOnCompletion = false
+                    scaleAnimation.fillMode = kCAFillModeForwards
+                    sublayerInstance.addAnimation(scaleAnimation, forKey: "scale")
+                    
                     sublayerInstance.serie = singleSerie
                     sublayerInstance.parameterDatasource = self
+                    sublayerInstance.scale = 1.0
                 }
             }
         }
@@ -424,12 +433,23 @@ extension GKRadarGraphView {
 
 extension GKRadarGraphView {
     
+    /// Layout sub views.
+    /// We use this to update our sublayers frames when the view lays out its subviews.
+    /// Layers do not resize automatically.
     public override func layoutSubviews() {
         
         super.layoutSubviews()
         
         // Layers do not auto-resize!
         containerLayer.frame = self.bounds
+        
+        if let sublayersInstance = containerLayer.sublayers {
+            
+            for serieLayer in sublayersInstance {
+                
+                serieLayer.frame = self.bounds
+            }
+        }
     }
     
     //

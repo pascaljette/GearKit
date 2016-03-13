@@ -57,6 +57,9 @@ internal class GKRadarGraphSerieLayer: CALayer {
 
     /// Serie containing the data and draw info for this layer.
     var serie: GKRadarGraphView.Serie?
+    
+    /// Scale key used for animation.
+    var scale: CGFloat = 1.0
 }
 
 extension GKRadarGraphSerieLayer {

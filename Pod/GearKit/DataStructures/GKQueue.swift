@@ -244,7 +244,7 @@ public struct GKQueue<Element> {
     /// Initialize from another sequence.
     ///
     /// - parameter s: Other sequence from which to initialize (typically an Array).
-    public init<S : SequenceType where S.Generator.Element: Comparable>(_ s: S) {
+    public init<S : SequenceType>(_ s: S) {
         
         var generator = s.generate()
         
