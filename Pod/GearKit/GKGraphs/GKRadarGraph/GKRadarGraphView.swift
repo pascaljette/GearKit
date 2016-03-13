@@ -200,26 +200,52 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         }
     }
     
+    /// Animation type for the series.
+    public enum SeriesAnimation {
+        
+        /// Do not animate
+        case NONE
+        
+        /// Scale all series simultaneously
+        case SCALE_ALL(CGFloat)
+    }
+    
+    //
+    // MARK: Initialization
+    //
+
+    /// Init with frame.
+    ///
+    ///  - parameter frame: Frame with which to initialize.  This is used when initializing the view 
+    /// programatically.
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        containerLayer.contentsScale = self.layer.contentsScale
-        containerLayer.backgroundColor = backgroundColor?.CGColor
-        containerLayer.parameterDatasource = self
-        containerLayer.plotApperanceDelegate = self
+
+        doInit()
         
         self.layer.addSublayer(containerLayer)
     }
 
+    /// Init with coder (required).
+    ///
+    ///  - parameter coder: Coder with which to initialize.  This is used when initializing the view
+    /// from a nib/storyboard.
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        doInit()
+
+        self.layer.addSublayer(containerLayer)
+    }
+    
+    /// Common setup function
+    private func doInit() {
+    
         containerLayer.contentsScale = self.layer.contentsScale
         containerLayer.backgroundColor = backgroundColor?.CGColor
         containerLayer.parameterDatasource = self
         containerLayer.plotApperanceDelegate = self
 
-        self.layer.addSublayer(containerLayer)
     }
     
     //
@@ -229,7 +255,8 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
     /// Array of parameters to generate the graph.
     public var parameters: [Parameter] = []
     
-    private var containerLayer = GKRadarGraphContainerLayer()
+    /// Animation type for series
+    public var seriesAnimation: SeriesAnimation = GKRadarGraphView.SERIES_ANIMATION_DEFAULT
     
     /// Array of series populating the graph's data.
     public var series: [Serie] = [] {
@@ -264,22 +291,18 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
                 
                 if let sublayerInstance = containerLayer.sublayers?[i] as? GKRadarGraphSerieLayer {
                     
-                    let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
-                    scaleAnimation.fromValue = 0.0
-                    scaleAnimation.toValue = 1.0
-                    scaleAnimation.duration = 1
-                    scaleAnimation.removedOnCompletion = false
-                    scaleAnimation.fillMode = kCAFillModeForwards
-                    scaleAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-                    sublayerInstance.addAnimation(scaleAnimation, forKey: "scale")
-                    
                     sublayerInstance.serie = singleSerie
                     sublayerInstance.parameterDatasource = self
                     sublayerInstance.scale = 1.0
                 }
             }
+            
+            assignSeriesAnimation()
         }
     }
+    
+    /// Container layer
+    private var containerLayer = GKRadarGraphContainerLayer()
     
     //
     // MARK: GKRadarGraphParameterDatasource implementation
@@ -453,20 +476,44 @@ extension GKRadarGraphView {
     internal class var GRAPH_BACKGROUND_COLOR_DEFAULT: UIColor {
         return UIColor.clearColor()
     }
+    
+    /// Default series animation type
+    internal class var SERIES_ANIMATION_DEFAULT: SeriesAnimation {
+        return .NONE
+    }
 }
 
 extension GKRadarGraphView {
     
     //
-    // MARK: Drawing functions
+    // MARK: Animation functions
     //
-    
-    /// Called with the UIView requires new rendering.
-    ///
-    /// - parameter rect: The rectangle in which the UIView is to be rendered.
-    override public func drawRect(rect: CGRect) {
+
+    /// Set the animation on the series.
+    func assignSeriesAnimation() {
         
-        super.drawRect(rect)
+        switch(seriesAnimation) {
+            
+        case .NONE:
+            break;
+            
+        case .SCALE_ALL(let duration):
+            // Set the serie on each slice
+            for i: Int in 0..<series.count {
+                
+                if let sublayerInstance = containerLayer.sublayers?[i] as? GKRadarGraphSerieLayer {
+                    
+                    let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+                    scaleAnimation.fromValue = 0.0
+                    scaleAnimation.toValue = 1.0
+                    scaleAnimation.duration = CFTimeInterval(duration)
+                    scaleAnimation.removedOnCompletion = false
+                    scaleAnimation.fillMode = kCAFillModeForwards
+                    scaleAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                    sublayerInstance.addAnimation(scaleAnimation, forKey: "scale")
+                }
+            }
+        }
     }
 }
 

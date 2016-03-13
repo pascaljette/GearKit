@@ -77,6 +77,8 @@ extension GKRadarGraphViewController {
         thirdSerie.percentageValues = [0.5, 0.9, 0.5, 0.5, 0.6]
         thirdSerie.decoration = .DIAMOND(8.0)
         
+        radarGraphView.seriesAnimation = .SCALE_ALL(2.0)
+        
         radarGraphView.series = [firstSerie, secondSerie, thirdSerie]
     }
 }
