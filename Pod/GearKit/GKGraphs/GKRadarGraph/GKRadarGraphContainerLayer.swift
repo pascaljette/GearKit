@@ -23,15 +23,6 @@
 import Foundation
 import UIKit
 
-//
-// TODO: Make all calculations in a background thread and then draw everything in the main thread
-//
-
-//
-// TODO: Add a circle type as well as a polygon type
-//
-
-
 /// Draw a fully customizable radar graph.  A simple preview is also visible in
 /// Interface Builder thanks tot he IBDesignable property.
 internal class GKRadarGraphContainerLayer : CALayer {
@@ -109,7 +100,6 @@ extension GKRadarGraphContainerLayer {
     // MARK: Computed properties (shortcuts)
     //
 
-    
     /// Margin of the chart relative to it's containing view's edge.
     private var margin: CGFloat {
         return plotApperanceDelegate?._margin

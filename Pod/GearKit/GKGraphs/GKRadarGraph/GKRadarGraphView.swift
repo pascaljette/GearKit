@@ -73,7 +73,7 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         }
         
         /// Fill mode for the serie.
-        public var fillMode: FillMode = .SOLID(UIColor.blackColor())
+        public var fillMode: FillMode = Serie.FILL_MODE_DEFAULT
         
         /// Serie's name.
         public var name: String?
@@ -82,7 +82,7 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         public var strokeColor: UIColor?
         
         /// Stroke width for the serie.
-        public var strokeWidth: CGFloat = 1.0
+        public var strokeWidth: CGFloat = Serie.STROKE_WIDTH_DEFAULT
         
         /// Percentage of the max value for each of the serie's attributes.  This must follow
         /// the same order as the owning graph parameters.
@@ -93,6 +93,25 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         
         /// Array of verties for that serie
         internal var vertices: [CGPoint] = []
+        
+        //
+        // MARK: Series default values
+        //
+        
+        /// Default fill mode for a series.
+        internal class var FILL_MODE_DEFAULT: FillMode {
+            return .SOLID(UIColor.blackColor())
+        }
+        
+        /// Default width for strokes
+        internal class var STROKE_WIDTH_DEFAULT: CGFloat {
+            return 0.0
+        }
+        
+        /// Default color for strokes
+        internal class var STROKE_COLOR_DEFAULT: UIColor {
+            return UIColor.blackColor()
+        }
     }
     
     /// Parameter for the Radar Graph View.  A parameter correspondes to a spoke
@@ -127,13 +146,13 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         public var name: String = ""
         
         /// Font for the name label in the graph
-        public var nameFont: UIFont = UIFont.systemFontOfSize(14)
+        public var nameFont: UIFont = Parameter.FONT_DEFAULT
         
         /// Font for the name label in the graph
-        public var nameFontColor: UIColor = UIColor.blackColor()
+        public var nameFontColor: UIColor = Parameter.FONT_COLOR_DEFAULT
         
         /// Offset of where to render the text.
-        public var textOffset: CGPoint = CGPoint(x: 0, y: 0)
+        public var textOffset: CGPoint = Parameter.TEXT_OFFSET_DEFAULT
         
         /// Location of the outer vertex
         internal class OuterVertex {
@@ -160,6 +179,25 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         
         /// Point of the top left of the text label
         internal var textTopLeftPoint: CGPoint?
+        
+        //
+        // MARK: Parameter default values.
+        //
+        
+        /// Default value for a parameter's font.
+        internal class var FONT_DEFAULT: UIFont {
+            return UIFont.systemFontOfSize(14)
+        }
+        
+        /// Default value for a parameter's font.
+        internal class var FONT_COLOR_DEFAULT: UIColor {
+            return UIColor.blackColor()
+        }
+        
+        /// Default value for a parameter's text offset.
+        internal class var TEXT_OFFSET_DEFAULT: CGPoint {
+            return CGPointZero
+        }
     }
     
     override init(frame: CGRect) {
@@ -232,6 +270,7 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
                     scaleAnimation.duration = 1
                     scaleAnimation.removedOnCompletion = false
                     scaleAnimation.fillMode = kCAFillModeForwards
+                    scaleAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
                     sublayerInstance.addAnimation(scaleAnimation, forKey: "scale")
                     
                     sublayerInstance.serie = singleSerie
