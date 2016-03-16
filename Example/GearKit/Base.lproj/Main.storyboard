@@ -200,36 +200,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyH-mZ-Gg8" customClass="GKRadarGraphView" customModule="GearKit">
-                                <rect key="frame" x="8" y="184" width="584" height="296"/>
+                                <rect key="frame" x="20" y="84" width="560" height="496"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="margin">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="outerStrokeColor">
-                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="graphBackgroundColor">
+                                        <color key="value" red="1" green="0.86875027248169667" blue="0.0" alpha="0.18682650862068967" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="outerStrokeWidth">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="gradationStrokeWidth">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                        <real key="value" value="0.0"/>
+                                        <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="numberOfGradations">
                                         <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="margin">
+                                        <real key="value" value="17"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="gradationStrokeWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="gradationStrokeColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="NyH-mZ-Gg8" secondAttribute="trailing" constant="8" id="bIE-Is-tUg"/>
-                            <constraint firstItem="NyH-mZ-Gg8" firstAttribute="top" secondItem="dws-G2-uX2" secondAttribute="bottom" constant="120" id="dOJ-lT-7dP"/>
-                            <constraint firstItem="NyH-mZ-Gg8" firstAttribute="leading" secondItem="fu3-iR-G5O" secondAttribute="leading" constant="8" id="jPU-a8-JDb"/>
-                            <constraint firstItem="f2d-v1-meW" firstAttribute="top" secondItem="NyH-mZ-Gg8" secondAttribute="bottom" constant="120" id="thL-lp-3Wv"/>
+                            <constraint firstItem="NyH-mZ-Gg8" firstAttribute="leading" secondItem="fu3-iR-G5O" secondAttribute="leading" constant="20" id="5Mb-vC-aGk"/>
+                            <constraint firstItem="NyH-mZ-Gg8" firstAttribute="top" secondItem="dws-G2-uX2" secondAttribute="bottom" constant="20" id="ECv-Zh-Ddt"/>
+                            <constraint firstItem="NyH-mZ-Gg8" firstAttribute="centerX" secondItem="fu3-iR-G5O" secondAttribute="centerX" id="FPo-yA-1cm"/>
+                            <constraint firstItem="f2d-v1-meW" firstAttribute="top" secondItem="NyH-mZ-Gg8" secondAttribute="bottom" constant="20" id="RiY-s4-4nv"/>
+                            <constraint firstAttribute="trailing" secondItem="NyH-mZ-Gg8" secondAttribute="trailing" constant="20" id="y41-td-SaQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="GKRadarGraphView" id="yWM-tm-tUj"/>
