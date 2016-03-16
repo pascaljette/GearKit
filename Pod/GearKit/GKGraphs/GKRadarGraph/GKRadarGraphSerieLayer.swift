@@ -60,6 +60,9 @@ internal class GKRadarGraphSerieLayer: CALayer {
     
     /// Scale key used for animation.
     var scale: CGFloat = 1.0
+    
+    /// A reference on the next layer in the series queue.
+    var nextSerieLayer: GKRadarGraphSerieLayer?
 }
 
 extension GKRadarGraphSerieLayer {
@@ -245,6 +248,44 @@ extension GKRadarGraphSerieLayer {
         }
         
         return bezierPath
+    }
+    
+    /// Make a scale animation that will grow the serie from nothing to its full scale.
+    ///
+    /// - parameter duration: Duration of the scale animation.
+    ///
+    /// - returns: A scale animation that can be applied to the layer using addAnimation.
+    internal func makeScaleAnimation(duration: CGFloat) -> CABasicAnimation {
+        
+        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+        scaleAnimation.fromValue = 0.0
+        scaleAnimation.toValue = 1.0
+        scaleAnimation.duration = CFTimeInterval(duration)
+        scaleAnimation.removedOnCompletion = false
+        scaleAnimation.fillMode = kCAFillModeForwards
+        scaleAnimation.delegate = self
+        scaleAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        return scaleAnimation
+    }
+    
+    /// Called when an animation on this layer stops.
+    ///
+    /// - parameter anim: Instance of the animation that just stopped.
+    /// - parmaeter finished: Whether the animation is finished or was interrupted.
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+
+        // If there is a next layer in the series queue.
+        if let nextSerieLayerInstance = nextSerieLayer {
+            
+            // Show the layer.
+            nextSerieLayerInstance.hidden = false
+            
+            // Animate the layer so that the animations are chained from serie to serie.
+            // The duration is reused and is therefore the same for all series.
+            let scaleAnimation = nextSerieLayerInstance.makeScaleAnimation(CGFloat(anim.duration))
+            nextSerieLayerInstance.addAnimation(scaleAnimation, forKey: "scale")
+        }
     }
     
     /// Draw the layer in the given context.

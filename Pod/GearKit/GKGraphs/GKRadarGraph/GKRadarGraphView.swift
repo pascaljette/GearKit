@@ -208,6 +208,9 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         
         /// Scale all series simultaneously
         case SCALE_ALL(CGFloat)
+        
+        /// Scale series one by one
+        case SCALE_ONE_BY_ONE(CGFloat)
     }
     
     //
@@ -245,7 +248,6 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         containerLayer.backgroundColor = backgroundColor?.CGColor
         containerLayer.parameterDatasource = self
         containerLayer.plotApperanceDelegate = self
-
     }
     
     //
@@ -294,6 +296,11 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
                     sublayerInstance.serie = singleSerie
                     sublayerInstance.parameterDatasource = self
                     sublayerInstance.scale = 1.0
+                    
+                    if (i < series.count - 1) {
+                        
+                        sublayerInstance.nextSerieLayer = containerLayer.sublayers?[i + 1] as? GKRadarGraphSerieLayer
+                    }
                 }
             }
             
@@ -360,6 +367,7 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
     @IBInspectable
     public var numberOfGradations: Int = NUMBER_OF_GRADATIONS_DEFAULT
     
+    /// Background color of the polygon that delimits the plot itself, not the full view.
     @IBInspectable
     public var graphBackgroundColor: UIColor = GRAPH_BACKGROUND_COLOR_DEFAULT
 }
@@ -511,6 +519,26 @@ extension GKRadarGraphView {
                     scaleAnimation.fillMode = kCAFillModeForwards
                     scaleAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
                     sublayerInstance.addAnimation(scaleAnimation, forKey: "scale")
+                }
+            }
+            
+        case .SCALE_ONE_BY_ONE(let duration):
+            
+            if let firstLayer = self.containerLayer.sublayers?.first as? GKRadarGraphSerieLayer {
+                
+                // Set the animation on the first layer only.
+                // Other animation will be set when the animation stops.
+                // The delegate is the CALayer itself.
+                let scaleAnimation = firstLayer.makeScaleAnimation(duration)
+                firstLayer.addAnimation(scaleAnimation, forKey: "scale")
+            }
+            
+            // Make all the subsequent layers hidden initially.
+            if let sublayersAfterFirst = self.containerLayer.sublayers?.suffixFrom(1) {
+                
+                for sublayerInstance in sublayersAfterFirst {
+                    
+                    sublayerInstance.hidden = true
                 }
             }
         }
