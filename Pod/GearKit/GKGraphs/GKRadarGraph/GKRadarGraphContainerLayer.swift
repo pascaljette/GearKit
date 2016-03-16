@@ -78,6 +78,15 @@ internal class GKRadarGraphContainerLayer : CALayer {
         needsDisplayOnBoundsChange = true
     }
     
+    /// Init from another layer.  Needed to implement for layer copy when setNeedsDisplay is called.
+    ///
+    /// - parameter layer; Layer to copy.
+    override init(layer: AnyObject) {
+        super.init(layer: layer)
+        
+        // Default is false, meaning the layer is not re-drawn when its bounds change.
+        needsDisplayOnBoundsChange = true
+    }
 }
 
 extension GKRadarGraphContainerLayer {
@@ -332,6 +341,11 @@ extension GKRadarGraphContainerLayer {
     /// - parameter ctx: The context in which the gradations are drawn.
     private func drawOuterPolygon(ctx: CGContextRef) {
         
+        guard parameters.count > 0 else {
+            
+            return
+        }
+        
         let bezierPath: UIBezierPath = UIBezierPath()
         
         for i in 0..<parameters.count {
@@ -369,40 +383,47 @@ extension GKRadarGraphContainerLayer {
     /// - parameter ctx: The context in which the gradations are drawn.
     private func drawGradations(ctx: CGContextRef) {
         
-        if let strokeColor: CGColor = gradationStrokeColor.CGColor {
-        
-            let bezierPath: UIBezierPath = UIBezierPath()
+        guard let strokeColor: CGColor = gradationStrokeColor.CGColor else {
             
-            for i in 0..<numberOfGradations {
+            return
+        }
+        
+        guard numberOfGradations > 0 && parameters.count > 0 else {
+            
+            return
+        }
+        
+        let bezierPath: UIBezierPath = UIBezierPath()
+        
+        for i in 0..<numberOfGradations {
+            
+            let radiusRatio: CGFloat = (1.0 / (CGFloat(numberOfGradations) + 1.0)) * CGFloat(i + 1)
+            
+            for i in 0..<parameters.count {
                 
-                let radiusRatio: CGFloat = (1.0 / (CGFloat(numberOfGradations) + 1.0)) * CGFloat(i + 1)
+                let xPosition = circleCenter.x + (circleRadius * radiusRatio * cos(parameters[i].outerVertex!.angle))
+                let yPosition = circleCenter.y + (circleRadius * radiusRatio * sin(parameters[i].outerVertex!.angle))
                 
-                for i in 0..<parameters.count {
+                let vertex: CGPoint = CGPoint(x: xPosition, y: yPosition)
+                
+                if i == 0 {
                     
-                    let xPosition = circleCenter.x + (circleRadius * radiusRatio * cos(parameters[i].outerVertex!.angle))
-                    let yPosition = circleCenter.y + (circleRadius * radiusRatio * sin(parameters[i].outerVertex!.angle))
+                    bezierPath.moveToPoint(vertex)
                     
-                    let vertex: CGPoint = CGPoint(x: xPosition, y: yPosition)
+                } else {
                     
-                    if i == 0 {
-                        
-                        bezierPath.moveToPoint(vertex)
-                        
-                    } else {
-                        
-                        bezierPath.addLineToPoint(vertex)
-                    }
+                    bezierPath.addLineToPoint(vertex)
                 }
-                
-                bezierPath.closePath()
-                
-                CGContextAddPath(ctx, bezierPath.CGPath)
-                CGContextSetFillColorWithColor(ctx, UIColor.clearColor().CGColor)
-                CGContextSetStrokeColorWithColor(ctx, strokeColor)
-                CGContextSetLineWidth(ctx, gradationStrokeWidth)
-                
-                CGContextDrawPath(ctx, .FillStroke)
             }
+            
+            bezierPath.closePath()
+            
+            CGContextAddPath(ctx, bezierPath.CGPath)
+            CGContextSetFillColorWithColor(ctx, UIColor.clearColor().CGColor)
+            CGContextSetStrokeColorWithColor(ctx, strokeColor)
+            CGContextSetLineWidth(ctx, gradationStrokeWidth)
+            
+            CGContextDrawPath(ctx, .FillStroke)
         }
     }
     
@@ -429,6 +450,31 @@ extension GKRadarGraphContainerLayer {
         
         // Draw outer polygon.
         drawOuterPolygon(ctx)
+    }
+}
+
+extension GKRadarGraphContainerLayer {
+
+    //
+    // MARK: CALayer overrides
+    //
+
+    /// Override set needs display in order to redraw the children layers
+    /// when the parent view is changed.
+    override func setNeedsDisplay() {
+        
+        super.setNeedsDisplay()
+        
+        guard let allSublayers = sublayers else {
+            
+            return
+        }
+        
+        // For all sublayers (typically series layers), redraw as well.
+        for sublayer in allSublayers {
+            
+            sublayer.setNeedsDisplay()
+        }
     }
 }
 

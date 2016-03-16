@@ -255,7 +255,13 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
     //
     
     /// Array of parameters to generate the graph.
-    public var parameters: [Parameter] = []
+    public var parameters: [Parameter] = [] {
+        
+        didSet {
+            
+            setNeedsDisplay()
+        }
+    }
     
     /// Animation type for series
     public var seriesAnimation: SeriesAnimation = GKRadarGraphView.SERIES_ANIMATION_DEFAULT
@@ -305,6 +311,8 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
             }
             
             assignSeriesAnimation()
+            
+            setNeedsDisplay()
         }
     }
     
@@ -547,6 +555,11 @@ extension GKRadarGraphView {
 
 extension GKRadarGraphView {
     
+    //
+    // MARK: UIView overrides
+    //
+
+    
     /// Layout sub views.
     /// We use this to update our sublayers frames when the view lays out its subviews.
     /// Layers do not resize automatically.
@@ -566,6 +579,18 @@ extension GKRadarGraphView {
         }
     }
     
+    /// Override set needs display in order to redraw the children layers
+    /// when the parent view is changed.
+    public override func setNeedsDisplay() {
+        
+        super.setNeedsDisplay()
+        
+        containerLayer.setNeedsDisplay()
+    }
+}
+
+extension GKRadarGraphView {
+
     //
     // MARK: IBDesignable implementation
     //

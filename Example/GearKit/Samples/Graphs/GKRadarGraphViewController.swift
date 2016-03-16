@@ -36,6 +36,11 @@ extension GKRadarGraphViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+     
         let hpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "HP")
         let mpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "MP")
         let strengthParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "STR")
@@ -77,13 +82,8 @@ extension GKRadarGraphViewController {
         thirdSerie.decoration = .DIAMOND(8.0)
         
         radarGraphView.seriesAnimation = .SCALE_ONE_BY_ONE(2.0)
-
-        radarGraphView.series = [firstSerie, secondSerie, thirdSerie]
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-     
         
+        radarGraphView.series = [firstSerie, secondSerie, thirdSerie]
+
     }
 }

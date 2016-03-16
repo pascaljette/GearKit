@@ -102,14 +102,18 @@ extension GKRadarGraphSerieLayer {
     /// - parameter serie; The serie containing all the info to render.
     private func drawSerie(ctx: CGContext, serie: GKRadarGraphView.Serie) {
         
+        let outerVertices = parameters.flatMap( { return $0.outerVertex?.point })
+        
+        guard !outerVertices.isEmpty else {
+            
+            return
+        }
+        
         let bezierPath: UIBezierPath = UIBezierPath()
         
-        for i in 0..<parameters.count {
+        for i in 0..<outerVertices.count {
             
-            guard let point = parameters[i].outerVertex?.point else {
-                
-                continue
-            }
+            let point = outerVertices[i]
             
             let differenceX = point.x - circleCenter.x
             let differenceY = point.y - circleCenter.y
