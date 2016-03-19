@@ -489,6 +489,7 @@ extension GKRadarGraphContainerLayer {
                         serieSublayer.makeParameterPathAnimation(duration)
                         
                     case .SCALE_ALL(let duration):
+                        serieSublayer.decorationLayer?.hidden = true
                         serieSublayer.makeScaleAnimation(duration)
                         
                     case .SCALE_ONE_BY_ONE(let duration):

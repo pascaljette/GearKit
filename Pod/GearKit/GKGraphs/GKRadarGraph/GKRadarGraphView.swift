@@ -310,7 +310,6 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
                     
                     sublayerInstance.serie = singleSerie
                     sublayerInstance.parameterDatasource = self
-                    sublayerInstance.scale = 1.0
                     
                     sublayerInstance.nextSerieLayer = allSublayers.isInBounds(i + 1)
                         ? allSublayers[i + 1] as? GKRadarGraphSerieLayer

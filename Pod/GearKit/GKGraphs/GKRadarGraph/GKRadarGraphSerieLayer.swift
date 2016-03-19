@@ -36,6 +36,11 @@ internal class GKRadarGraphSerieLayer: CAShapeLayer {
         
         // Default is false, meaning the layer is not re-drawn when its bounds change.
         needsDisplayOnBoundsChange = true
+        
+        let decorationLayer = GKRadarGraphSerieDecorationLayer()
+        decorationLayer.frame = self.bounds
+        
+        self.decorationLayer = decorationLayer
     }
     
     /// Required initializer with coder.
@@ -46,6 +51,11 @@ internal class GKRadarGraphSerieLayer: CAShapeLayer {
         
         // Default is false, meaning the layer is not re-drawn when its bounds change.
         needsDisplayOnBoundsChange = true
+        
+        let decorationLayer = GKRadarGraphSerieDecorationLayer()
+        decorationLayer.frame = self.bounds
+        
+        self.decorationLayer = decorationLayer
     }
     
     //
@@ -78,12 +88,11 @@ internal class GKRadarGraphSerieLayer: CAShapeLayer {
             
             strokeColor = serie?.strokeColor?.CGColor
             lineWidth = serie?.strokeWidth ?? 1
+            
+            decorationLayer?.serie = serie
         }
     }
-    
-    /// Scale key used for animation.
-    var scale: CGFloat = 1.0
-    
+
     /// A reference on the next layer in the series queue.
     var nextSerieLayer: GKRadarGraphSerieLayer?
     
@@ -116,6 +125,76 @@ extension GKRadarGraphSerieLayer {
     /// radius for the inner gradations.
     private var circleRadius: CGFloat {
         return parameterDatasource?._circleRadius ?? 0
+    }
+    
+    /// Whenever we set the frame for the series layer, we need to propagate the change to
+    /// the decoration layer.
+    override var frame: CGRect {
+        
+        get {
+            
+            return super.frame
+        }
+        
+        set {
+            
+            super.frame = newValue
+            decorationLayer?.frame = newValue
+        }
+    }
+    
+    /// A reference on the sublayer that draws the decorations.
+    var decorationLayer: GKRadarGraphSerieDecorationLayer? {
+        
+        get {
+            
+            guard let sublayersInstance = self.sublayers else {
+                
+                return nil
+            }
+            
+            // Return the first sublayer that is of type GKRadarGraphSerieDecorationLayer
+            // There should be just one in any case.
+            for sublayer in sublayersInstance {
+                
+                if sublayer is GKRadarGraphSerieDecorationLayer {
+                    
+                    return sublayer as? GKRadarGraphSerieDecorationLayer
+                }
+            }
+            
+            return nil
+        }
+        
+        set {
+            
+            guard let sublayersInstance = sublayers else {
+                
+                if let newSublayerInstance = newValue {
+                    
+                    newSublayerInstance.parameterDatasource = parameterDatasource
+                    newSublayerInstance.setNeedsDisplay()
+                    addSublayer(newSublayerInstance)
+                }
+                
+                return
+            }
+            
+            for sublayer in sublayersInstance {
+                
+                if let decorationSublayer = sublayer as? GKRadarGraphSerieDecorationLayer {
+                    
+                    decorationSublayer.removeFromSuperlayer()
+                }
+            }
+            
+            if let newSublayerInstance = newValue {
+                newSublayerInstance.parameterDatasource = parameterDatasource
+                newSublayerInstance.setNeedsDisplay()
+                addSublayer(newSublayerInstance)
+            }
+            
+        }
     }
 }
 
@@ -178,86 +257,13 @@ extension GKRadarGraphSerieLayer {
         
         self.path = bezierPath.CGPath
     }
+}
+
+extension GKRadarGraphSerieLayer {
     
-    /// Draw a decoration on each of the serie's vertices.
-    ///
-    /// - parameter ctx: The context in which to draw the decorations.
-    /// - parameter serie: The serie for which to draw decorations.
-    private func drawAllVertexDecorations(ctx: CGContext, serie: GKRadarGraphView.Serie) {
-        
-        guard let decorationInstance = serie.decoration, decorationColor = serie.strokeColor else {
-            
-            return
-        }
-        
-        for vertex in serie.vertices {
-            
-            drawVertexDecoration(ctx, decorationType: decorationInstance, decorationColor: decorationColor, decorationCenter: vertex)
-        }
-    }
-    
-    /// Draw the vertex decorations (shape or image at each serie's vertex)
-    ///
-    /// - parameter ctx: The context in which to draw the decoration.
-    /// - parameter decorationType: The decoration type to draw.
-    /// - parameter decorationColor: Color used to fill the decoration.  
-    /// - parameter decorationCenter: It will act as the circle center.
-    private func drawVertexDecoration(ctx: CGContext, decorationType: GKRadarGraphView.Serie.DecorationType, decorationColor: UIColor, decorationCenter: CGPoint) {
-        
-        let bezierPath: UIBezierPath
-        
-        switch(decorationType) {
-            
-        case .CIRCLE(let radius):
-            bezierPath = UIBezierPath(arcCenter: decorationCenter, radius: radius, startAngle: 0, endAngle: CGFloat(M_2_PI), clockwise: false)
-        case .DIAMOND(let radius):
-            bezierPath = traceDecorationPolygonBezierPath(4, radius: radius, center: decorationCenter, rotation: GKRadarGraphView.VERTICAL_OFFSET)
-        case .SQUARE(let radius):
-            bezierPath = traceDecorationPolygonBezierPath(4, radius: radius, center: decorationCenter, rotation: GKRadarGraphView.SQUARE_OFFSET)
-        }
-        
-        bezierPath.closePath()
-        bezierPath.lineJoinStyle = .Round
-        
-        CGContextAddPath(ctx, bezierPath.CGPath)
-        CGContextSetFillColorWithColor(ctx, decorationColor.CGColor)
-        CGContextDrawPath(ctx, .Fill)
-    }
-    
-    /// Generate the bezier path for the decorations at the bottom of the series vertices.
-    ///
-    /// - parameter numEdges: Number of edges for the decoration.
-    /// - parameter radius: Radius of the decoration's outlying circle.
-    /// - parameter center: Center point of the decoration.
-    /// - parameter rotation: Rotation of the decoration shape.
-    ///
-    /// - returns: The unclosed bezier path generated for the given decoration.
-    private func traceDecorationPolygonBezierPath(numEdges: Int, radius: CGFloat, center: CGPoint, rotation: CGFloat) -> UIBezierPath {
-        
-        let angle = CGFloat.degreesToRadians(degrees: (360 / CGFloat(numEdges)))
-        let bezierPath: UIBezierPath = UIBezierPath()
-        
-        for i in 0..<numEdges {
-            
-            let vertexAngle = angle * CGFloat(i) + rotation
-            
-            let xPosition = center.x + (radius * cos(vertexAngle))
-            let yPosition = center.y + (radius * sin(vertexAngle))
-            
-            let vertex: CGPoint = CGPoint(x: xPosition, y: yPosition)
-            
-            if i == 0 {
-                
-                bezierPath.moveToPoint(vertex)
-                
-            } else {
-                
-                bezierPath.addLineToPoint(vertex)
-            }
-        }
-        
-        return bezierPath
-    }
+    //
+    // MARK: Animation methods
+    //
     
     /// Make a scale animation that will grow the serie from nothing to its full scale.
     ///
@@ -334,7 +340,7 @@ extension GKRadarGraphSerieLayer {
                 
                 fromPath.moveToPoint(fromPoint)
                 toPath.moveToPoint(toPoint)
-
+                
             } else {
                 
                 fromPath.addLineToPoint(fromPoint)
@@ -344,7 +350,7 @@ extension GKRadarGraphSerieLayer {
         
         fromPath.closePath()
         toPath.closePath()
-
+        
         pathAnimation.fromValue = fromPath.CGPath
         pathAnimation.toValue = toPath.CGPath
         pathAnimation.duration = CFTimeInterval(duration)
@@ -355,6 +361,13 @@ extension GKRadarGraphSerieLayer {
         
         addAnimation(pathAnimation, forKey: "path")
     }
+}
+
+extension GKRadarGraphSerieLayer {
+    
+    //
+    // MARK: CAAnimation delegate implementation
+    //
     
     /// Called when an animation on this layer stops.
     ///
@@ -371,7 +384,7 @@ extension GKRadarGraphSerieLayer {
                 
                 makeParameterPathAnimation(duration)
             }
-
+            
         case .SCALE_ONE_BY_ONE(let duration):
             
             if let nextLayerInstance = nextSerieLayer {
@@ -381,25 +394,38 @@ extension GKRadarGraphSerieLayer {
             }
             
         case .SCALE_ALL:
-            break
+            decorationLayer?.hidden = false
             
         case .NONE:
             break
-        }        
-    }
-    
-    /// Draw the layer in the given context.
-    ///
-    /// - parameter ctx: The context in which to draw the layer.
-    internal override func drawInContext(ctx: CGContext) {
-
-        super.drawInContext(ctx)
-        if let serieInstance = serie {
-            
-            // Vertex decorations have to be drawn after the serie itself.
-            // This is because the decoration have to be drawn on top of
-            // the serie itself.
-            drawAllVertexDecorations(ctx, serie: serieInstance)
         }
     }
 }
+
+
+extension GKRadarGraphSerieLayer {
+    
+    //
+    // MARK: CALayer overrides
+    //
+    
+    /// Override set needs display in order to redraw the children layers
+    /// when the parent view is changed.
+    override func setNeedsDisplay() {
+        
+        super.setNeedsDisplay()
+        
+        guard let allSublayers = sublayers else {
+            
+            return
+        }
+        
+        // For all sublayers (typically series layers), redraw as well.
+        for sublayer in allSublayers {
+            
+            sublayer.setNeedsDisplay()
+        }
+    }
+}
+
+
