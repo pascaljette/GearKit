@@ -24,7 +24,7 @@ import Foundation
 import UIKit
 
 /// Layer that draws a serie in the radar graph.
-internal class GKRadarGraphSerieLayer: CALayer {
+internal class GKRadarGraphSerieLayer: CAShapeLayer {
     
     //
     // MARK: Initialization
@@ -54,15 +54,44 @@ internal class GKRadarGraphSerieLayer: CALayer {
     
     /// Global data source
     var parameterDatasource: GKRadarGraphParameterDatasource?
-
+    
     /// Serie containing the data and draw info for this layer.
-    var serie: GKRadarGraphView.Serie?
+    var serie: GKRadarGraphView.Serie? {
+        
+        didSet {
+            
+            if let serieFillMode = serie?.fillMode {
+                
+                switch serieFillMode {
+                    
+                case .NONE:
+                    fillColor = nil
+                    
+                case .SOLID(let color):
+                    fillColor = color.CGColor
+                }
+
+            } else {
+                
+                fillColor = nil
+            }
+            
+            strokeColor = serie?.strokeColor?.CGColor
+            lineWidth = serie?.strokeWidth ?? 1
+        }
+    }
     
     /// Scale key used for animation.
     var scale: CGFloat = 1.0
     
     /// A reference on the next layer in the series queue.
     var nextSerieLayer: GKRadarGraphSerieLayer?
+    
+    /// Index of the last animated vertex.  Useful for chaining animations on vertices.
+    internal var lastAnimatedVertexIndex: Int = 0
+    
+    /// Animation type for the serie
+    internal var animationType: GKRadarGraphView.SeriesAnimation = .NONE
 }
 
 extension GKRadarGraphSerieLayer {
@@ -100,7 +129,12 @@ extension GKRadarGraphSerieLayer {
     ///
     /// - parameter ctx The context in which to draw the serie.
     /// - parameter serie; The serie containing all the info to render.
-    private func drawSerie(ctx: CGContext, serie: GKRadarGraphView.Serie) {
+    internal func generatePath() {
+        
+        guard let serieInstance = serie else {
+            
+            return
+        }
         
         let outerVertices = parameters.flatMap( { return $0.outerVertex?.point })
         
@@ -119,8 +153,8 @@ extension GKRadarGraphSerieLayer {
             let differenceY = point.y - circleCenter.y
             
             // scalar multiplication
-            let scalarMultiplier = serie.percentageValues.count > i
-                ? serie.percentageValues[i]
+            let scalarMultiplier = serieInstance.percentageValues.count > i
+                ? serieInstance.percentageValues[i]
                 : 0
             
             let pointX = circleCenter.x + (differenceX * scalarMultiplier)
@@ -128,7 +162,7 @@ extension GKRadarGraphSerieLayer {
             
             let vertex: CGPoint = CGPoint(x: pointX, y: pointY)
             
-            serie.vertices.append(vertex)
+            serieInstance.vertices.append(vertex)
             
             if i == 0 {
                 
@@ -142,36 +176,7 @@ extension GKRadarGraphSerieLayer {
         
         bezierPath.closePath()
         
-        guard let strokeColorInstance = serie.strokeColor else {
-        
-            switch serie.fillMode {
-                
-            case .NONE:
-                break
-                
-            case .SOLID(let fillColor):
-                CGContextAddPath(ctx, bezierPath.CGPath)
-                CGContextSetFillColorWithColor(ctx, fillColor.CGColor)
-                CGContextDrawPath(ctx, .Fill)
-            }
-            
-            return
-        }
-        
-        CGContextAddPath(ctx, bezierPath.CGPath)
-        
-        CGContextSetStrokeColorWithColor(ctx, strokeColorInstance.CGColor)
-        CGContextSetLineWidth(ctx, serie.strokeWidth)
-
-        switch serie.fillMode {
-            
-        case .NONE:
-            CGContextDrawPath(ctx, .Stroke)
-            
-        case .SOLID(let color):
-            CGContextSetFillColorWithColor(ctx, color.CGColor)
-            CGContextDrawPath(ctx, .FillStroke)
-        }
+        self.path = bezierPath.CGPath
     }
     
     /// Draw a decoration on each of the serie's vertices.
@@ -259,47 +264,137 @@ extension GKRadarGraphSerieLayer {
     /// - parameter duration: Duration of the scale animation.
     ///
     /// - returns: A scale animation that can be applied to the layer using addAnimation.
-    internal func makeScaleAnimation(duration: CGFloat) -> CABasicAnimation {
+    internal func makeScaleAnimation(duration: CGFloat) {
         
-        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
-        scaleAnimation.fromValue = 0.0
-        scaleAnimation.toValue = 1.0
-        scaleAnimation.duration = CFTimeInterval(duration)
-        scaleAnimation.removedOnCompletion = false
-        scaleAnimation.fillMode = kCAFillModeForwards
-        scaleAnimation.delegate = self
-        scaleAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        let pathAnimation = CABasicAnimation(keyPath: "path")
         
-        return scaleAnimation
+        let fromPath: UIBezierPath = UIBezierPath()
+        let toPath: UIBezierPath = UIBezierPath()
+        
+        for i in 0..<parameters.count {
+            
+            if i == 0 {
+                
+                fromPath.moveToPoint(circleCenter)
+                toPath.moveToPoint(serie!.vertices[0])
+                
+            } else {
+                
+                fromPath.addLineToPoint(circleCenter)
+                toPath.addLineToPoint(serie!.vertices[i])
+            }
+        }
+        
+        fromPath.closePath()
+        toPath.closePath()
+        
+        
+        pathAnimation.fromValue = fromPath.CGPath
+        pathAnimation.toValue = toPath.CGPath
+        pathAnimation.duration = CFTimeInterval(duration)
+        pathAnimation.removedOnCompletion = false
+        pathAnimation.fillMode = kCAFillModeForwards
+        pathAnimation.delegate = self
+        pathAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        addAnimation(pathAnimation, forKey: "path")
+    }
+    
+    /// Make a path animation for the serie where it will expand parameter by parameter.
+    /// The idea is to have the path start with all points at 0 and then expand each point
+    /// one by one.
+    ///
+    /// - parameter duration: Duration of the animation (for 1 point, not the full animation).
+    ///
+    /// - returns: A scale animation that can be applied to the layer using addAnimation.
+    internal func makeParameterPathAnimation(duration: CGFloat) {
+        
+        guard let serieInstance = serie else {
+            
+            return
+        }
+        
+        let pathAnimation = CABasicAnimation(keyPath: "path")
+        
+        let fromPath: UIBezierPath = UIBezierPath()
+        let toPath: UIBezierPath = UIBezierPath()
+        
+        // Make an all-zero path
+        for i in 0..<serieInstance.vertices.count {
+            
+            let fromPoint: CGPoint = i < lastAnimatedVertexIndex
+                ? serieInstance.vertices[i]
+                : circleCenter
+            
+            let toPoint: CGPoint = i < lastAnimatedVertexIndex + 1
+                ? serieInstance.vertices[i]
+                : circleCenter
+            
+            if i == 0 {
+                
+                fromPath.moveToPoint(fromPoint)
+                toPath.moveToPoint(toPoint)
+
+            } else {
+                
+                fromPath.addLineToPoint(fromPoint)
+                toPath.addLineToPoint(toPoint)
+            }
+        }
+        
+        fromPath.closePath()
+        toPath.closePath()
+
+        pathAnimation.fromValue = fromPath.CGPath
+        pathAnimation.toValue = toPath.CGPath
+        pathAnimation.duration = CFTimeInterval(duration)
+        pathAnimation.removedOnCompletion = false
+        pathAnimation.fillMode = kCAFillModeForwards
+        pathAnimation.delegate = self
+        pathAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        addAnimation(pathAnimation, forKey: "path")
     }
     
     /// Called when an animation on this layer stops.
     ///
     /// - parameter anim: Instance of the animation that just stopped.
-    /// - parmaeter finished: Whether the animation is finished or was interrupted.
+    /// - parameter finished: Whether the animation is finished or was interrupted.
     override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+        
+        switch animationType {
+            
+        case .PARAMETER_BY_PARAMETER(let duration):
+            lastAnimatedVertexIndex += 1
+            
+            if lastAnimatedVertexIndex < serie?.vertices.count {
+                
+                makeParameterPathAnimation(duration)
+            }
 
-        // If there is a next layer in the series queue.
-        if let nextSerieLayerInstance = nextSerieLayer {
+        case .SCALE_ONE_BY_ONE(let duration):
             
-            // Show the layer.
-            nextSerieLayerInstance.hidden = false
+            if let nextLayerInstance = nextSerieLayer {
+                
+                nextLayerInstance.hidden = false
+                nextLayerInstance.makeScaleAnimation(duration)
+            }
             
-            // Animate the layer so that the animations are chained from serie to serie.
-            // The duration is reused and is therefore the same for all series.
-            let scaleAnimation = nextSerieLayerInstance.makeScaleAnimation(CGFloat(anim.duration))
-            nextSerieLayerInstance.addAnimation(scaleAnimation, forKey: "scale")
-        }
+        case .SCALE_ALL:
+            break
+            
+        case .NONE:
+            break
+        }        
     }
     
     /// Draw the layer in the given context.
     ///
     /// - parameter ctx: The context in which to draw the layer.
     internal override func drawInContext(ctx: CGContext) {
-        
+
+        super.drawInContext(ctx)
         if let serieInstance = serie {
-            
-            drawSerie(ctx, serie: serieInstance)
             
             // Vertex decorations have to be drawn after the serie itself.
             // This is because the decoration have to be drawn on top of

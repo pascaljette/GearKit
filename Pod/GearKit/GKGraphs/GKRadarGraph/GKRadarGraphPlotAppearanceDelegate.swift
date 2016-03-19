@@ -50,4 +50,7 @@ internal protocol GKRadarGraphPlotAppearanceDelegate {
     
     /// Override the view's background color to be the background of the graph only.
     var _graphBackgroundColor: UIColor { get }
+    
+    /// How to animate the series.
+    var _seriesAnimation:  GKRadarGraphView.SeriesAnimation { get }
 }

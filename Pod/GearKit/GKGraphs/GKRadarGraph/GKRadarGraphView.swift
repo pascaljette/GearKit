@@ -211,6 +211,9 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         
         /// Scale series one by one
         case SCALE_ONE_BY_ONE(CGFloat)
+        
+        /// draw the series parameter by parameter.
+        case PARAMETER_BY_PARAMETER(CGFloat)
     }
     
     //
@@ -297,20 +300,23 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
                 
                 let singleSerie = series[i]
                 
-                if let sublayerInstance = containerLayer.sublayers?[i] as? GKRadarGraphSerieLayer {
+                guard let allSublayers = containerLayer.sublayers else {
+                    
+                    // This is actually a fatal error, sublayers should not be nil here.
+                    continue
+                }
+                
+                if let sublayerInstance = allSublayers[i] as? GKRadarGraphSerieLayer {
                     
                     sublayerInstance.serie = singleSerie
                     sublayerInstance.parameterDatasource = self
                     sublayerInstance.scale = 1.0
                     
-                    if (i < series.count - 1) {
-                        
-                        sublayerInstance.nextSerieLayer = containerLayer.sublayers?[i + 1] as? GKRadarGraphSerieLayer
-                    }
+                    sublayerInstance.nextSerieLayer = allSublayers.isInBounds(i + 1)
+                        ? allSublayers[i + 1] as? GKRadarGraphSerieLayer
+                        : nil                    
                 }
             }
-            
-            assignSeriesAnimation()
             
             setNeedsDisplay()
         }
@@ -421,6 +427,11 @@ extension GKRadarGraphView : GKRadarGraphPlotAppearanceDelegate {
     var _graphBackgroundColor: UIColor {
         return graphBackgroundColor
     }
+    
+    /// How to animate the series.
+    var _seriesAnimation: SeriesAnimation {
+        return seriesAnimation
+    }
 }
 
 extension GKRadarGraphView {
@@ -496,60 +507,6 @@ extension GKRadarGraphView {
     /// Default series animation type
     internal class var SERIES_ANIMATION_DEFAULT: SeriesAnimation {
         return .NONE
-    }
-}
-
-extension GKRadarGraphView {
-    
-    //
-    // MARK: Animation functions
-    //
-
-    /// Set the animation on the series.
-    func assignSeriesAnimation() {
-        
-        switch(seriesAnimation) {
-            
-        case .NONE:
-            break;
-            
-        case .SCALE_ALL(let duration):
-            // Set the serie on each slice
-            for i: Int in 0..<series.count {
-                
-                if let sublayerInstance = containerLayer.sublayers?[i] as? GKRadarGraphSerieLayer {
-                    
-                    let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
-                    scaleAnimation.fromValue = 0.0
-                    scaleAnimation.toValue = 1.0
-                    scaleAnimation.duration = CFTimeInterval(duration)
-                    scaleAnimation.removedOnCompletion = false
-                    scaleAnimation.fillMode = kCAFillModeForwards
-                    scaleAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-                    sublayerInstance.addAnimation(scaleAnimation, forKey: "scale")
-                }
-            }
-            
-        case .SCALE_ONE_BY_ONE(let duration):
-            
-            if let firstLayer = self.containerLayer.sublayers?.first as? GKRadarGraphSerieLayer {
-                
-                // Set the animation on the first layer only.
-                // Other animation will be set when the animation stops.
-                // The delegate is the CALayer itself.
-                let scaleAnimation = firstLayer.makeScaleAnimation(duration)
-                firstLayer.addAnimation(scaleAnimation, forKey: "scale")
-            }
-            
-            // Make all the subsequent layers hidden initially.
-            if let sublayersAfterFirst = self.containerLayer.sublayers?.suffixFrom(1) {
-                
-                for sublayerInstance in sublayersAfterFirst {
-                    
-                    sublayerInstance.hidden = true
-                }
-            }
-        }
     }
 }
 
