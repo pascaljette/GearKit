@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SamplesHomeViewController" customModule="GearKit_Example" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="XRi-eF-isx" id="X4u-4c-3Fg"/>
+                <outlet property="view" destination="FoZ-Kj-fpI" id="IrV-GM-Oj6"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="FoZ-Kj-fpI">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XRi-eF-isx">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="XRi-eF-isx" secondAttribute="bottom" id="TxI-uO-jja"/>
+                <constraint firstItem="XRi-eF-isx" firstAttribute="top" secondItem="FoZ-Kj-fpI" secondAttribute="top" id="c5u-ZX-CCk"/>
+                <constraint firstAttribute="trailing" secondItem="XRi-eF-isx" secondAttribute="trailing" id="iNq-Tz-Yp7"/>
+                <constraint firstItem="XRi-eF-isx" firstAttribute="leading" secondItem="FoZ-Kj-fpI" secondAttribute="leading" id="pie-rh-YQ2"/>
+            </constraints>
+            <point key="canvasLocation" x="424" y="-297"/>
+        </view>
+    </objects>
+</document>

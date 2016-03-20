@@ -12,6 +12,12 @@
 		535A0CB81C7070B1000C1CFF /* GKKeyboardScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */; };
 		535A0CB91C7070B1000C1CFF /* GKManualLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */; };
 		535A0CBC1C707123000C1CFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 535A0CBA1C707123000C1CFF /* LaunchScreen.storyboard */; };
+		5379D3421C9ED8350032DF52 /* GKRadarGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5379D3411C9ED8350032DF52 /* GKRadarGraphViewController.xib */; };
+		5379D3441C9ED88E0032DF52 /* GKRadarGraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379D3431C9ED88E0032DF52 /* GKRadarGraphModel.swift */; };
+		5379D3461C9EE02C0032DF52 /* GKKeyboardScrollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5379D3451C9EE02C0032DF52 /* GKKeyboardScrollViewController.xib */; };
+		5379D3481C9EE0FB0032DF52 /* SamplesHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5379D3471C9EE0FB0032DF52 /* SamplesHomeViewController.xib */; };
+		5379D34A1C9EE10F0032DF52 /* SamplesHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379D3491C9EE10F0032DF52 /* SamplesHomeViewController.swift */; };
+		5379D34C1C9EE17D0032DF52 /* GKManualLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5379D34B1C9EE17D0032DF52 /* GKManualLoginViewController.xib */; };
 		53A067441C7090B20022DF95 /* GKTableCustomCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A067431C7090B20022DF95 /* GKTableCustomCellViewController.swift */; };
 		53A067461C7093120022DF95 /* TripleLabelCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A067451C7093120022DF95 /* TripleLabelCellModel.swift */; };
 		53A1D6101C9037FC009E83CB /* GKQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D60D1C9036D0009E83CB /* GKQueueTests.swift */; };
@@ -21,8 +27,6 @@
 		53A1D6151C903B43009E83CB /* CGFloatExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536248211C784E8A004EC051 /* CGFloatExtensionTests.swift */; };
 		53A1D6161C903B49009E83CB /* GKColorRGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D5F81C789D5E009E83CB /* GKColorRGBTests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
-		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		952DE57BA6AEC0BB21F5FF47 /* Pods_GearKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC0A73CBA9720FF2EE3EA82E /* Pods_GearKit_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -51,6 +55,12 @@
 		535A0CBB1C707123000C1CFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5362481E1C7846AA004EC051 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		536248211C784E8A004EC051 /* CGFloatExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloatExtensionTests.swift; sourceTree = "<group>"; };
+		5379D3411C9ED8350032DF52 /* GKRadarGraphViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKRadarGraphViewController.xib; sourceTree = "<group>"; };
+		5379D3431C9ED88E0032DF52 /* GKRadarGraphModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphModel.swift; sourceTree = "<group>"; };
+		5379D3451C9EE02C0032DF52 /* GKKeyboardScrollViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKKeyboardScrollViewController.xib; sourceTree = "<group>"; };
+		5379D3471C9EE0FB0032DF52 /* SamplesHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SamplesHomeViewController.xib; sourceTree = "<group>"; };
+		5379D3491C9EE10F0032DF52 /* SamplesHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesHomeViewController.swift; sourceTree = "<group>"; };
+		5379D34B1C9EE17D0032DF52 /* GKManualLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKManualLoginViewController.xib; sourceTree = "<group>"; };
 		53A067431C7090B20022DF95 /* GKTableCustomCellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableCustomCellViewController.swift; sourceTree = "<group>"; };
 		53A067451C7093120022DF95 /* TripleLabelCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripleLabelCellModel.swift; sourceTree = "<group>"; };
 		53A1D5EE1C78669D009E83CB /* StringExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
@@ -60,8 +70,6 @@
 		607FACD01AFB9204008FA782 /* GearKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GearKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* GearKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GearKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,6 +115,8 @@
 				535A0CB31C7070B1000C1CFF /* KeyboardScroll */,
 				535A0CB51C7070B1000C1CFF /* ManualLogin */,
 				53A067421C70909A0022DF95 /* Table */,
+				5379D3471C9EE0FB0032DF52 /* SamplesHomeViewController.xib */,
+				5379D3491C9EE10F0032DF52 /* SamplesHomeViewController.swift */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -115,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				535A0CB21C7070B1000C1CFF /* GKRadarGraphViewController.swift */,
+				5379D3411C9ED8350032DF52 /* GKRadarGraphViewController.xib */,
+				5379D3431C9ED88E0032DF52 /* GKRadarGraphModel.swift */,
 			);
 			path = Graphs;
 			sourceTree = "<group>";
@@ -123,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */,
+				5379D3451C9EE02C0032DF52 /* GKKeyboardScrollViewController.xib */,
 			);
 			path = KeyboardScroll;
 			sourceTree = "<group>";
@@ -131,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */,
+				5379D34B1C9EE17D0032DF52 /* GKManualLoginViewController.xib */,
 			);
 			path = ManualLogin;
 			sourceTree = "<group>";
@@ -197,8 +211,6 @@
 			children = (
 				535A0CB01C7070B1000C1CFF /* Samples */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				535A0CBA1C707123000C1CFF /* LaunchScreen.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -340,8 +352,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5379D3421C9ED8350032DF52 /* GKRadarGraphViewController.xib in Resources */,
 				535A0CBC1C707123000C1CFF /* LaunchScreen.storyboard in Resources */,
-				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				5379D34C1C9EE17D0032DF52 /* GKManualLoginViewController.xib in Resources */,
+				5379D3461C9EE02C0032DF52 /* GKKeyboardScrollViewController.xib in Resources */,
+				5379D3481C9EE0FB0032DF52 /* SamplesHomeViewController.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,12 +469,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				53A067441C7090B20022DF95 /* GKTableCustomCellViewController.swift in Sources */,
+				5379D3441C9ED88E0032DF52 /* GKRadarGraphModel.swift in Sources */,
 				535A0CB81C7070B1000C1CFF /* GKKeyboardScrollViewController.swift in Sources */,
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				53A067461C7093120022DF95 /* TripleLabelCellModel.swift in Sources */,
 				535A0CB91C7070B1000C1CFF /* GKManualLoginViewController.swift in Sources */,
 				535A0CB71C7070B1000C1CFF /* GKRadarGraphViewController.swift in Sources */,
+				5379D34A1C9EE10F0032DF52 /* SamplesHomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,14 +509,6 @@
 				535A0CBB1C707123000C1CFF /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				607FACDA1AFB9204008FA782 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

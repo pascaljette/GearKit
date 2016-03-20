@@ -24,28 +24,23 @@ import UIKit
 import GearKit
 
 /// Root table view controller for the application.
-class RootViewController: GKTableViewControllerBase {
-    
-}
-
-//
-// MARK: Nested Types
-//
-extension RootViewController {
-    
-    enum SegueIdentifiers: String {
+class SamplesHomeViewController: GKTableViewControllerBase {
+   
+    init() {
         
-        case SHOW_RADAR_GRAPH = "ShowGKRadarGraphSample"
-        case SHOW_MANUAL_LOGIN = "ShowGKManualLoginSample"
-        case SHOW_KEYBOARD_SCROLLVIEW = "ShowKeyboardScrollview"
-        case SHOW_TABLE_CUSTOM_CELL = "ShowTableCustomCell"
+        super.init(nibName: "SamplesHomeViewController", bundle: nil)
+        navigationItem.title = "Home"
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is not supported (no storyboard support)")
     }
 }
 
 //
 // MARK: UIViewControllerOverrides
 //
-extension RootViewController {
+extension SamplesHomeViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +52,7 @@ extension RootViewController {
 //
 // MARK: Computed Properties
 //
-extension RootViewController {
+extension SamplesHomeViewController {
     
     // Table section for table
     var tableSection: GKTableSectionTitle {
@@ -68,7 +63,8 @@ extension RootViewController {
             let customTableCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
                 , title: "GKTable"
                 , subTitle: "CustomCell"
-                , cellTouchedFunction: { [weak self] _ in self?.navigateToSample(SegueIdentifiers.SHOW_TABLE_CUSTOM_CELL)}
+                , cellTouchedFunction: { [weak self] _ in
+                }
                 , deselectOnSelected: true)
             
             return GKTableSectionTitle(cells: [customTableCell], headerTitle: "GKTable")
@@ -81,13 +77,16 @@ extension RootViewController {
         get {
             
             // Graph section
-            let spiderGraphCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
+            let radarGraphCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
                 , title: "GKGraphs"
                 , subTitle: "GKRadarGraph"
-                , cellTouchedFunction: { [weak self] _ in self?.navigateToSample(SegueIdentifiers.SHOW_RADAR_GRAPH)}
+                , cellTouchedFunction: { [weak self] _ in
+                    
+                    self?.showViewController(GKRadarGraphViewController(model: GKRadarGraphModel()), sender: self)
+                }
                 , deselectOnSelected: true)
             
-            return GKTableSectionTitle(cells: [spiderGraphCell], headerTitle: "GKGraph")
+            return GKTableSectionTitle(cells: [radarGraphCell], headerTitle: "GKGraph")
         }
     }
     
@@ -100,7 +99,7 @@ extension RootViewController {
             let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
                 , title: "GKManualLogin"
                 , subTitle: "GKManualLoginViewController"
-                , cellTouchedFunction: { [weak self] _ in self?.navigateToSample(SegueIdentifiers.SHOW_MANUAL_LOGIN)}
+                , cellTouchedFunction: { [weak self] _ in }
                 , deselectOnSelected: true)
             
             return GKTableSectionTitle(cells: [manualLoginCell], headerTitle: "GKLogin")
@@ -116,23 +115,11 @@ extension RootViewController {
             let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
                 , title: "Keyboard"
                 , subTitle: "ScrollView"
-                , cellTouchedFunction: { [weak self] _ in self?.navigateToSample(SegueIdentifiers.SHOW_KEYBOARD_SCROLLVIEW)}
+                , cellTouchedFunction: { [weak self] _ in }
                 , deselectOnSelected: true)
             
             return GKTableSectionTitle(cells: [manualLoginCell], headerTitle: "Keyboard")
         }
     }
     
-}
-
-//
-// MARK: Private methods
-//
-extension RootViewController {
-    
-    /// Show the radar graph sample
-    private func navigateToSample(segueIdentifier: SegueIdentifiers) {
-        
-        self.performSegueWithIdentifier(segueIdentifier.rawValue, sender: self)
-    }
 }

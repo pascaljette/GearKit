@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GKKeyboardScrollViewController" customModule="GearKit_Example" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ra7-ax-fiJ">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="736"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input Text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mSq-D3-hWT">
+                            <rect key="frame" x="16" y="20" width="568" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Pyl-1a-ilN"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input Text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a3A-cK-LrD">
+                            <rect key="frame" x="16" y="180" width="568" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="WuG-0A-zFF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input Text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qaP-IJ-pEp">
+                            <rect key="frame" x="16" y="340" width="568" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="ssY-YT-bcw"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input Text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H6S-6r-vQ0">
+                            <rect key="frame" x="16" y="500" width="568" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="H6C-GI-5Ve"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="H6S-6r-vQ0" firstAttribute="trailing" secondItem="mSq-D3-hWT" secondAttribute="trailing" id="6hq-Ne-Paw"/>
+                        <constraint firstItem="qaP-IJ-pEp" firstAttribute="top" secondItem="mSq-D3-hWT" secondAttribute="bottom" constant="290" id="Cu7-RS-26E"/>
+                        <constraint firstAttribute="trailing" secondItem="mSq-D3-hWT" secondAttribute="trailing" constant="16" id="DXX-aS-kSD"/>
+                        <constraint firstItem="qaP-IJ-pEp" firstAttribute="leading" secondItem="mSq-D3-hWT" secondAttribute="leading" id="NvJ-xz-RXB"/>
+                        <constraint firstItem="qaP-IJ-pEp" firstAttribute="trailing" secondItem="mSq-D3-hWT" secondAttribute="trailing" id="RK6-0T-44Z"/>
+                        <constraint firstItem="a3A-cK-LrD" firstAttribute="trailing" secondItem="mSq-D3-hWT" secondAttribute="trailing" id="ffx-L5-z8f"/>
+                        <constraint firstItem="H6S-6r-vQ0" firstAttribute="top" secondItem="mSq-D3-hWT" secondAttribute="bottom" constant="450" id="fwl-6O-341"/>
+                        <constraint firstItem="a3A-cK-LrD" firstAttribute="top" secondItem="mSq-D3-hWT" secondAttribute="bottom" constant="130" id="gjG-jt-Gzr"/>
+                        <constraint firstItem="mSq-D3-hWT" firstAttribute="top" secondItem="ra7-ax-fiJ" secondAttribute="top" constant="20" id="jXZ-Ha-EIK"/>
+                        <constraint firstItem="mSq-D3-hWT" firstAttribute="leading" secondItem="ra7-ax-fiJ" secondAttribute="leading" constant="16" id="jvZ-UV-1cE"/>
+                        <constraint firstAttribute="bottom" secondItem="H6S-6r-vQ0" secondAttribute="bottom" constant="20" id="p0j-eq-dqD"/>
+                        <constraint firstItem="a3A-cK-LrD" firstAttribute="leading" secondItem="mSq-D3-hWT" secondAttribute="leading" id="u3P-HB-7DR"/>
+                        <constraint firstItem="H6S-6r-vQ0" firstAttribute="leading" secondItem="mSq-D3-hWT" secondAttribute="leading" id="vMI-Cc-W0P"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ra7-ax-fiJ" secondAttribute="trailing" id="Q1z-VN-jVw"/>
+                <constraint firstAttribute="bottom" secondItem="ra7-ax-fiJ" secondAttribute="bottom" id="Xy6-IB-4hs"/>
+                <constraint firstAttribute="trailing" secondItem="mSq-D3-hWT" secondAttribute="trailing" constant="16" id="Z1C-Zn-rPs"/>
+                <constraint firstItem="ra7-ax-fiJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hfp-5X-FV7"/>
+                <constraint firstItem="mSq-D3-hWT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="yzC-GW-6Ei"/>
+                <constraint firstItem="ra7-ax-fiJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zi7-sX-mCF"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="303" y="263"/>
+        </view>
+    </objects>
+</document>
