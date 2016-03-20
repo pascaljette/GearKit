@@ -157,6 +157,12 @@ extension GKRadarGraphContainerLayer {
             ?? GKRadarGraphView.GRAPH_BACKGROUND_COLOR_DEFAULT.CGColor
     }
     
+    /// Determine the animation method to use for the series.
+    internal var seriesAnimation: GKRadarGraphView.SeriesAnimation {
+        return plotApperanceDelegate?._seriesAnimation
+            ?? GKRadarGraphView.SERIES_ANIMATION_DEFAULT
+    }
+    
     /// Center of the graph's circle.  The circle is used to draw the regular polygons inside.
     private var circleCenter: CGPoint {
         
@@ -445,11 +451,72 @@ extension GKRadarGraphContainerLayer {
         // Do a next pass so we can save the final position and parameters of the vertices.
         calculateOuterVertices(self.frame, passmode: .DRAW_TEXT(ctx))
         
-        // Draw the gradations
+        // Draw the gradations.
         drawGradations(ctx)
         
         // Draw outer polygon.
         drawOuterPolygon(ctx)
+        
+        // Animate the series.
+        assignSeriesAnimation()
+    }
+}
+
+extension GKRadarGraphContainerLayer {
+    
+    //
+    // MARK: Animation functions
+    //
+    
+    /// Assign animation functions to all series.
+    func assignSeriesAnimation() {
+        
+        if let allSublayers = self.sublayers {
+            
+            for i: Int in 0..<allSublayers.count {
+                
+                if let serieSublayer = allSublayers[i] as? GKRadarGraphSerieLayer {
+                    
+                    serieSublayer.generatePath()
+                    serieSublayer.animationType = seriesAnimation
+                    
+                    switch seriesAnimation {
+                        
+                    case .NONE:
+                        serieSublayer.decorationLayer?.hidden = false
+                        
+                    case .PARAMETER_BY_PARAMETER(let duration):
+                        serieSublayer.decorationLayer?.hidden = true
+                        
+                        if i == 0 {
+                            
+                            serieSublayer.makeParameterPathAnimation(duration)
+                            
+                        } else {
+                            
+                            serieSublayer.hidden = true
+                        }
+                        
+                    case .SCALE_ALL(let duration):
+                        serieSublayer.decorationLayer?.hidden = true
+                        serieSublayer.makeScaleAnimation(duration)
+                        
+                    case .SCALE_ONE_BY_ONE(let duration):
+                        serieSublayer.decorationLayer?.hidden = true
+
+                        if i == 0 {
+                            
+                            serieSublayer.makeScaleAnimation(duration)
+                            
+                        } else {
+                            
+                            serieSublayer.hidden = true
+                        }
+                    }
+                    
+                }
+            }
+        }
     }
 }
 

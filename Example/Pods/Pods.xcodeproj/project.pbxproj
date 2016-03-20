@@ -62,6 +62,7 @@
 		53298FBC1C954788004CA2E0 /* GKRadarGraphParameterDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53298FBB1C954788004CA2E0 /* GKRadarGraphParameterDatasource.swift */; };
 		53298FBE1C954D49004CA2E0 /* GKRadarGraphPlotAppearanceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53298FBD1C954D49004CA2E0 /* GKRadarGraphPlotAppearanceDelegate.swift */; };
 		534778D346BE2E8988F9369B062CA2E7 /* GKTableCellErrorBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905906183EF33E129F612B8AA15EEEC9 /* GKTableCellErrorBasic.swift */; };
+		5379D3401C9DA2480032DF52 /* GKRadarGraphSerieDecorationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379D33E1C9DA22D0032DF52 /* GKRadarGraphSerieDecorationLayer.swift */; };
 		54AE9AF18CB7EEA4401D254DFE44974F /* AssertionDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6256685B28E1AAD9699422B405D3F3 /* AssertionDispatcher.swift */; };
 		58DE63B2FF3954F1467A5B41D8FF3932 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1EF76FE0C0FE0638FCD1666876DF45 /* XCTest.framework */; };
 		5C0BF7965E5BB652433475280CBE2BE3 /* World+DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82ABEC48264367A46677760F9FFF4C3 /* World+DSL.swift */; };
@@ -322,6 +323,7 @@
 		53298FB61C953B34004CA2E0 /* GKRadarGraphSerieLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphSerieLayer.swift; sourceTree = "<group>"; };
 		53298FBB1C954788004CA2E0 /* GKRadarGraphParameterDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphParameterDatasource.swift; sourceTree = "<group>"; };
 		53298FBD1C954D49004CA2E0 /* GKRadarGraphPlotAppearanceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphPlotAppearanceDelegate.swift; sourceTree = "<group>"; };
+		5379D33E1C9DA22D0032DF52 /* GKRadarGraphSerieDecorationLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphSerieDecorationLayer.swift; sourceTree = "<group>"; };
 		54977F881E571219BF5FBB3AE8EA4B70 /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = "<group>"; };
 		54B9A17E905F7B745AF531895A5419D5 /* Quick.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Quick.modulemap; sourceTree = "<group>"; };
 		5573D3A64AEDC2B9246D33758DEB58F6 /* ArrayExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
@@ -901,6 +903,7 @@
 				954E927DAA6E75CD1A328E3F8FBC1752 /* GKRadarGraphView.swift */,
 				53298FB31C9448C8004CA2E0 /* GKRadarGraphContainerLayer.swift */,
 				53298FB61C953B34004CA2E0 /* GKRadarGraphSerieLayer.swift */,
+				5379D33E1C9DA22D0032DF52 /* GKRadarGraphSerieDecorationLayer.swift */,
 				53298FBB1C954788004CA2E0 /* GKRadarGraphParameterDatasource.swift */,
 				53298FBD1C954D49004CA2E0 /* GKRadarGraphPlotAppearanceDelegate.swift */,
 			);
@@ -1488,6 +1491,7 @@
 				076CE631CF545DABAB3580B7DC74A221 /* GKPlistKeyConstants.swift in Sources */,
 				C0F12618534623A618EDA9286E8AB157 /* GKQueue.swift in Sources */,
 				7C0F8E807499BB8309BEC7C2B2837CA8 /* GKRadarGraphView.swift in Sources */,
+				5379D3401C9DA2480032DF52 /* GKRadarGraphSerieDecorationLayer.swift in Sources */,
 				53298FB81C953B83004CA2E0 /* GKRadarGraphSerieLayer.swift in Sources */,
 				64388B97AFFF3A1ECCB8C108063060C8 /* GKScrollingKeyboardListener.swift in Sources */,
 				0C7DAF96F2A49C086A74E6E4404842F4 /* GKSolidColorButton.swift in Sources */,
