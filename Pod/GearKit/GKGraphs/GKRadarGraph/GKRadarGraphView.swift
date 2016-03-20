@@ -228,8 +228,6 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         super.init(frame: frame)
 
         doInit()
-        
-        self.layer.addSublayer(containerLayer)
     }
 
     /// Init with coder (required).
@@ -240,8 +238,6 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         super.init(coder: aDecoder)
         
         doInit()
-
-        self.layer.addSublayer(containerLayer)
     }
     
     /// Common setup function
@@ -251,6 +247,9 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         containerLayer.backgroundColor = backgroundColor?.CGColor
         containerLayer.parameterDatasource = self
         containerLayer.plotApperanceDelegate = self
+        
+        self.layer.addSublayer(containerLayer)
+
     }
     
     //

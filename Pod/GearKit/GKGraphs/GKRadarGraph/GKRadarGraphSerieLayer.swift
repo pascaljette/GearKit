@@ -33,14 +33,8 @@ internal class GKRadarGraphSerieLayer: CAShapeLayer {
     /// Parameterless constructor.
     override init() {
         super.init()
-        
-        // Default is false, meaning the layer is not re-drawn when its bounds change.
-        needsDisplayOnBoundsChange = true
-        
-        let decorationLayer = GKRadarGraphSerieDecorationLayer()
-        decorationLayer.frame = self.bounds
-        
-        self.decorationLayer = decorationLayer
+
+        doInit()
     }
     
     /// Required initializer with coder.
@@ -49,6 +43,12 @@ internal class GKRadarGraphSerieLayer: CAShapeLayer {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        doInit()
+    }
+    
+    /// Common setup function
+    private func doInit() {
+     
         // Default is false, meaning the layer is not re-drawn when its bounds change.
         needsDisplayOnBoundsChange = true
         
@@ -115,7 +115,6 @@ extension GKRadarGraphSerieLayer {
         return parameterDatasource?._parameters ?? []
     }
     
-    
     /// Center of the graph's circle.  The circle is used to draw the regular polygons inside.
     private var circleCenter: CGPoint {
         return parameterDatasource?._circleCenter ?? CGPointZero
@@ -155,45 +154,35 @@ extension GKRadarGraphSerieLayer {
             
             // Return the first sublayer that is of type GKRadarGraphSerieDecorationLayer
             // There should be just one in any case.
-            for sublayer in sublayersInstance {
-                
-                if sublayer is GKRadarGraphSerieDecorationLayer {
-                    
-                    return sublayer as? GKRadarGraphSerieDecorationLayer
-                }
-            }
             
-            return nil
+            let myLayer = sublayersInstance.filter( { return $0 is GKRadarGraphSerieDecorationLayer })
+            return myLayer.first as? GKRadarGraphSerieDecorationLayer
         }
         
         set {
+
+            // Get an array, but in all cases, there should be only one of those sublayers.
+            let decorationLayers = sublayers?.filter({ $0 is GKRadarGraphSerieDecorationLayer})
             
-            guard let sublayersInstance = sublayers else {
+            guard let newSublayerInstance = newValue else {
                 
-                if let newSublayerInstance = newValue {
-                    
-                    newSublayerInstance.parameterDatasource = parameterDatasource
-                    newSublayerInstance.setNeedsDisplay()
-                    addSublayer(newSublayerInstance)
-                }
+                decorationLayers?.forEach({ $0.removeFromSuperlayer()})
                 
                 return
             }
             
-            for sublayer in sublayersInstance {
+            if let currentDecorationLayer = decorationLayers?.first as? GKRadarGraphSerieDecorationLayer {
                 
-                if let decorationSublayer = sublayer as? GKRadarGraphSerieDecorationLayer {
-                    
-                    decorationSublayer.removeFromSuperlayer()
-                }
-            }
+                currentDecorationLayer.frame = newSublayerInstance.frame
+                currentDecorationLayer.serie = newSublayerInstance.serie
+                currentDecorationLayer.setNeedsDisplay()
             
-            if let newSublayerInstance = newValue {
+            } else {
+                
                 newSublayerInstance.parameterDatasource = parameterDatasource
                 newSublayerInstance.setNeedsDisplay()
                 addSublayer(newSublayerInstance)
             }
-            
         }
     }
 }
@@ -272,8 +261,6 @@ extension GKRadarGraphSerieLayer {
     /// - returns: A scale animation that can be applied to the layer using addAnimation.
     internal func makeScaleAnimation(duration: CGFloat) {
         
-        let pathAnimation = CABasicAnimation(keyPath: "path")
-        
         let fromPath: UIBezierPath = UIBezierPath()
         let toPath: UIBezierPath = UIBezierPath()
         
@@ -294,16 +281,7 @@ extension GKRadarGraphSerieLayer {
         fromPath.closePath()
         toPath.closePath()
         
-        
-        pathAnimation.fromValue = fromPath.CGPath
-        pathAnimation.toValue = toPath.CGPath
-        pathAnimation.duration = CFTimeInterval(duration)
-        pathAnimation.removedOnCompletion = false
-        pathAnimation.fillMode = kCAFillModeForwards
-        pathAnimation.delegate = self
-        pathAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        
-        addAnimation(pathAnimation, forKey: "path")
+        addAnimationFromPath(fromPath.CGPath, toPath: toPath.CGPath, duration: CFTimeInterval(duration))
     }
     
     /// Make a path animation for the serie where it will expand parameter by parameter.
@@ -319,8 +297,6 @@ extension GKRadarGraphSerieLayer {
             
             return
         }
-        
-        let pathAnimation = CABasicAnimation(keyPath: "path")
         
         let fromPath: UIBezierPath = UIBezierPath()
         let toPath: UIBezierPath = UIBezierPath()
@@ -351,8 +327,21 @@ extension GKRadarGraphSerieLayer {
         fromPath.closePath()
         toPath.closePath()
         
-        pathAnimation.fromValue = fromPath.CGPath
-        pathAnimation.toValue = toPath.CGPath
+        addAnimationFromPath(fromPath.CGPath, toPath: toPath.CGPath, duration: CFTimeInterval(duration))
+    }
+    
+    /// Make a path animation based on the provided paths an durations.  This can be used
+    /// to scale or animate the shape construction.
+    ///
+    /// - parameter fromPath: Initial path.
+    /// - parameter toPath: Destination path.
+    /// - parameter duration: Animation duration.
+    private func addAnimationFromPath(fromPath: CGPathRef, toPath: CGPathRef, duration: CFTimeInterval) {
+        
+        let pathAnimation = CABasicAnimation(keyPath: "path")
+        
+        pathAnimation.fromValue = fromPath
+        pathAnimation.toValue = toPath
         pathAnimation.duration = CFTimeInterval(duration)
         pathAnimation.removedOnCompletion = false
         pathAnimation.fillMode = kCAFillModeForwards
@@ -383,10 +372,22 @@ extension GKRadarGraphSerieLayer {
             if lastAnimatedVertexIndex < serie?.vertices.count {
                 
                 makeParameterPathAnimation(duration)
+            
+            } else if lastAnimatedVertexIndex == serie?.vertices.count {
+                
+                decorationLayer?.hidden = false
+                
+                if let nextLayerInstance = nextSerieLayer {
+                    
+                    nextLayerInstance.hidden = false
+                    nextLayerInstance.makeParameterPathAnimation(duration)
+                }
             }
             
         case .SCALE_ONE_BY_ONE(let duration):
             
+            decorationLayer?.hidden = false
+
             if let nextLayerInstance = nextSerieLayer {
                 
                 nextLayerInstance.hidden = false

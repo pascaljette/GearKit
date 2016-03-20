@@ -483,16 +483,27 @@ extension GKRadarGraphContainerLayer {
                     switch seriesAnimation {
                         
                     case .NONE:
-                        break
+                        serieSublayer.decorationLayer?.hidden = false
                         
                     case .PARAMETER_BY_PARAMETER(let duration):
-                        serieSublayer.makeParameterPathAnimation(duration)
+                        serieSublayer.decorationLayer?.hidden = true
+                        
+                        if i == 0 {
+                            
+                            serieSublayer.makeParameterPathAnimation(duration)
+                            
+                        } else {
+                            
+                            serieSublayer.hidden = true
+                        }
                         
                     case .SCALE_ALL(let duration):
                         serieSublayer.decorationLayer?.hidden = true
                         serieSublayer.makeScaleAnimation(duration)
                         
                     case .SCALE_ONE_BY_ONE(let duration):
+                        serieSublayer.decorationLayer?.hidden = true
+
                         if i == 0 {
                             
                             serieSublayer.makeScaleAnimation(duration)
