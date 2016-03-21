@@ -26,30 +26,50 @@ import GearKit
 /// Stored properties
 class GKRadarGraphViewController: UIViewController {
     
+    //
+    // MARK: IBOutlets
+    //
+    
     @IBOutlet weak var radarGraphView: GKRadarGraphView!
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Model containing info about generating the graph.
     let model: GKRadarGraphModel
     
+    //
+    // MARK: Initialisation.
+    //
+    
+    /// Initialise with a model.
+    ///
+    /// - parameter model: Model to use to initialise the view controller.
     init(model: GKRadarGraphModel) {
         
         self.model = model
         super.init(nibName: "GKRadarGraphViewController", bundle: nil)
     }
 
+    /// Required initialiser with a coder.
+    /// We generate a fatal error to underline the fact that we do not want to support storyboards.
+    ///
+    /// - parameter coder: Coder used to serialize the object.
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) is not supported")
     }
 }
 
-/// UIViewController overrides
 extension GKRadarGraphViewController {
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
+    //
+    // MARK: UIViewController overrides.
+    //
+
+    /// View did appear.
+    ///
+    /// - parameter animated: Whether the view should be animated.
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -59,6 +79,5 @@ extension GKRadarGraphViewController {
         radarGraphView.seriesAnimation = .PARAMETER_BY_PARAMETER(0.8)
         
         radarGraphView.series = model.series
-
     }
 }

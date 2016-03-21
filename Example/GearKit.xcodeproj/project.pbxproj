@@ -26,6 +26,7 @@
 		53A1D6141C903B41009E83CB /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D5EE1C78669D009E83CB /* StringExtensionTests.swift */; };
 		53A1D6151C903B43009E83CB /* CGFloatExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536248211C784E8A004EC051 /* CGFloatExtensionTests.swift */; };
 		53A1D6161C903B49009E83CB /* GKColorRGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D5F81C789D5E009E83CB /* GKColorRGBTests.swift */; };
+		53B52D011C9FDAED0042D91F /* GKTableCustomCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53B52D001C9FDAED0042D91F /* GKTableCustomCellViewController.xib */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		952DE57BA6AEC0BB21F5FF47 /* Pods_GearKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC0A73CBA9720FF2EE3EA82E /* Pods_GearKit_Tests.framework */; };
@@ -67,6 +68,7 @@
 		53A1D5F81C789D5E009E83CB /* GKColorRGBTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKColorRGBTests.swift; sourceTree = "<group>"; };
 		53A1D6041C805EB0009E83CB /* GKDoublyLinkedListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKDoublyLinkedListTests.swift; sourceTree = "<group>"; };
 		53A1D60D1C9036D0009E83CB /* GKQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKQueueTests.swift; sourceTree = "<group>"; };
+		53B52D001C9FDAED0042D91F /* GKTableCustomCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKTableCustomCellViewController.xib; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* GearKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GearKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,10 +113,10 @@
 		535A0CB01C7070B1000C1CFF /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				53A067421C70909A0022DF95 /* Table */,
 				535A0CB11C7070B1000C1CFF /* Graphs */,
 				535A0CB31C7070B1000C1CFF /* KeyboardScroll */,
 				535A0CB51C7070B1000C1CFF /* ManualLogin */,
-				53A067421C70909A0022DF95 /* Table */,
 				5379D3471C9EE0FB0032DF52 /* SamplesHomeViewController.xib */,
 				5379D3491C9EE10F0032DF52 /* SamplesHomeViewController.swift */,
 			);
@@ -162,6 +164,7 @@
 		53A067421C70909A0022DF95 /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				53B52D001C9FDAED0042D91F /* GKTableCustomCellViewController.xib */,
 				53A067431C7090B20022DF95 /* GKTableCustomCellViewController.swift */,
 				53A067451C7093120022DF95 /* TripleLabelCellModel.swift */,
 			);
@@ -353,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5379D3421C9ED8350032DF52 /* GKRadarGraphViewController.xib in Resources */,
+				53B52D011C9FDAED0042D91F /* GKTableCustomCellViewController.xib in Resources */,
 				535A0CBC1C707123000C1CFF /* LaunchScreen.storyboard in Resources */,
 				5379D34C1C9EE17D0032DF52 /* GKManualLoginViewController.xib in Resources */,
 				5379D3461C9EE02C0032DF52 /* GKKeyboardScrollViewController.xib in Resources */,

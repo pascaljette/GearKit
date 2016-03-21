@@ -25,14 +25,46 @@ import GearKit
 
 class GKTableCustomCellViewController : GKTableViewControllerBase {
 
+    //
+    // MARK: Nested Types
+    //
+    
     enum CellIdentifiers: String {
         
         case TRIPLE_LABEL = "TripleLabelCell"
         case LABEL_BUTTON = "LabelButtonCell"
     }
     
+    //
+    // MARK: Initialization
+    //
+    
+    /// Empty initializer, picks the nib automatically.
+    init() {
+        
+        super.init(nibName: "GKTableCustomCellViewController", bundle: nil)
+    }
+    
+    /// Required initialiser with a coder.
+    /// We generate a fatal error to underline the fact that we do not want to support storyboards.
+    ///
+    /// - parameter coder: Coder used to serialize the object.
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is not supported")
+    }
+}
+
+extension GKTableCustomCellViewController {
+    
+    //
+    // MARK: UIViewController overrides
+    //
+
+    /// View did load.
     override func viewDidLoad() {
         
         super.viewDidLoad()
     }
+
 }
+

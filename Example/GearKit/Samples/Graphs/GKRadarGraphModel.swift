@@ -23,8 +23,24 @@
 import UIKit
 import GearKit
 
+/// Model containing the data necessary to display the radar graph view controller.
 struct GKRadarGraphModel {
     
+    //
+    // MARK: Stored properties
+    //
+
+    /// Array of parameters for the plot.
+    var parameters: [GKRadarGraphView.Parameter] = []
+    
+    /// Series representing the data in the plot.
+    var series: [GKRadarGraphView.Serie] = []
+
+    //
+    // MARK: Initialisation
+    //
+
+    /// Initialize with default values.
     init() {
         
         let hpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "HP")
@@ -68,7 +84,4 @@ struct GKRadarGraphModel {
                 
         series = [firstSerie, secondSerie, thirdSerie]
     }
-    
-    var parameters: [GKRadarGraphView.Parameter] = []
-    var series: [GKRadarGraphView.Serie] = []
 }

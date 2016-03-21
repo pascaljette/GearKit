@@ -64,6 +64,7 @@ extension SamplesHomeViewController {
                 , title: "GKTable"
                 , subTitle: "CustomCell"
                 , cellTouchedFunction: { [weak self] _ in
+                    self?.showViewController(GKTableCustomCellViewController(), sender: self)
                 }
                 , deselectOnSelected: true)
             
@@ -99,7 +100,9 @@ extension SamplesHomeViewController {
             let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
                 , title: "GKManualLogin"
                 , subTitle: "GKManualLoginViewController"
-                , cellTouchedFunction: { [weak self] _ in }
+                , cellTouchedFunction: { [weak self] _ in
+                    self?.showViewController(GKManualLoginViewController(), sender: self)
+                }
                 , deselectOnSelected: true)
             
             return GKTableSectionTitle(cells: [manualLoginCell], headerTitle: "GKLogin")
@@ -115,7 +118,9 @@ extension SamplesHomeViewController {
             let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
                 , title: "Keyboard"
                 , subTitle: "ScrollView"
-                , cellTouchedFunction: { [weak self] _ in }
+                , cellTouchedFunction: { [weak self] _ in
+                    self?.showViewController(GKKeyboardScrollViewController(), sender: self)
+                }
                 , deselectOnSelected: true)
             
             return GKTableSectionTitle(cells: [manualLoginCell], headerTitle: "Keyboard")
