@@ -68,7 +68,7 @@ extension SamplesHomeViewController {
         
         registerNibName(TableCellIdentifiers.BASIC_CELL.rawValue, fromBundle: NSBundle.mainBundle())
         
-        tableSections = [tableSection, graphSection, manualLoginSection, keyboardSection]
+        tableSections = [customTableCellSection, graphSection, manualLoginSection, keyboardSection]
     }
 }
 
@@ -79,7 +79,7 @@ extension SamplesHomeViewController {
     //
     
     /// Table section for table
-    var tableSection: GKTableSectionTitle {
+    var customTableCellSection: GKTableSectionTitle {
         
         get {
             

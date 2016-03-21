@@ -18,6 +18,10 @@ This is written and designed to be used with Swift 2.1.1 (XCode 7.2)
 GearKit is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+## Contribution
+
+Please check the [Backlog page](https://pjette.backlogtool.com/find/GK_1)
+
 ```ruby
 pod "GearKit"
 ```

@@ -83,8 +83,17 @@ extension GKRadarGraphViewController {
         radarGraphView.parameters = model.parameters
         radarGraphView.backgroundColor = GKColorRGB(red: 0, green: 200, blue: 100, alpha: 150).uiColor
         
-        radarGraphView.seriesAnimation = .PARAMETER_BY_PARAMETER(0.8)
+        radarGraphView.seriesAnimation = .PARAMETER_BY_PARAMETER(0.4)
         
         radarGraphView.series = model.series
+    }
+}
+
+extension GKRadarGraphViewController {
+    
+    
+    @IBAction func editSeriesButtonTapped(sender: AnyObject) {
+        
+        showViewController(GKRadarGraphEditSeriesViewController(graphData: model), sender: self)
     }
 }
