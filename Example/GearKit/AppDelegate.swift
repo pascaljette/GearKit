@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 import UIKit
+import GearKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,7 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        let viewController = SamplesHomeViewController()
+        let navigationController = GKNavigationControllerBase(rootViewController: viewController)
+        
+        self.window!.rootViewController = navigationController
+        self.window!.makeKeyAndVisible()
         return true
     }
 

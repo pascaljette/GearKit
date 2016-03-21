@@ -26,40 +26,53 @@ import GearKit
 class GKManualLoginViewController: GKManualLoginViewControllerBase {
     
     @IBOutlet weak var scrollView: UIScrollView!
-}
-
-//
-// MARK: UIViewController overrides
-//
-extension GKManualLoginViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    //
+    // MARK: Initialization
+    //
+    
+    /// Empty initializer, picks the nib automatically.
+    init() {
+        
+        super.init(nibName: "GKManualLoginViewController", bundle: nil)
         
         loginDelegate = self
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    /// Required initialiser with a coder.
+    /// We generate a fatal error to underline the fact that we do not want to support storyboards.
+    ///
+    /// - parameter coder: Coder used to serialize the object.
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is not supported")
     }
 }
 
-//
-// MARK: GKManualLoginDelegate implementation
-//
-extension GKManualLoginViewController: GKManualLoginDelegate {
+extension GKManualLoginViewController {
     
-    // Perform login
+    //
+    // MARK: Initialization
+    //
+    
+    /// View did load.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationItem.title = "GKManualLogin"
+    }
+}
+
+extension GKManualLoginViewController: GKManualLoginDelegate {
+
+    //
+    // MARK: GKManualLoginDelegate implementation
+    //
+    
+    /// Perform login; for example, when the login button is pressed.
     func performLogin() {
         
         print("User Name: \(userName ?? "")")
         print("Password: \(password ?? "")")
         print("Remember Me?: \(rememberMe)")
     }
-}
-
-/// Private methods
-extension GKManualLoginViewController {
-    
 }

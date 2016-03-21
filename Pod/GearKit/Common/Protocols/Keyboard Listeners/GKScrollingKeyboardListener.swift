@@ -44,6 +44,15 @@ extension GKScrollingKeyboardListener where Self : UIViewController {
         return 16.0
     }
     
+    /// Get the total inset adjustment based on keyboard size and margin.
+    ///
+    /// - parameter notification: Notification used to get the keyboard size.
+    ///
+    /// - returns: The calculated total inset adjustment.
+    private func getTotalInsetAdjustment(notification: NSNotification) -> CGFloat {
+        return notification.keyboardSize.height + INSET_DEFAULT_MARGIN
+    }
+    
     /// Call in keyboardDidAppear
     public final func adjustInsetsOnKeyboardShow(notification: NSNotification) {
         
@@ -60,7 +69,7 @@ extension GKScrollingKeyboardListener where Self : UIViewController {
         if !keyboardVisible {
             
             var contentInsets: UIEdgeInsets = scrollViewInstance.contentInset
-            contentInsets.bottom += notification.keyboardSize.height + INSET_DEFAULT_MARGIN
+            contentInsets.bottom += getTotalInsetAdjustment(notification)
             
             scrollViewInstance.contentInset = contentInsets;
             scrollViewInstance.scrollIndicatorInsets = contentInsets
@@ -96,7 +105,7 @@ extension GKScrollingKeyboardListener where Self : UIViewController {
         if keyboardVisible {
             
             var contentInsets: UIEdgeInsets = scrollViewInstance.contentInset
-            contentInsets.bottom -= notification.keyboardSize.height
+            contentInsets.bottom -= getTotalInsetAdjustment(notification)
             
             scrollViewInstance.contentInset = contentInsets;
             scrollViewInstance.scrollIndicatorInsets = contentInsets

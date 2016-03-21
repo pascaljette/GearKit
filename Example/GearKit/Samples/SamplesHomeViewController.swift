@@ -24,51 +24,72 @@ import UIKit
 import GearKit
 
 /// Root table view controller for the application.
-class RootViewController: GKTableViewControllerBase {
+class SamplesHomeViewController: GKTableViewControllerBase {
+   
+    //
+    // MARK: Nested types
+    //
     
-}
-
-//
-// MARK: Nested Types
-//
-extension RootViewController {
-    
-    enum SegueIdentifiers: String {
+    /// Identifiers for table cells in this table view.
+    enum TableCellIdentifiers: String {
         
-        case SHOW_RADAR_GRAPH = "ShowGKRadarGraphSample"
-        case SHOW_MANUAL_LOGIN = "ShowGKManualLoginSample"
-        case SHOW_KEYBOARD_SCROLLVIEW = "ShowKeyboardScrollview"
-        case SHOW_TABLE_CUSTOM_CELL = "ShowTableCustomCell"
+        case BASIC_CELL = "SamplesHomeBasicCell"
+    }
+    
+    //
+    // MARK: Initialisation
+    //
+    
+    /// Empty initializer, picks the nib automatically.
+    init() {
+        
+        super.init(nibName: "SamplesHomeViewController", bundle: nil)
+        navigationItem.title = "Home"
+    }
+
+    /// Required initialiser with a coder.
+    /// We generate a fatal error to underline the fact that we do not want to support storyboards.
+    ///
+    /// - parameter coder: Coder used to serialize the object.
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is not supported (no storyboard support)")
     }
 }
 
-//
-// MARK: UIViewControllerOverrides
-//
-extension RootViewController {
+extension SamplesHomeViewController {
+
+    //
+    // MARK: UIViewController overrides
+    //
     
+    /// View did load.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        registerNibName(TableCellIdentifiers.BASIC_CELL.rawValue, fromBundle: NSBundle.mainBundle())
         
         tableSections = [tableSection, graphSection, manualLoginSection, keyboardSection]
     }
 }
 
-//
-// MARK: Computed Properties
-//
-extension RootViewController {
+extension SamplesHomeViewController {
+
+    //
+    // MARK: Computed Properties
+    //
     
-    // Table section for table
+    /// Table section for table
     var tableSection: GKTableSectionTitle {
         
         get {
             
             // Graph section
-            let customTableCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
+            let customTableCell: GKTableCellBasic = GKTableCellBasic(identifier: TableCellIdentifiers.BASIC_CELL.rawValue
                 , title: "GKTable"
                 , subTitle: "CustomCell"
-                , cellTouchedFunction: { [weak self] _ in self?.navigateToSample(SegueIdentifiers.SHOW_TABLE_CUSTOM_CELL)}
+                , cellTouchedFunction: { [weak self] _ in
+                    self?.showViewController(GKTableCustomCellViewController(), sender: self)
+                }
                 , deselectOnSelected: true)
             
             return GKTableSectionTitle(cells: [customTableCell], headerTitle: "GKTable")
@@ -81,13 +102,16 @@ extension RootViewController {
         get {
             
             // Graph section
-            let spiderGraphCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
+            let radarGraphCell: GKTableCellBasic = GKTableCellBasic(identifier: TableCellIdentifiers.BASIC_CELL.rawValue
                 , title: "GKGraphs"
                 , subTitle: "GKRadarGraph"
-                , cellTouchedFunction: { [weak self] _ in self?.navigateToSample(SegueIdentifiers.SHOW_RADAR_GRAPH)}
+                , cellTouchedFunction: { [weak self] _ in
+                    
+                    self?.showViewController(GKRadarGraphViewController(model: GKRadarGraphModel()), sender: self)
+                }
                 , deselectOnSelected: true)
             
-            return GKTableSectionTitle(cells: [spiderGraphCell], headerTitle: "GKGraph")
+            return GKTableSectionTitle(cells: [radarGraphCell], headerTitle: "GKGraph")
         }
     }
     
@@ -97,10 +121,12 @@ extension RootViewController {
         get {
             
             // Manual login section
-            let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
+            let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: TableCellIdentifiers.BASIC_CELL.rawValue
                 , title: "GKManualLogin"
                 , subTitle: "GKManualLoginViewController"
-                , cellTouchedFunction: { [weak self] _ in self?.navigateToSample(SegueIdentifiers.SHOW_MANUAL_LOGIN)}
+                , cellTouchedFunction: { [weak self] _ in
+                    self?.showViewController(GKManualLoginViewController(), sender: self)
+                }
                 , deselectOnSelected: true)
             
             return GKTableSectionTitle(cells: [manualLoginCell], headerTitle: "GKLogin")
@@ -113,26 +139,15 @@ extension RootViewController {
         get {
             
             // Manual login section
-            let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
+            let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: TableCellIdentifiers.BASIC_CELL.rawValue
                 , title: "Keyboard"
                 , subTitle: "ScrollView"
-                , cellTouchedFunction: { [weak self] _ in self?.navigateToSample(SegueIdentifiers.SHOW_KEYBOARD_SCROLLVIEW)}
+                , cellTouchedFunction: { [weak self] _ in
+                    self?.showViewController(GKKeyboardScrollViewController(), sender: self)
+                }
                 , deselectOnSelected: true)
             
             return GKTableSectionTitle(cells: [manualLoginCell], headerTitle: "Keyboard")
         }
-    }
-    
-}
-
-//
-// MARK: Private methods
-//
-extension RootViewController {
-    
-    /// Show the radar graph sample
-    private func navigateToSample(segueIdentifier: SegueIdentifiers) {
-        
-        self.performSegueWithIdentifier(segueIdentifier.rawValue, sender: self)
     }
 }

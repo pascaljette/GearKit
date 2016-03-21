@@ -56,6 +56,7 @@ internal class GKRadarGraphSerieLayer: CAShapeLayer {
         decorationLayer.frame = self.bounds
         
         self.decorationLayer = decorationLayer
+        lineJoin = "bevel"
     }
     
     //

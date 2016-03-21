@@ -26,64 +26,65 @@ import GearKit
 /// Stored properties
 class GKRadarGraphViewController: UIViewController {
     
+    //
+    // MARK: IBOutlets
+    //
+    
     @IBOutlet weak var radarGraphView: GKRadarGraphView!
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Model containing info about generating the graph.
+    let model: GKRadarGraphModel
+    
+    //
+    // MARK: Initialisation.
+    //
+    
+    /// Initialise with a model.
+    ///
+    /// - parameter model: Model to use to initialise the view controller.
+    init(model: GKRadarGraphModel) {
+        
+        self.model = model
+        super.init(nibName: "GKRadarGraphViewController", bundle: nil)
+    }
+
+    /// Required initialiser with a coder.
+    /// We generate a fatal error to underline the fact that we do not want to support storyboards.
+    ///
+    /// - parameter coder: Coder used to serialize the object.
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is not supported")
+    }
 }
 
-/// UIViewController overrides
 extension GKRadarGraphViewController {
     
+    //
+    // MARK: UIViewController overrides.
+    //
+
+    /// View did load
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
+        self.navigationItem.title = "GKRadarGraph"
     }
     
+    /// View did appear.
+    ///
+    /// - parameter animated: Whether the view should be animated.
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-     
-        let hpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "HP")
-        let mpParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "MP")
-        let strengthParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "STR")
-        let defenseParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "DF")
-        let magicParameter: GKRadarGraphView.Parameter = GKRadarGraphView.Parameter(name: "MGC")
         
-        radarGraphView.parameters = [hpParameter, mpParameter, strengthParameter, defenseParameter, magicParameter]
+        radarGraphView.parameters = model.parameters
         radarGraphView.backgroundColor = GKColorRGB(red: 0, green: 200, blue: 100, alpha: 150).uiColor
-        
-        // We only support gradients for a single serie radar graph
-        let firstSerie = GKRadarGraphView.Serie()
-        firstSerie.strokeColor = UIColor.blueColor()
-        firstSerie.strokeWidth = 4.0
-        firstSerie.name = "blue"
-        let firstFillColor: UIColor = UIColor(red: 0.1, green: 0.1, blue: 0.7, alpha: 0.7)
-        
-        firstSerie.fillMode = .SOLID(firstFillColor)
-        firstSerie.percentageValues = [0.9, 0.5, 0.6, 0.2, 0.9]
-        firstSerie.decoration = .SQUARE(8.0)
-        
-        let secondSerie = GKRadarGraphView.Serie()
-        secondSerie.strokeColor = UIColor.greenColor()
-        secondSerie.strokeWidth = 4.0
-        secondSerie.name = "green"
-        let secondFillColor: UIColor = UIColor(red: 0.1, green: 0.7, blue: 0.1, alpha: 0.7)
-        
-        secondSerie.fillMode = .SOLID(secondFillColor)
-        secondSerie.percentageValues = [0.9, 0.1, 0.2, 0.9, 0.3]
-        secondSerie.decoration = .CIRCLE(6.0)
-        
-        let thirdSerie = GKRadarGraphView.Serie()
-        thirdSerie.strokeColor = UIColor.redColor()
-        thirdSerie.strokeWidth = 4.0
-        thirdSerie.name = "red"
-        let thirdSerieFillColor: UIColor = UIColor(red: 0.7, green: 0.1, blue: 0.1, alpha: 0.7)
-        
-        thirdSerie.fillMode = .SOLID(thirdSerieFillColor)
-        thirdSerie.percentageValues = [0.5, 0.9, 0.5, 0.5, 0.6]
-        thirdSerie.decoration = .DIAMOND(8.0)
         
         radarGraphView.seriesAnimation = .PARAMETER_BY_PARAMETER(0.8)
         
-        radarGraphView.series = [firstSerie, secondSerie, thirdSerie]
-
+        radarGraphView.series = model.series
     }
 }
