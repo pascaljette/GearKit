@@ -91,7 +91,8 @@ extension GKKeyboardScrollViewController {
         
         super.viewDidLoad()
 
-        
+        self.navigationItem.title = "GKKeyboardScroll"
+
         addKeyboardObserver()
         
         textField1?.delegate = self

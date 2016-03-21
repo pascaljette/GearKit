@@ -26,41 +26,65 @@ import GearKit
 /// Root table view controller for the application.
 class SamplesHomeViewController: GKTableViewControllerBase {
    
+    //
+    // MARK: Nested types
+    //
+    
+    /// Identifiers for table cells in this table view.
+    enum TableCellIdentifiers: String {
+        
+        case BASIC_CELL = "SamplesHomeBasicCell"
+    }
+    
+    //
+    // MARK: Initialisation
+    //
+    
+    /// Empty initializer, picks the nib automatically.
     init() {
         
         super.init(nibName: "SamplesHomeViewController", bundle: nil)
         navigationItem.title = "Home"
     }
 
+    /// Required initialiser with a coder.
+    /// We generate a fatal error to underline the fact that we do not want to support storyboards.
+    ///
+    /// - parameter coder: Coder used to serialize the object.
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) is not supported (no storyboard support)")
     }
 }
 
-//
-// MARK: UIViewControllerOverrides
-//
 extension SamplesHomeViewController {
+
+    //
+    // MARK: UIViewController overrides
+    //
     
+    /// View did load.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        registerNibName(TableCellIdentifiers.BASIC_CELL.rawValue, fromBundle: NSBundle.mainBundle())
         
         tableSections = [tableSection, graphSection, manualLoginSection, keyboardSection]
     }
 }
 
-//
-// MARK: Computed Properties
-//
 extension SamplesHomeViewController {
+
+    //
+    // MARK: Computed Properties
+    //
     
-    // Table section for table
+    /// Table section for table
     var tableSection: GKTableSectionTitle {
         
         get {
             
             // Graph section
-            let customTableCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
+            let customTableCell: GKTableCellBasic = GKTableCellBasic(identifier: TableCellIdentifiers.BASIC_CELL.rawValue
                 , title: "GKTable"
                 , subTitle: "CustomCell"
                 , cellTouchedFunction: { [weak self] _ in
@@ -78,7 +102,7 @@ extension SamplesHomeViewController {
         get {
             
             // Graph section
-            let radarGraphCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
+            let radarGraphCell: GKTableCellBasic = GKTableCellBasic(identifier: TableCellIdentifiers.BASIC_CELL.rawValue
                 , title: "GKGraphs"
                 , subTitle: "GKRadarGraph"
                 , cellTouchedFunction: { [weak self] _ in
@@ -97,7 +121,7 @@ extension SamplesHomeViewController {
         get {
             
             // Manual login section
-            let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
+            let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: TableCellIdentifiers.BASIC_CELL.rawValue
                 , title: "GKManualLogin"
                 , subTitle: "GKManualLoginViewController"
                 , cellTouchedFunction: { [weak self] _ in
@@ -115,7 +139,7 @@ extension SamplesHomeViewController {
         get {
             
             // Manual login section
-            let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: "RootViewControllerBasicCell"
+            let manualLoginCell: GKTableCellBasic = GKTableCellBasic(identifier: TableCellIdentifiers.BASIC_CELL.rawValue
                 , title: "Keyboard"
                 , subTitle: "ScrollView"
                 , cellTouchedFunction: { [weak self] _ in
@@ -126,5 +150,4 @@ extension SamplesHomeViewController {
             return GKTableSectionTitle(cells: [manualLoginCell], headerTitle: "Keyboard")
         }
     }
-    
 }

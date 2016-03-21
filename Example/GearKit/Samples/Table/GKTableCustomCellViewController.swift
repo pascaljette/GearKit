@@ -31,8 +31,8 @@ class GKTableCustomCellViewController : GKTableViewControllerBase {
     
     enum CellIdentifiers: String {
         
-        case TRIPLE_LABEL = "TripleLabelCell"
-        case LABEL_BUTTON = "LabelButtonCell"
+        case TRIPLE_LABEL = "GKTableCustomTripleLabelCell"
+        case LABEL_BUTTON = "GKTableCustomLabelButtonCell"
     }
     
     //
@@ -64,7 +64,7 @@ extension GKTableCustomCellViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        self.navigationItem.title = "GKTableCustomCell"
     }
-
 }
-

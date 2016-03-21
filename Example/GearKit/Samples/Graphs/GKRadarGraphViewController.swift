@@ -67,6 +67,13 @@ extension GKRadarGraphViewController {
     // MARK: UIViewController overrides.
     //
 
+    /// View did load
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        self.navigationItem.title = "GKRadarGraph"
+    }
+    
     /// View did appear.
     ///
     /// - parameter animated: Whether the view should be animated.

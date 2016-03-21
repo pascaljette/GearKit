@@ -48,6 +48,20 @@ class GKManualLoginViewController: GKManualLoginViewControllerBase {
     }
 }
 
+extension GKManualLoginViewController {
+    
+    //
+    // MARK: Initialization
+    //
+    
+    /// View did load.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationItem.title = "GKManualLogin"
+    }
+}
+
 extension GKManualLoginViewController: GKManualLoginDelegate {
 
     //
