@@ -27,7 +27,7 @@ import UIKit
 internal protocol GKRadarGraphParameterDatasource {
     
     /// Parameters (read-only)
-    var _parameters: [GKRadarGraphView.Parameter] { get }
+    var _parameters: [GKRadarGraphView.Parameter] { get set }
     
     /// Circle center.  Must be writable for auto-adjust in the plot layer.
     var _circleCenter: CGPoint { get set }

@@ -95,7 +95,7 @@ internal class GKRadarGraphSerieLayer: CAShapeLayer {
     }
 
     /// A reference on the next layer in the series queue.
-    var nextSerieLayer: GKRadarGraphSerieLayer?
+    weak var nextSerieLayer: GKRadarGraphSerieLayer?
     
     /// Index of the last animated vertex.  Useful for chaining animations on vertices.
     internal var lastAnimatedVertexIndex: Int = 0
@@ -213,6 +213,7 @@ extension GKRadarGraphSerieLayer {
         }
         
         let bezierPath: UIBezierPath = UIBezierPath()
+        var allSerieVertices: [CGPoint] = []
         
         for i in 0..<outerVertices.count {
             
@@ -231,7 +232,7 @@ extension GKRadarGraphSerieLayer {
             
             let vertex: CGPoint = CGPoint(x: pointX, y: pointY)
             
-            serieInstance.vertices.append(vertex)
+            allSerieVertices.append(vertex)
             
             if i == 0 {
                 
@@ -242,6 +243,8 @@ extension GKRadarGraphSerieLayer {
                 bezierPath.addLineToPoint(vertex)
             }
         }
+        
+        self.serie?.vertices = allSerieVertices
         
         bezierPath.closePath()
         
