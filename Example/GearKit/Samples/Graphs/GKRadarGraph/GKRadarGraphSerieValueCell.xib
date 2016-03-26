@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GKRadarGraphSerieValueCell" id="IXd-x7-ddg" customClass="GKRadarGraphSerieValueCell" customModule="GearKit_Example" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GKRadarGraphSerieValueCell" id="IXd-x7-ddg" customClass="GKRadarGraphSerieValueCell" customModule="GearKit_Example" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IXd-x7-ddg" id="B6z-o5-hBj">
@@ -21,7 +21,7 @@
                             <constraint firstAttribute="height" constant="44" id="xhV-dN-FIZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                     </textField>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4I-0d-Nyj">
                         <rect key="frame" x="251" y="0.0" width="1" height="43.5"/>
@@ -30,26 +30,31 @@
                             <constraint firstAttribute="width" constant="1" id="hwe-AD-AAo"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvn-cC-PQN" userLabel="ParameterName">
-                        <rect key="frame" x="12" y="12.5" width="37.5" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KL7-re-toA" userLabel="parameterNameButton">
+                        <rect key="frame" x="14" y="7" width="237" height="30"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="nameButtonTapped:" destination="IXd-x7-ddg" eventType="touchUpInside" id="Uqg-JF-Ee8"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="bvn-cC-PQN" firstAttribute="leading" secondItem="B6z-o5-hBj" secondAttribute="leading" constant="12" id="5aZ-iH-hNt"/>
+                    <constraint firstAttribute="bottom" secondItem="KL7-re-toA" secondAttribute="bottom" constant="6.5" id="9mE-NY-dS8"/>
+                    <constraint firstItem="KL7-re-toA" firstAttribute="leading" secondItem="B6z-o5-hBj" secondAttribute="leading" constant="14" id="BQK-D4-C0R"/>
                     <constraint firstAttribute="bottom" secondItem="JGh-Wi-j8e" secondAttribute="bottom" id="IKh-pI-iWk"/>
                     <constraint firstItem="c4I-0d-Nyj" firstAttribute="top" secondItem="B6z-o5-hBj" secondAttribute="top" id="Srb-cN-maw"/>
                     <constraint firstAttribute="trailing" secondItem="JGh-Wi-j8e" secondAttribute="trailing" constant="8" id="TRA-TD-sjK"/>
-                    <constraint firstItem="bvn-cC-PQN" firstAttribute="centerY" secondItem="B6z-o5-hBj" secondAttribute="centerY" id="WLY-jJ-ccw"/>
+                    <constraint firstItem="KL7-re-toA" firstAttribute="top" secondItem="B6z-o5-hBj" secondAttribute="top" constant="7" id="UHb-4Q-cEL"/>
                     <constraint firstItem="JGh-Wi-j8e" firstAttribute="top" secondItem="B6z-o5-hBj" secondAttribute="top" id="cUt-iW-YYZ"/>
+                    <constraint firstItem="c4I-0d-Nyj" firstAttribute="leading" secondItem="KL7-re-toA" secondAttribute="trailing" id="lg0-Cs-afg"/>
                     <constraint firstItem="JGh-Wi-j8e" firstAttribute="leading" secondItem="c4I-0d-Nyj" secondAttribute="trailing" id="oxT-cH-E8o"/>
                     <constraint firstAttribute="bottom" secondItem="c4I-0d-Nyj" secondAttribute="bottom" id="yhO-oh-LJY"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="parameterName" destination="bvn-cC-PQN" id="f3o-Uy-Gwk"/>
+                <outlet property="parameterNameButton" destination="KL7-re-toA" id="VN5-Fc-lEX"/>
                 <outlet property="parameterValueField" destination="JGh-Wi-j8e" id="wvs-0R-RoH"/>
             </connections>
             <point key="canvasLocation" x="78" y="156"/>

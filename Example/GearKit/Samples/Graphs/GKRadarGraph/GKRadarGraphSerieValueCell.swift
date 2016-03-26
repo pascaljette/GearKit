@@ -25,15 +25,57 @@ import UIKit
 
 class GKRadarGraphSerieValueCell : UITableViewCell {
     
-    @IBOutlet weak var parameterName: UILabel!
+    @IBOutlet weak var parameterNameButton: UIButton!
     
     @IBOutlet weak var parameterValueField: UITextField!
     
     // TODO-pk awful waste of memory, fix this.
     var model: GKRadarGraphModel?
+    
+    override func awakeFromNib() {
+        
+        super.awakeFromNib()
+        
+        let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: 50))
+        numberToolbar.barStyle = .Default
+        
+        numberToolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: .Done, target: self, action: "keyboardDoneButtonTapped:")]
+        
+        numberToolbar.sizeToFit()
+        parameterValueField.inputAccessoryView = numberToolbar
+    }
 }
+
+extension GKRadarGraphSerieValueCell {
+    
+    @IBAction func nameButtonTapped(sender: AnyObject) {
+        print(parameterNameButton.titleLabel?.text)
+    }
+}
+
 
 extension GKRadarGraphSerieValueCell : UITextFieldDelegate {
     
-    
+    //
+    // MARK: Nested types
+    //
+
 }
+
+extension GKRadarGraphSerieValueCell {
+    
+    //
+    // MARK: Keyboard Toolbar buttons selectors
+    //
+    
+    func keyboardDoneButtonTapped(sender: UIBarButtonItem!) {
+        
+        print("Done")
+        parameterValueField.resignFirstResponder()
+    }
+
+
+}
+
