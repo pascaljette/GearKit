@@ -337,6 +337,7 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
     //
     
     /// Parameters (read-only)
+    // TODO-pk this should be read-only but we need to update the points on the parameters.  What do?
     var _parameters: [GKRadarGraphView.Parameter] {
         
         get {
@@ -575,6 +576,8 @@ extension GKRadarGraphView {
         
         self.seriesAnimation = seriesAnimation
         
+        // TODO-pk There must be a better way (at least, more expressive) than simply clearing the series
+        // and then copying them again :(
         let seriesBuffer = self.series
         self.series = []
         self.series = seriesBuffer
