@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tta-Kf-k5D" customClass="GKRadarGraphView" customModule="GearKit">
-                    <rect key="frame" x="20" y="20" width="560" height="492"/>
+                    <rect key="frame" x="20" y="20" width="560" height="394"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="graphBackgroundColor">
@@ -40,8 +40,26 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ik-PU-sRc" customClass="GKSolidColorButton" customModule="GearKit">
+                    <rect key="frame" x="0.0" y="464" width="600" height="48"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="5co-kp-8ts"/>
+                    </constraints>
+                    <state key="normal" title="Animate">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                            <color key="value" red="0.6233022708" green="0.84512947900000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="animateButtonTapped:" destination="-1" eventType="touchUpInside" id="KBy-WG-RJA"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui1-dd-AUE">
-                    <rect key="frame" x="245.5" y="520" width="109" height="30"/>
+                    <rect key="frame" x="246" y="520" width="109" height="30"/>
                     <state key="normal" title="Edit Parameters"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ik-wD-CbJ">
@@ -57,11 +75,14 @@
                 <constraint firstItem="Tta-Kf-k5D" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="0do-4H-1Xh"/>
                 <constraint firstItem="8Ik-wD-CbJ" firstAttribute="top" secondItem="ui1-dd-AUE" secondAttribute="bottom" constant="6" id="26s-og-kMY"/>
                 <constraint firstAttribute="bottom" secondItem="8Ik-wD-CbJ" secondAttribute="bottom" constant="14" id="6ed-k6-vkU"/>
+                <constraint firstItem="4Ik-PU-sRc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7mC-bx-t0P"/>
+                <constraint firstAttribute="trailing" secondItem="4Ik-PU-sRc" secondAttribute="trailing" id="OQj-gO-f9S"/>
                 <constraint firstItem="8Ik-wD-CbJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aDI-nf-A7R"/>
                 <constraint firstAttribute="trailing" secondItem="Tta-Kf-k5D" secondAttribute="trailing" constant="20" id="grz-2c-IjM"/>
                 <constraint firstItem="ui1-dd-AUE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jem-0m-TFZ"/>
+                <constraint firstItem="4Ik-PU-sRc" firstAttribute="top" secondItem="Tta-Kf-k5D" secondAttribute="bottom" constant="50" id="lKl-9k-WSH"/>
                 <constraint firstItem="Tta-Kf-k5D" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="rnT-66-AKQ"/>
-                <constraint firstItem="ui1-dd-AUE" firstAttribute="top" secondItem="Tta-Kf-k5D" secondAttribute="bottom" constant="8" id="tWR-RV-7ro"/>
+                <constraint firstItem="ui1-dd-AUE" firstAttribute="top" secondItem="4Ik-PU-sRc" secondAttribute="bottom" constant="8" id="v5B-RW-1vc"/>
             </constraints>
         </view>
     </objects>

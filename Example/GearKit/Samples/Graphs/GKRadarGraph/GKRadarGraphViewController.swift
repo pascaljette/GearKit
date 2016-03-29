@@ -27,17 +27,51 @@ import GearKit
 class GKRadarGraphViewController: UIViewController {
     
     //
+    // MARK: Nested types
+    //
+    enum AnimationPickerType: String {
+        
+        /// Scale all series simultaneously.
+        case SCALE_ALL = "Scale all"
+        
+        /// Scale series one by one.
+        case SCALE_ONE_BY_ONE = "Scale one by one"
+        
+        /// Parameter one by one.
+        case PARAMETER_BY_PARAMETER = "Parameter one by one"
+        
+        /// Get the corresponding series animation enum from the picker data.
+        var seriesAnimation: GKRadarGraphView.SeriesAnimation {
+            
+            switch self {
+                
+            case .SCALE_ALL:
+                return .SCALE_ALL(GKRadarGraphViewController.ANIMATION_DEFAULT_DURATION)
+                
+            case .SCALE_ONE_BY_ONE:
+                return .SCALE_ONE_BY_ONE(GKRadarGraphViewController.ANIMATION_DEFAULT_DURATION)
+                
+            case .PARAMETER_BY_PARAMETER:
+                return .PARAMETER_BY_PARAMETER(GKRadarGraphViewController.ANIMATION_DEFAULT_DURATION)
+            }
+        }
+    }
+    
+    //
     // MARK: IBOutlets
     //
     
     @IBOutlet weak var radarGraphView: GKRadarGraphView!
-    
+
     //
     // MARK: Stored properties
     //
     
     /// Model containing info about generating the graph.
     let model: GKRadarGraphModel
+    
+    /// Animation picker view data
+    let pickerViewData: [AnimationPickerType] = [.SCALE_ALL, .SCALE_ONE_BY_ONE, .PARAMETER_BY_PARAMETER]
     
     //
     // MARK: Initialisation.
@@ -64,6 +98,18 @@ class GKRadarGraphViewController: UIViewController {
 extension GKRadarGraphViewController {
     
     //
+    // MARK: Class variables.
+    //
+    
+    /// Default duration for an animation.
+    class var ANIMATION_DEFAULT_DURATION: CGFloat {
+        return 0.4
+    }
+}
+
+extension GKRadarGraphViewController {
+    
+    //
     // MARK: UIViewController overrides.
     //
 
@@ -74,24 +120,111 @@ extension GKRadarGraphViewController {
         self.navigationItem.title = "GKRadarGraph"
     }
     
-    /// View did appear.
+    /// View will appear.
     ///
     /// - parameter animated: Whether the view should be animated.
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         radarGraphView.parameters = model.parameters
         radarGraphView.backgroundColor = GKColorRGB(red: 0, green: 200, blue: 100, alpha: 150).uiColor
-                
-        radarGraphView.series = model.series
         
-        radarGraphView.animateWithType(.PARAMETER_BY_PARAMETER(0.4))
+        radarGraphView.series = model.series
     }
 }
 
+extension GKRadarGraphViewController: UIPickerViewDataSource {
+    
+    // returns the number of 'columns' to display.
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        
+        return 1
+    }
+    
+    // returns the # of rows in each component..
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        return pickerViewData.count
+    }
+}
+
+extension GKRadarGraphViewController: UIPickerViewDelegate {
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerViewData[row].rawValue
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        let selection = pickerViewData[row]
+        radarGraphView.animateWithType(selection.seriesAnimation)
+    }
+}
+
+
 extension GKRadarGraphViewController {
     
+    //
+    // MARK: IBAction.
+    //
+
+    /// Animate button tapped.
+    ///
+    /// - parameter sender: The "Animate" button itself.
+    @IBAction func animateButtonTapped(sender: AnyObject) {
+        
+        let alertController: UIAlertController = UIAlertController(title: "Select Animation", message: nil, preferredStyle: .ActionSheet)
+     
+        // TODO-pk there is a better to do this than this ugly enum.
+        let scaleAllAction: UIAlertAction = UIAlertAction(title: AnimationPickerType.SCALE_ALL.rawValue, style: .Default, handler: { [weak self] _ in
+            
+            guard let strongSelf = self else {
+                
+                return
+            }
+            
+            let action = AnimationPickerType.SCALE_ALL
+            strongSelf.radarGraphView.animateWithType(action.seriesAnimation)
+            
+        })
+        
+        let scaleOneByOneAction: UIAlertAction = UIAlertAction(title: AnimationPickerType.SCALE_ONE_BY_ONE.rawValue, style: .Default, handler: { [weak self] _ in
+            
+            guard let strongSelf = self else {
+                
+                return
+            }
+            
+            let action = AnimationPickerType.SCALE_ONE_BY_ONE
+            strongSelf.radarGraphView.animateWithType(action.seriesAnimation)
+            
+        })
+        
+        let parameterOneByOneAction: UIAlertAction = UIAlertAction(title: AnimationPickerType.PARAMETER_BY_PARAMETER.rawValue, style: .Default, handler: { [weak self] _ in
+            
+            guard let strongSelf = self else {
+                
+                return
+            }
+            
+            let action = AnimationPickerType.PARAMETER_BY_PARAMETER
+            strongSelf.radarGraphView.animateWithType(action.seriesAnimation)
+            
+        })
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        alertController.addAction(scaleAllAction)
+        alertController.addAction(scaleOneByOneAction)
+        alertController.addAction(parameterOneByOneAction)
+        alertController.addAction(cancelAction)
+
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     
+    /// Edit series button tapped.
+    ///
+    /// - parameter sender: The "Edit Series" button itself.
     @IBAction func editSeriesButtonTapped(sender: AnyObject) {
         
         showViewController(GKRadarGraphEditSeriesViewController(graphData: model), sender: self)
