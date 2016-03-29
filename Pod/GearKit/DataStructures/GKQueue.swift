@@ -202,7 +202,7 @@ extension GKQueueImplementation {
         
         var current : NodeType? = self.head
         
-        return anyGenerator {
+        return AnyGenerator {
             
             while (current != nil) {
                 

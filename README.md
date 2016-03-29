@@ -11,7 +11,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-This is written and designed to be used with Swift 2.1.1 (XCode 7.2)
+This is written and designed to be used with Swift 2.2 (XCode 7.3)
 
 ## Installation
 

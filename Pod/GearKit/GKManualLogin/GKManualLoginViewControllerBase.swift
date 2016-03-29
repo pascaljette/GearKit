@@ -95,8 +95,8 @@ extension GKManualLoginViewControllerBase {
         // Set the selectors for when the text value changes.  This provides an immediate update to the username/password
         // variables whenever something is changed in the text field.  Note that this will not be called when
         // the text is auto-corrected or programatically changed.
-        userNameTextField?.addTarget(self, action: "usernameTextFieldValueChanged:", forControlEvents: .EditingChanged)
-        passwordTextField?.addTarget(self, action: "passwordTextFieldValueChanged:", forControlEvents: .EditingChanged)
+        userNameTextField?.addTarget(self, action: #selector(GKManualLoginViewControllerBase.usernameTextFieldValueChanged), forControlEvents: .EditingChanged)
+        passwordTextField?.addTarget(self, action: #selector(GKManualLoginViewControllerBase.passwordTextFieldValueChanged), forControlEvents: .EditingChanged)
         
         // enable the clear button while editing for both fields
         userNameTextField?.clearButtonMode = .WhileEditing

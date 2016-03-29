@@ -76,7 +76,7 @@ extension GKKeyboardListener where Self : AnyObject {
         if let _ = keyboardWillAppear {
             
             NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "keyboardWillAppear:",
+                selector: #selector(GKKeyboardListener.keyboardWillAppear),
                 name: UIKeyboardWillShowNotification,
                 object: nil)
         }
@@ -84,7 +84,7 @@ extension GKKeyboardListener where Self : AnyObject {
         if let _ = keyboardDidAppear {
             
             NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "keyboardDidAppear:",
+                selector: #selector(GKKeyboardListener.keyboardDidAppear),
                 name: UIKeyboardDidShowNotification,
                 object: nil)
         }
@@ -92,7 +92,7 @@ extension GKKeyboardListener where Self : AnyObject {
         if let _ = keyboardWillDisappear {
             
             NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "keyboardWillDisappear:",
+                selector: #selector(GKKeyboardListener.keyboardWillDisappear),
                 name: UIKeyboardWillHideNotification,
                 object: nil)
         }
@@ -100,7 +100,7 @@ extension GKKeyboardListener where Self : AnyObject {
         if let _ = keyboardDidDisappear {
             
             NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "keyboardDidDisappear:",
+                selector: #selector(GKKeyboardListener.keyboardDidDisappear),
                 name: UIKeyboardDidHideNotification,
                 object: nil)
         }
