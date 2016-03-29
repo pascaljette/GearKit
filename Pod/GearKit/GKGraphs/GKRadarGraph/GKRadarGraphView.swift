@@ -42,7 +42,7 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
     //
     
     /// A serie in the graph.  This represents the actual data.
-    public class Serie {
+    public struct Serie {
         
         /// Fill mode for the serie.  Can be either filled or not.
         public enum FillMode {
@@ -99,24 +99,24 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         //
         
         /// Default fill mode for a series.
-        internal class var FILL_MODE_DEFAULT: FillMode {
+        internal static var FILL_MODE_DEFAULT: FillMode {
             return .SOLID(UIColor.blackColor())
         }
         
         /// Default width for strokes
-        internal class var STROKE_WIDTH_DEFAULT: CGFloat {
+        internal static var STROKE_WIDTH_DEFAULT: CGFloat {
             return 0.0
         }
         
         /// Default color for strokes
-        internal class var STROKE_COLOR_DEFAULT: UIColor {
+        internal static var STROKE_COLOR_DEFAULT: UIColor {
             return UIColor.blackColor()
         }
     }
     
     /// Parameter for the Radar Graph View.  A parameter correspondes to a spoke
     /// in radar chart language.
-    public class Parameter {
+    public struct Parameter {
         
         /// Empty initializer.
         public init() {
@@ -185,17 +185,17 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
         //
         
         /// Default value for a parameter's font.
-        internal class var FONT_DEFAULT: UIFont {
+        internal static var FONT_DEFAULT: UIFont {
             return UIFont.systemFontOfSize(14)
         }
         
         /// Default value for a parameter's font.
-        internal class var FONT_COLOR_DEFAULT: UIColor {
+        internal static var FONT_COLOR_DEFAULT: UIColor {
             return UIColor.blackColor()
         }
         
         /// Default value for a parameter's text offset.
-        internal class var TEXT_OFFSET_DEFAULT: CGPoint {
+        internal static var TEXT_OFFSET_DEFAULT: CGPoint {
             return CGPointZero
         }
     }
@@ -266,7 +266,7 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
     }
     
     /// Animation type for series
-    public var seriesAnimation: SeriesAnimation = GKRadarGraphView.SERIES_ANIMATION_DEFAULT
+    private var seriesAnimation: SeriesAnimation = GKRadarGraphView.SERIES_ANIMATION_DEFAULT
     
     /// Array of series populating the graph's data.
     public var series: [Serie] = [] {
@@ -290,6 +290,11 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
                 
                 for _: Int in 0..<abs(difference) {
                 
+                    if let seriesSublayer = containerLayer.sublayers?[0] as? GKRadarGraphSerieLayer {
+                        
+                        seriesSublayer.nextSerieLayer = nil
+                    }
+                    
                     containerLayer.sublayers?.removeAtIndex(0)
                 }
             }
@@ -332,8 +337,19 @@ public class GKRadarGraphView : UIView, GKRadarGraphParameterDatasource {
     //
     
     /// Parameters (read-only)
+    // TODO-pk this should be read-only but we need to update the points on the parameters.  What do?
     var _parameters: [GKRadarGraphView.Parameter] {
-        return parameters
+        
+        get {
+            
+            return parameters
+        }
+        
+        set {
+            
+            parameters = newValue
+        }
+        
     }
     
     /// Circle center for plot adjustments.
@@ -545,6 +561,31 @@ extension GKRadarGraphView {
 }
 
 extension GKRadarGraphView {
+    
+    //
+    // MARK: Functions
+    //
+    
+    // TODO-pk: Must add a completion block
+    // TODO-pk This resets all layers.  There might be a more elegant and optimal way to do this.
+    
+    /// Start animating the graph.  Note that this will reset all layers so call sparingly.
+    ///
+    /// - parameter seriesAnimation: Type of animation for the series.
+    public func animateWithType(seriesAnimation: SeriesAnimation) {
+        
+        self.seriesAnimation = seriesAnimation
+        
+        // TODO-pk There must be a better way (at least, more expressive) than simply clearing the series
+        // and then copying them again :(
+        let seriesBuffer = self.series
+        self.series = []
+        self.series = seriesBuffer
+    }
+}
+
+
+extension GKRadarGraphView {
 
     //
     // MARK: IBDesignable implementation
@@ -563,7 +604,7 @@ extension GKRadarGraphView {
         self.parameters = [hpParameter, mpParameter, strengthParameter, defenseParameter, magicParameter]
 
         // We only support gradients for a single serie radar graph
-        let firstSerie = GKRadarGraphView.Serie()
+        var firstSerie = GKRadarGraphView.Serie()
         firstSerie.strokeColor = UIColor.blueColor()
         firstSerie.strokeWidth = 4.0
         let firstFillColor: UIColor = UIColor(red: 0.1, green: 0.1, blue: 0.7, alpha: 0.7)
@@ -572,7 +613,7 @@ extension GKRadarGraphView {
         firstSerie.percentageValues = [0.9, 0.5, 0.6, 0.2, 0.9]
         firstSerie.decoration = .SQUARE(8.0)
         
-        let secondSerie = GKRadarGraphView.Serie()
+        var secondSerie = GKRadarGraphView.Serie()
         secondSerie.strokeColor = UIColor.greenColor()
         secondSerie.strokeWidth = 4.0
         let secondFillColor: UIColor = UIColor(red: 0.1, green: 0.7, blue: 0.1, alpha: 0.7)
@@ -581,7 +622,7 @@ extension GKRadarGraphView {
         secondSerie.percentageValues = [0.9, 0.1, 0.2, 0.9, 0.3]
         secondSerie.decoration = .CIRCLE(6.0)
 
-        let thirdSerie = GKRadarGraphView.Serie()
+        var thirdSerie = GKRadarGraphView.Serie()
         thirdSerie.strokeColor = UIColor.redColor()
         thirdSerie.strokeWidth = 4.0
         let thirdSerieFillColor: UIColor = UIColor(red: 0.7, green: 0.1, blue: 0.1, alpha: 0.7)

@@ -8,12 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		04412475DDF1737681F49D29 /* Pods_GearKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC44BFE1D1D3018E745A7EF /* Pods_GearKit_Example.framework */; };
-		535A0CB71C7070B1000C1CFF /* GKRadarGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB21C7070B1000C1CFF /* GKRadarGraphViewController.swift */; };
 		535A0CB81C7070B1000C1CFF /* GKKeyboardScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */; };
 		535A0CB91C7070B1000C1CFF /* GKManualLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */; };
 		535A0CBC1C707123000C1CFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 535A0CBA1C707123000C1CFF /* LaunchScreen.storyboard */; };
-		5379D3421C9ED8350032DF52 /* GKRadarGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5379D3411C9ED8350032DF52 /* GKRadarGraphViewController.xib */; };
-		5379D3441C9ED88E0032DF52 /* GKRadarGraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379D3431C9ED88E0032DF52 /* GKRadarGraphModel.swift */; };
 		5379D3461C9EE02C0032DF52 /* GKKeyboardScrollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5379D3451C9EE02C0032DF52 /* GKKeyboardScrollViewController.xib */; };
 		5379D3481C9EE0FB0032DF52 /* SamplesHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5379D3471C9EE0FB0032DF52 /* SamplesHomeViewController.xib */; };
 		5379D34A1C9EE10F0032DF52 /* SamplesHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379D3491C9EE10F0032DF52 /* SamplesHomeViewController.swift */; };
@@ -27,6 +24,13 @@
 		53A1D6161C903B49009E83CB /* GKColorRGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D5F81C789D5E009E83CB /* GKColorRGBTests.swift */; };
 		53B52D011C9FDAED0042D91F /* GKTableCustomCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53B52D001C9FDAED0042D91F /* GKTableCustomCellViewController.xib */; };
 		53B52D031C9FE4A80042D91F /* SamplesHomeBasicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53B52D021C9FE4A80042D91F /* SamplesHomeBasicCell.xib */; };
+		53B52D081C9FF5D40042D91F /* GKRadarGraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B52D051C9FF5D40042D91F /* GKRadarGraphModel.swift */; };
+		53B52D091C9FF5D40042D91F /* GKRadarGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B52D061C9FF5D40042D91F /* GKRadarGraphViewController.swift */; };
+		53B52D0A1C9FF5D40042D91F /* GKRadarGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53B52D071C9FF5D40042D91F /* GKRadarGraphViewController.xib */; };
+		53B52D0C1C9FF5F20042D91F /* GKRadarGraphEditSeriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53B52D0B1C9FF5F20042D91F /* GKRadarGraphEditSeriesViewController.xib */; };
+		53B52D0E1C9FF6100042D91F /* GKRadarGraphEditSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B52D0D1C9FF6100042D91F /* GKRadarGraphEditSeriesViewController.swift */; };
+		53B52D101C9FFBB00042D91F /* GKRadarGraphSerieValueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53B52D0F1C9FFBB00042D91F /* GKRadarGraphSerieValueCell.xib */; };
+		53B52D121CA023F20042D91F /* GKRadarGraphSerieValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B52D111CA023F20042D91F /* GKRadarGraphSerieValueCell.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		952DE57BA6AEC0BB21F5FF47 /* Pods_GearKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC0A73CBA9720FF2EE3EA82E /* Pods_GearKit_Tests.framework */; };
@@ -50,14 +54,11 @@
 		379FB71C41A86FE891B92525 /* Pods-GearKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GearKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-GearKit_Example/Pods-GearKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		3E55453717B94C34FDC8BC0F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		44C96B4E25CCEED12BF882E2 /* Pods-GearKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GearKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GearKit_Tests/Pods-GearKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		535A0CB21C7070B1000C1CFF /* GKRadarGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphViewController.swift; sourceTree = "<group>"; };
 		535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKKeyboardScrollViewController.swift; sourceTree = "<group>"; };
 		535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKManualLoginViewController.swift; sourceTree = "<group>"; };
 		535A0CBB1C707123000C1CFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5362481E1C7846AA004EC051 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		536248211C784E8A004EC051 /* CGFloatExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloatExtensionTests.swift; sourceTree = "<group>"; };
-		5379D3411C9ED8350032DF52 /* GKRadarGraphViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKRadarGraphViewController.xib; sourceTree = "<group>"; };
-		5379D3431C9ED88E0032DF52 /* GKRadarGraphModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphModel.swift; sourceTree = "<group>"; };
 		5379D3451C9EE02C0032DF52 /* GKKeyboardScrollViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKKeyboardScrollViewController.xib; sourceTree = "<group>"; };
 		5379D3471C9EE0FB0032DF52 /* SamplesHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SamplesHomeViewController.xib; sourceTree = "<group>"; };
 		5379D3491C9EE10F0032DF52 /* SamplesHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesHomeViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +70,13 @@
 		53A1D60D1C9036D0009E83CB /* GKQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKQueueTests.swift; sourceTree = "<group>"; };
 		53B52D001C9FDAED0042D91F /* GKTableCustomCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKTableCustomCellViewController.xib; sourceTree = "<group>"; };
 		53B52D021C9FE4A80042D91F /* SamplesHomeBasicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SamplesHomeBasicCell.xib; sourceTree = "<group>"; };
+		53B52D051C9FF5D40042D91F /* GKRadarGraphModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphModel.swift; sourceTree = "<group>"; };
+		53B52D061C9FF5D40042D91F /* GKRadarGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphViewController.swift; sourceTree = "<group>"; };
+		53B52D071C9FF5D40042D91F /* GKRadarGraphViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKRadarGraphViewController.xib; sourceTree = "<group>"; };
+		53B52D0B1C9FF5F20042D91F /* GKRadarGraphEditSeriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKRadarGraphEditSeriesViewController.xib; sourceTree = "<group>"; };
+		53B52D0D1C9FF6100042D91F /* GKRadarGraphEditSeriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphEditSeriesViewController.swift; sourceTree = "<group>"; };
+		53B52D0F1C9FFBB00042D91F /* GKRadarGraphSerieValueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKRadarGraphSerieValueCell.xib; sourceTree = "<group>"; };
+		53B52D111CA023F20042D91F /* GKRadarGraphSerieValueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRadarGraphSerieValueCell.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* GearKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GearKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,9 +135,7 @@
 		535A0CB11C7070B1000C1CFF /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
-				535A0CB21C7070B1000C1CFF /* GKRadarGraphViewController.swift */,
-				5379D3411C9ED8350032DF52 /* GKRadarGraphViewController.xib */,
-				5379D3431C9ED88E0032DF52 /* GKRadarGraphModel.swift */,
+				53B52D041C9FF5D40042D91F /* GKRadarGraph */,
 			);
 			path = Graphs;
 			sourceTree = "<group>";
@@ -186,6 +192,20 @@
 				53A1D60D1C9036D0009E83CB /* GKQueueTests.swift */,
 			);
 			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		53B52D041C9FF5D40042D91F /* GKRadarGraph */ = {
+			isa = PBXGroup;
+			children = (
+				53B52D051C9FF5D40042D91F /* GKRadarGraphModel.swift */,
+				53B52D071C9FF5D40042D91F /* GKRadarGraphViewController.xib */,
+				53B52D061C9FF5D40042D91F /* GKRadarGraphViewController.swift */,
+				53B52D0B1C9FF5F20042D91F /* GKRadarGraphEditSeriesViewController.xib */,
+				53B52D0D1C9FF6100042D91F /* GKRadarGraphEditSeriesViewController.swift */,
+				53B52D0F1C9FFBB00042D91F /* GKRadarGraphSerieValueCell.xib */,
+				53B52D111CA023F20042D91F /* GKRadarGraphSerieValueCell.swift */,
+			);
+			path = GKRadarGraph;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -355,11 +375,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5379D3421C9ED8350032DF52 /* GKRadarGraphViewController.xib in Resources */,
 				53B52D031C9FE4A80042D91F /* SamplesHomeBasicCell.xib in Resources */,
 				53B52D011C9FDAED0042D91F /* GKTableCustomCellViewController.xib in Resources */,
 				535A0CBC1C707123000C1CFF /* LaunchScreen.storyboard in Resources */,
 				5379D34C1C9EE17D0032DF52 /* GKManualLoginViewController.xib in Resources */,
+				53B52D101C9FFBB00042D91F /* GKRadarGraphSerieValueCell.xib in Resources */,
+				53B52D0C1C9FF5F20042D91F /* GKRadarGraphEditSeriesViewController.xib in Resources */,
+				53B52D0A1C9FF5D40042D91F /* GKRadarGraphViewController.xib in Resources */,
 				5379D3461C9EE02C0032DF52 /* GKKeyboardScrollViewController.xib in Resources */,
 				5379D3481C9EE0FB0032DF52 /* SamplesHomeViewController.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -474,12 +496,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				53A067441C7090B20022DF95 /* GKTableCustomCellViewController.swift in Sources */,
-				5379D3441C9ED88E0032DF52 /* GKRadarGraphModel.swift in Sources */,
 				535A0CB81C7070B1000C1CFF /* GKKeyboardScrollViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				53B52D121CA023F20042D91F /* GKRadarGraphSerieValueCell.swift in Sources */,
+				53B52D0E1C9FF6100042D91F /* GKRadarGraphEditSeriesViewController.swift in Sources */,
 				535A0CB91C7070B1000C1CFF /* GKManualLoginViewController.swift in Sources */,
-				535A0CB71C7070B1000C1CFF /* GKRadarGraphViewController.swift in Sources */,
+				53B52D091C9FF5D40042D91F /* GKRadarGraphViewController.swift in Sources */,
 				5379D34A1C9EE10F0032DF52 /* SamplesHomeViewController.swift in Sources */,
+				53B52D081C9FF5D40042D91F /* GKRadarGraphModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

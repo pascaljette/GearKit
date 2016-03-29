@@ -52,7 +52,7 @@ struct GKRadarGraphModel {
         parameters = [hpParameter, mpParameter, strengthParameter, defenseParameter, magicParameter]
         
         // We only support gradients for a single serie radar graph
-        let firstSerie = GKRadarGraphView.Serie()
+        var firstSerie = GKRadarGraphView.Serie()
         firstSerie.strokeColor = UIColor.blueColor()
         firstSerie.strokeWidth = 4.0
         firstSerie.name = "blue"
@@ -62,7 +62,7 @@ struct GKRadarGraphModel {
         firstSerie.percentageValues = [0.9, 0.5, 0.6, 0.2, 0.9]
         firstSerie.decoration = .SQUARE(8.0)
         
-        let secondSerie = GKRadarGraphView.Serie()
+        var secondSerie = GKRadarGraphView.Serie()
         secondSerie.strokeColor = UIColor.greenColor()
         secondSerie.strokeWidth = 4.0
         secondSerie.name = "green"
@@ -72,7 +72,7 @@ struct GKRadarGraphModel {
         secondSerie.percentageValues = [0.9, 0.1, 0.2, 0.9, 0.3]
         secondSerie.decoration = .CIRCLE(6.0)
         
-        let thirdSerie = GKRadarGraphView.Serie()
+        var thirdSerie = GKRadarGraphView.Serie()
         thirdSerie.strokeColor = UIColor.redColor()
         thirdSerie.strokeWidth = 4.0
         thirdSerie.name = "red"

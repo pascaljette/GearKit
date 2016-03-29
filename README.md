@@ -22,6 +22,10 @@ it, simply add the following line to your Podfile:
 pod "GearKit"
 ```
 
+## Contribution
+
+Please check the [Backlog page](https://pjette.backlogtool.com/find/GK_1)
+
 ## Author
 
 Pascal Jette, pascal.jette@gmail.com

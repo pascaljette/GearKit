@@ -50,7 +50,17 @@ internal class GKRadarGraphContainerLayer : CALayer {
     
     /// Array of parameters to generate the graph.  Shortcut to access the datasource.
     private var parameters: [GKRadarGraphView.Parameter] {
-        return parameterDatasource?._parameters ?? []
+        
+        get {
+            
+            return parameterDatasource?._parameters ?? []
+
+        }
+        
+        set {
+            
+            parameterDatasource?._parameters = newValue
+        }
     }
     
     /// Delegate for plot appearance.

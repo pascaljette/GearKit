@@ -707,7 +707,6 @@
 				67F41E6BFD2B18E471E8A73BBD5C179F /* GKGraphs */,
 				26CC381D779955B1F68ADFD5D3EF9946 /* GKManualLogin */,
 				BE6A4FC096E49994D9AD140C80770EE4 /* GKTable */,
-				A2DD3444032E5FC4CB6EDF0F63D7781A /* Views */,
 			);
 			path = GearKit;
 			sourceTree = "<group>";
@@ -940,13 +939,6 @@
 				8AE359677FC9C34DB3B21C58D0CB9162 /* UIImageExtension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		A2DD3444032E5FC4CB6EDF0F63D7781A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		A8CFABF26950BC160A702819776EABA2 /* Base */ = {
