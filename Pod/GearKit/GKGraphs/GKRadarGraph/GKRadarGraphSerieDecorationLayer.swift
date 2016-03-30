@@ -177,35 +177,6 @@ extension GKRadarGraphSerieDecorationLayer {
 extension GKRadarGraphSerieDecorationLayer {
     
     //
-    // MARK: CAAnimation delegate implementation
-    //
-    
-    /// Called when an animation on this layer stops.
-    ///
-    /// - parameter anim: Instance of the animation that just stopped.
-    /// - parameter finished: Whether the animation is finished or was interrupted.
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        
-        switch animationType {
-            
-        case .PARAMETER_BY_PARAMETER:
-            break
-            
-        case .SCALE_ONE_BY_ONE:
-            break
-            
-        case .SCALE_ALL:
-            break
-            
-        case .NONE:
-            break
-        }
-    }
-}
-
-extension GKRadarGraphSerieDecorationLayer {
-    
-    //
     // MARK: CALayer override
     //
     
