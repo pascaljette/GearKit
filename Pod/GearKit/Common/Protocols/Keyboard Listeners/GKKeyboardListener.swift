@@ -32,8 +32,8 @@ import UIKit
 @objc
 public protocol GKKeyboardListener : class {
 
-    /// We need to force implementation of these methods because
-    /// we cannot declare selectors in protocol extensions.
+    /// Keep a reference on the active field, i.e. the field that caused the keyboard
+    /// to be shown.
     var activeField: UITextInputTraits? { get set }
     
     /// The keyboard visibility isn't automatically updated.  It must be implemented
