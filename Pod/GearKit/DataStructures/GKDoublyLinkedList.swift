@@ -446,7 +446,7 @@ extension GKDoublyLinkedListImplementation : SequenceType {
         
         var current : GKDoublyLinkedList.NodeType? = head
         
-        return anyGenerator {
+        return AnyGenerator {
             
             while (current != nil) {
                 

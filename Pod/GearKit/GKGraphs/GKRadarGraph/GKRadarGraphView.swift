@@ -581,6 +581,8 @@ extension GKRadarGraphView {
         let seriesBuffer = self.series
         self.series = []
         self.series = seriesBuffer
+        
+        containerLayer.assignSeriesAnimation()
     }
 }
 

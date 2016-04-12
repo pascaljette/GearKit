@@ -1,6 +1,6 @@
 {
   "name": "GearKit",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "summary": "Various utilities for standard applications.",
   "description": "Can be used either as a framework library or as a tutorial.",
   "homepage": "https://github.com/pascaljette/GearKit",

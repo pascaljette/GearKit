@@ -41,7 +41,7 @@ class GKRadarGraphSerieValueCell : UITableViewCell {
         
         numberToolbar.items = [
             UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: .Done, target: self, action: "keyboardDoneButtonTapped:")]
+            UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(GKRadarGraphSerieValueCell.keyboardDoneButtonTapped))]
         
         numberToolbar.sizeToFit()
         parameterValueField.inputAccessoryView = numberToolbar

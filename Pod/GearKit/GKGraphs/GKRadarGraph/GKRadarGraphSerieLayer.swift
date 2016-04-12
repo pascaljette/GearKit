@@ -368,6 +368,27 @@ extension GKRadarGraphSerieLayer {
     /// - parameter finished: Whether the animation is finished or was interrupted.
     override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         
+        guard flag else {
+            
+            hidden = false
+            decorationLayer?.hidden = false
+            
+            removeAllAnimations()
+            
+            var currentLayer = self
+            while let nextLayer = currentLayer.nextSerieLayer {
+                
+                nextLayer.hidden = false
+                nextLayer.decorationLayer?.hidden = false
+                
+                nextLayer.removeAllAnimations()
+                
+                currentLayer = nextLayer
+            }
+            
+            return
+        }
+        
         switch animationType {
             
         case .PARAMETER_BY_PARAMETER(let duration):

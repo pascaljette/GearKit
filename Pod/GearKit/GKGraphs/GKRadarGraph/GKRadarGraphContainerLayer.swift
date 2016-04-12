@@ -443,6 +443,24 @@ extension GKRadarGraphContainerLayer {
         }
     }
     
+    // TODO-pk make a functor that is applicable on all series
+    
+    /// Generate path for all series.
+    private func generateSeriesPaths() {
+        
+        if let allSublayers = self.sublayers {
+            
+            for i: Int in 0..<allSublayers.count {
+                
+                if let serieSublayer = allSublayers[i] as? GKRadarGraphSerieLayer {
+                    
+                    serieSublayer.generatePath()
+                }
+            }
+        }
+    }
+
+    
     /// Draw the layer in the given context.
     ///
     /// - parameter ctx: The context in which to draw the layer.
@@ -467,8 +485,8 @@ extension GKRadarGraphContainerLayer {
         // Draw outer polygon.
         drawOuterPolygon(ctx)
         
-        // Animate the series.
-        assignSeriesAnimation()
+        // Generate path to draw all series
+        generateSeriesPaths()
     }
 }
 
@@ -487,6 +505,8 @@ extension GKRadarGraphContainerLayer {
                 
                 if let serieSublayer = allSublayers[i] as? GKRadarGraphSerieLayer {
                     
+                    // TODO-pk we should not need to re-generate the path 
+                    // when we animate the series.
                     serieSublayer.generatePath()
                     serieSublayer.animationType = seriesAnimation
                     
