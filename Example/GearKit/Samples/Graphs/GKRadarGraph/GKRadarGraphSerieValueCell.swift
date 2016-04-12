@@ -25,9 +25,12 @@ import UIKit
 
 class GKRadarGraphSerieValueCell : UITableViewCell {
     
-    @IBOutlet weak var parameterNameButton: UIButton!
+    @IBOutlet weak var parameterNameLabel: UILabel!
     
     @IBOutlet weak var parameterValueField: UITextField!
+    
+    /// TODO-pk change this to a proper delegate
+    weak var tableView: UITableView?
     
     // TODO-pk awful waste of memory, fix this.
     var model: GKRadarGraphModel?
@@ -44,23 +47,47 @@ class GKRadarGraphSerieValueCell : UITableViewCell {
             UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(GKRadarGraphSerieValueCell.keyboardDoneButtonTapped))]
         
         numberToolbar.sizeToFit()
+        
+        parameterValueField.delegate = self
         parameterValueField.inputAccessoryView = numberToolbar
     }
 }
 
-extension GKRadarGraphSerieValueCell {
-    
-    @IBAction func nameButtonTapped(sender: AnyObject) {
-        print(parameterNameButton.titleLabel?.text)
-    }
-}
-
-
 extension GKRadarGraphSerieValueCell : UITextFieldDelegate {
     
     //
-    // MARK: Nested types
+    // MARK: UITextFieldDelegate implementation
     //
+    
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        guard let tableViewInstance = tableView else {
+            
+            return
+        }
+        
+        guard let indexPath = tableViewInstance.indexPathForCell(self) else {
+            
+            return
+        }
+
+        var contentInsets: UIEdgeInsets = tableViewInstance.contentInset
+        contentInsets.bottom += (tableViewInstance.frame.height - self.frame.height)
+        tableView?.contentInset = contentInsets
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        guard let tableViewInstance = tableView else {
+            
+            return
+        }
+        
+        var contentInsets: UIEdgeInsets = tableViewInstance.contentInset
+        contentInsets.bottom -= (tableViewInstance.frame.height - self.frame.height)
+        tableView?.contentInset = contentInsets
+    }
 
 }
 
@@ -75,7 +102,5 @@ extension GKRadarGraphSerieValueCell {
         print("Done")
         parameterValueField.resignFirstResponder()
     }
-
-
 }
 

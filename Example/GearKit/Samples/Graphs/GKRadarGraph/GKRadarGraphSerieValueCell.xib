@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -30,31 +30,28 @@
                             <constraint firstAttribute="width" constant="1" id="hwe-AD-AAo"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KL7-re-toA" userLabel="parameterNameButton">
-                        <rect key="frame" x="14" y="7" width="237" height="30"/>
-                        <state key="normal" title="Button">
-                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="nameButtonTapped:" destination="IXd-x7-ddg" eventType="touchUpInside" id="Uqg-JF-Ee8"/>
-                        </connections>
-                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x44-w7-WSM">
+                        <rect key="frame" x="16" y="11" width="223" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="KL7-re-toA" secondAttribute="bottom" constant="6.5" id="9mE-NY-dS8"/>
-                    <constraint firstItem="KL7-re-toA" firstAttribute="leading" secondItem="B6z-o5-hBj" secondAttribute="leading" constant="14" id="BQK-D4-C0R"/>
+                    <constraint firstAttribute="bottom" secondItem="x44-w7-WSM" secondAttribute="bottom" constant="11" id="5VN-bi-HWF"/>
+                    <constraint firstItem="x44-w7-WSM" firstAttribute="top" secondItem="B6z-o5-hBj" secondAttribute="top" constant="11" id="Gtk-Kl-eeE"/>
                     <constraint firstAttribute="bottom" secondItem="JGh-Wi-j8e" secondAttribute="bottom" id="IKh-pI-iWk"/>
+                    <constraint firstItem="x44-w7-WSM" firstAttribute="leading" secondItem="B6z-o5-hBj" secondAttribute="leading" constant="16" id="Pa1-SX-AAp"/>
                     <constraint firstItem="c4I-0d-Nyj" firstAttribute="top" secondItem="B6z-o5-hBj" secondAttribute="top" id="Srb-cN-maw"/>
                     <constraint firstAttribute="trailing" secondItem="JGh-Wi-j8e" secondAttribute="trailing" constant="8" id="TRA-TD-sjK"/>
-                    <constraint firstItem="KL7-re-toA" firstAttribute="top" secondItem="B6z-o5-hBj" secondAttribute="top" constant="7" id="UHb-4Q-cEL"/>
                     <constraint firstItem="JGh-Wi-j8e" firstAttribute="top" secondItem="B6z-o5-hBj" secondAttribute="top" id="cUt-iW-YYZ"/>
-                    <constraint firstItem="c4I-0d-Nyj" firstAttribute="leading" secondItem="KL7-re-toA" secondAttribute="trailing" id="lg0-Cs-afg"/>
                     <constraint firstItem="JGh-Wi-j8e" firstAttribute="leading" secondItem="c4I-0d-Nyj" secondAttribute="trailing" id="oxT-cH-E8o"/>
+                    <constraint firstItem="c4I-0d-Nyj" firstAttribute="leading" secondItem="x44-w7-WSM" secondAttribute="trailing" constant="12" id="u8g-7h-GG4"/>
                     <constraint firstAttribute="bottom" secondItem="c4I-0d-Nyj" secondAttribute="bottom" id="yhO-oh-LJY"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="parameterNameButton" destination="KL7-re-toA" id="VN5-Fc-lEX"/>
+                <outlet property="parameterNameLabel" destination="x44-w7-WSM" id="dE0-vD-bNc"/>
                 <outlet property="parameterValueField" destination="JGh-Wi-j8e" id="wvs-0R-RoH"/>
             </connections>
             <point key="canvasLocation" x="78" y="156"/>

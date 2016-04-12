@@ -118,9 +118,10 @@ extension GKRadarGraphEditSeriesViewController {
             return cell ?? UITableViewCell()
         }
         
+        cell.tableView = tableView
         cell.model = model
         
-        cell.parameterNameButton.setTitle(model.parameters[indexPath.row].name, forState: .Normal)
+        cell.parameterNameLabel.text = model.parameters[indexPath.row].name
         
         cell.parameterValueField.text = String(model.series[indexPath.section].percentageValues[indexPath.row])
         
