@@ -67,7 +67,7 @@ extension GKRadarGraphSerieValueCell : UITextFieldDelegate {
             return
         }
         
-        guard let indexPath = tableViewInstance.indexPathForCell(self) else {
+        guard let _ = tableViewInstance.indexPathForCell(self) else {
             
             return
         }

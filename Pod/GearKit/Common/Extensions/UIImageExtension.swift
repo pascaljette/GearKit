@@ -24,7 +24,7 @@ import Foundation
 import UIKit
 
 /// Extension for the Swift Standard UIImage class
-extension UIImage {
+public extension UIImage {
     
     /// Generate an image from a solid color.
     ///

@@ -24,7 +24,7 @@ import Foundation
 import UIKit
 
 /// Extension for the Swift Standard UIColor class
-extension UIColor {
+public extension UIColor {
 
     /// Returns a GKColorRGB from the color components.
     public var gkColorRGB: GKColorRGB {

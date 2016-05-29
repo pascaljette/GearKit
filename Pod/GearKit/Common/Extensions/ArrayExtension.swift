@@ -23,7 +23,7 @@
 import Foundation
 
 /// Extension for the Swift Standard Array type
-extension Array {
+public extension Array {
     
     /// Checks whether an index is within the arrays bounds
     ///

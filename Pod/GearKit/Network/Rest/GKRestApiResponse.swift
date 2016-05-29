@@ -20,20 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
-import UIKit
+import SwiftyJSON
 
-/// Extension for the Swift Standard NSNotification class
-public extension NSNotification {
-
-    /// Get the keyboard size.  Will return 0 for all non-keyboard-related notifications
-    public var keyboardSize: CGSize {
-        
-        guard let notificationDict: Dictionary = self.userInfo else {
-            
-            return CGSize(width: 0, height: 0)
-        }
-        
-        return notificationDict[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue.size ?? CGSize(width: 0, height: 0)
-    }
+/// Protocol for a response from the API
+public protocol GKRestApiResponse {
+    
+    /// Model type
+    associatedtype ModelType
+    
+    /// Initialize from json.
+    ///
+    /// - parameter json: JSON or subJSON data with which to initialize.
+    init(json: JSON)
+    
+    // enforce the fact that every response must be associated with a model
+    
+    /// Model instance.
+    var model: ModelType { get set }
 }

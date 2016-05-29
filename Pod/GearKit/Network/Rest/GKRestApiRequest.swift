@@ -21,19 +21,13 @@
 // SOFTWARE.
 
 import Foundation
-import UIKit
 
-/// Extension for the Swift Standard NSNotification class
-public extension NSNotification {
-
-    /// Get the keyboard size.  Will return 0 for all non-keyboard-related notifications
-    public var keyboardSize: CGSize {
-        
-        guard let notificationDict: Dictionary = self.userInfo else {
-            
-            return CGSize(width: 0, height: 0)
-        }
-        
-        return notificationDict[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue.size ?? CGSize(width: 0, height: 0)
-    }
+/// Protocol for all api requests.
+public protocol GKRestApiRequest {
+    
+    /// Query items (path parameter).
+    var queryItems: [NSURLQueryItem]? { get }
+    
+    ///　Get the absolute Url for the request
+    var absoluteUrl: NSURL? { get }
 }
