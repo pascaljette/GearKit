@@ -21,19 +21,43 @@
 // SOFTWARE.
 
 import Foundation
-import UIKit
 
-/// Extension for the Swift Standard NSNotification class
-public extension NSNotification {
+/// A request where we provide the full Url.  This is useful for URLs for the PokeApi
+/// that are retrieved from JSON responses themselves and therefore include the base URL as well.
+public protocol GKRestApiRequestAbsolutePath : GKRestApiRequest {
+    
+    /// Path of the function to call.
+    var absoluteUrlString: String { get set }
+    
+    /// Initialise with a full Url.
+    init(absoluteUrlString: String)
+}
 
-    /// Get the keyboard size.  Will return 0 for all non-keyboard-related notifications
-    public var keyboardSize: CGSize {
+public extension GKRestApiRequestAbsolutePath {
+    
+    /// Build absolute url based on all url components in the type.
+    var absoluteUrl: NSURL? {
         
-        guard let notificationDict: Dictionary = self.userInfo else {
+        guard let queryItemsInstance = queryItems else  {
             
-            return CGSize(width: 0, height: 0)
+            return NSURL(string: absoluteUrlString)
         }
         
-        return notificationDict[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue.size ?? CGSize(width: 0, height: 0)
+        guard let components = NSURLComponents(string: absoluteUrlString) else {
+            
+            print("Could not find URL components from string \(absoluteUrlString)")
+            return nil
+        }
+        
+        if let _ = components.queryItems {
+            
+            components.queryItems!.appendContentsOf(queryItemsInstance)
+            
+        } else {
+            
+            components.queryItems = queryItemsInstance
+        }
+        
+        return components.URL
     }
 }

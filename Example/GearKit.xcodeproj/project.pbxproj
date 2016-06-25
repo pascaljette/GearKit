@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04412475DDF1737681F49D29 /* Pods_GearKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC44BFE1D1D3018E745A7EF /* Pods_GearKit_Example.framework */; };
+		535094BE1CFAF92B00B86143 /* GKRestApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535094BC1CFAF88800B86143 /* GKRestApiTests.swift */; };
 		535A0CB81C7070B1000C1CFF /* GKKeyboardScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */; };
 		535A0CB91C7070B1000C1CFF /* GKManualLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */; };
 		535A0CBC1C707123000C1CFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 535A0CBA1C707123000C1CFF /* LaunchScreen.storyboard */; };
@@ -54,6 +55,7 @@
 		379FB71C41A86FE891B92525 /* Pods-GearKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GearKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-GearKit_Example/Pods-GearKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		3E55453717B94C34FDC8BC0F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		44C96B4E25CCEED12BF882E2 /* Pods-GearKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GearKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GearKit_Tests/Pods-GearKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		535094BC1CFAF88800B86143 /* GKRestApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKRestApiTests.swift; sourceTree = "<group>"; };
 		535A0CB41C7070B1000C1CFF /* GKKeyboardScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKKeyboardScrollViewController.swift; sourceTree = "<group>"; };
 		535A0CB61C7070B1000C1CFF /* GKManualLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKManualLoginViewController.swift; sourceTree = "<group>"; };
 		535A0CBB1C707123000C1CFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -116,6 +118,14 @@
 				2932E92630C06DF466224C54 /* Pods-GearKit_Tests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		535094BB1CFAF86700B86143 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				535094BC1CFAF88800B86143 /* GKRestApiTests.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		535A0CB01C7070B1000C1CFF /* Samples */ = {
@@ -256,6 +266,7 @@
 				53A1D5F71C789D3E009E83CB /* Common */,
 				53A1D6031C805EA1009E83CB /* DataStructures */,
 				5362481D1C784696004EC051 /* Extension */,
+				535094BB1CFAF86700B86143 /* Network */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -517,6 +528,7 @@
 				53A1D6161C903B49009E83CB /* GKColorRGBTests.swift in Sources */,
 				53A1D6131C903B3F009E83CB /* ArrayExtensionTests.swift in Sources */,
 				53A1D6151C903B43009E83CB /* CGFloatExtensionTests.swift in Sources */,
+				535094BE1CFAF92B00B86143 /* GKRestApiTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

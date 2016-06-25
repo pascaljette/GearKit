@@ -23,7 +23,7 @@
 import Foundation
 
 /// Extension for the Swift Standard String class
-extension String {
+public extension String {
     
     /// Check whether a string is nil or empty
     ///
