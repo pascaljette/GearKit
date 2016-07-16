@@ -57,6 +57,7 @@
 		52E10E7D04C2322A910B67923A7E2C77 /* QuickTestSuite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40C7D2CCE2352A3F267F843C323990 /* QuickTestSuite.swift */; };
 		52F8F42AFD78B06A2C5FEB626DAC49AA /* QuickSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = D3E05A6B2889A12CCA04652B5B9F73C3 /* QuickSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53772DAE28CB29723923452A96F2C7FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBB463DE7A246A7A8C01C88C7964D39 /* Foundation.framework */; };
+		5386AFC41D3A3E520048E7DD /* GKDateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386AFC31D3A3E520048E7DD /* GKDateTime.swift */; };
 		54150B6F349A6FC25AEC1A4079474A10 /* GKRestApiDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE066348FC9D63AD1FC332B70214885 /* GKRestApiDataTask.swift */; };
 		552CBE459648ED7EC16FE62986407304 /* GKTableCellBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC54A518FA7E0CB631AE36BD5522C5 /* GKTableCellBasic.swift */; };
 		566E231B7724CFB03D96AEF3EFA8DA46 /* GKSolidColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD0D5AE421E88353E7ABFB3291EBB30 /* GKSolidColorButton.swift */; };
@@ -264,6 +265,7 @@
 		507E304DEAB0E791555956A4D9E170FD /* Pods-GearKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GearKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		52BD6876CF83CD6FBAB383486AC5028B /* NimbleXCTestHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NimbleXCTestHandler.swift; path = Sources/Nimble/Adapters/NimbleXCTestHandler.swift; sourceTree = "<group>"; };
 		534D691A6E9B41623B68EFB8D31975F3 /* GKRadarGraphParameterDatasource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GKRadarGraphParameterDatasource.swift; sourceTree = "<group>"; };
+		5386AFC31D3A3E520048E7DD /* GKDateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKDateTime.swift; sourceTree = "<group>"; };
 		53FC79F9D86929450ED36330E90BD019 /* BeNil.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeNil.swift; path = Sources/Nimble/Matchers/BeNil.swift; sourceTree = "<group>"; };
 		54942FB9EEDD2D7123A3B28E9545AFDA /* BeGreaterThan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeGreaterThan.swift; path = Sources/Nimble/Matchers/BeGreaterThan.swift; sourceTree = "<group>"; };
 		5601C7F6A924BC789DA1C12682C0407B /* BeIdenticalTo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeIdenticalTo.swift; path = Sources/Nimble/Matchers/BeIdenticalTo.swift; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 		30C2DCCDF09045AA4E63D86AF8E6CAB8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5386AFC21D3A3E450048E7DD /* DateTime */,
 				30C2463C3B653CD6DEDBA3B91403B355 /* Base */,
 				6256AB637BFB656D5F81E84B15B79B69 /* Constants */,
 				26249F0F0C4B81CE49C20FCE3434DC54 /* Extensions */,
@@ -664,6 +667,14 @@
 				202E71B3F2864DB9B898F6D7DD5AEE60 /* Pods-GearKit_Tests */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		5386AFC21D3A3E450048E7DD /* DateTime */ = {
+			isa = PBXGroup;
+			children = (
+				5386AFC31D3A3E520048E7DD /* GKDateTime.swift */,
+			);
+			path = DateTime;
 			sourceTree = "<group>";
 		};
 		57B57AD2F6FFE4A2780D5227A93E0EB4 /* TableSection */ = {
@@ -1235,6 +1246,7 @@
 				566E231B7724CFB03D96AEF3EFA8DA46 /* GKSolidColorButton.swift in Sources */,
 				91F17E9F877B7A0AE9E11C20AEB82975 /* GKTableCellBase.swift in Sources */,
 				552CBE459648ED7EC16FE62986407304 /* GKTableCellBasic.swift in Sources */,
+				5386AFC41D3A3E520048E7DD /* GKDateTime.swift in Sources */,
 				16AEFF5CCB3509BE12F58910BAF77230 /* GKTableCellCustom.swift in Sources */,
 				487EC90BD618B7E572664D7DB38F2C9C /* GKTableCellErrorBasic.swift in Sources */,
 				95C948021FF846FA9981DCD9D5DDF89D /* GKTableCellErrorBasic.xib in Sources */,
