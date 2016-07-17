@@ -50,6 +50,7 @@ public struct DateTime {
     public init(components: NSDateComponents) throws {
     
         guard let componentsDate = components.date else {
+            
             throw DateTimeError.InvalidDateComponents(year: components.year, month: components.month, day: components.day)
         }
         

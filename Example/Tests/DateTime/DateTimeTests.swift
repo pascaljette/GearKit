@@ -286,13 +286,13 @@ class DateTimeSpec: QuickSpec {
             
             context("Error thrown") {
                 
-                // TODO-pk not yet tested.
                 it("should throw errors when setting to invalid year") {
                  
-                    expect(try DateTime.dateForFirstDayOfYearMonth(year: -1, month: -1)).to(throwError())
+//                    expect {
+//                        try DateTime.dateForFirstDayOfYearMonth(year: -100000000000000, month: -1000000000)
+//                    }.to(throwError())
                 }
             }
         }
-
     }
 }
