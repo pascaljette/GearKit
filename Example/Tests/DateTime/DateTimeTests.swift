@@ -189,16 +189,115 @@ class DateTimeSpec: QuickSpec {
                     
                 }
             }
+            
+            context("Whole month calendar array in leap-years") {
+                
+                it("should return the full array for February 2015 (starts on Sunday and ends on Saturday)") {
+                    
+                    let dateTimeArray = try! DateTime.allGregorianCalendarDaysFor(year: 2015, month: 2)
+                    
+                    expect(dateTimeArray.count).to(equal(28))
+                    
+                    for(index, dateTime) in dateTimeArray.enumerate() {
+                        
+                        expect(dateTime.day).to(equal(index + 1))
+                        expect(dateTime.month).to(equal(2))
+                        expect(dateTime.year).to(equal(2015))
+                    }
+                }
+
+                it("should return the full array for December 2015 (end of year)") {
+                    
+                    let dateTimeArray = try! DateTime.allGregorianCalendarDaysFor(year: 2015, month: 12)
+                    
+                    expect(dateTimeArray.count).to(equal(35))
+                    
+                    for(index, dateTime) in dateTimeArray.enumerate() {
+                        
+                        if index < 2 {
+                            
+                            expect(dateTime.day).to(equal(index + 29))
+                            expect(dateTime.month).to(equal(11))
+                            expect(dateTime.year).to(equal(2015))
+                            
+                        } else if index <= 32 {
+                            
+                            expect(dateTime.day).to(equal(index - 1))
+                            expect(dateTime.month).to(equal(12))
+                            expect(dateTime.year).to(equal(2015))
+                            
+                        } else {
+                            
+                            expect(dateTime.day).to(equal(index - 32))
+                            expect(dateTime.month).to(equal(1))
+                            expect(dateTime.year).to(equal(2016))
+                        }
+                    }
+                }
+
+                it("should return the full array for February 2016 (leap year)") {
+                    
+                    let dateTimeArray = try! DateTime.allGregorianCalendarDaysFor(year: 2016, month: 2)
+                    
+                    expect(dateTimeArray.count).to(equal(35))
+                    
+                    for(index, dateTime) in dateTimeArray.enumerate() {
+                        
+                        if index == 0 {
+                            
+                            expect(dateTime.day).to(equal(31))
+                            expect(dateTime.month).to(equal(1))
+                            expect(dateTime.year).to(equal(2016))
+                        
+                        } else if index <= 29 {
+                            
+                            expect(dateTime.day).to(equal(index))
+                            expect(dateTime.month).to(equal(2))
+                            expect(dateTime.year).to(equal(2016))
+
+                        } else {
+                            
+                            expect(dateTime.day).to(equal(index - 29))
+                            expect(dateTime.month).to(equal(3))
+                            expect(dateTime.year).to(equal(2016))
+                        }
+                    }
+                }
+            }
+        }
+        
+        describe("Increment / Decrement") {
+            
+            context("Computed properties / date components") {
+                
+                it("Should increment days appropriately") {
+                    
+                    var dateTime = DateTime()
+                    expect(dateTime.day).to(equal(today.day))
+
+                    dateTime.day += 1
+                    
+                    expect(dateTime.day).to(equal(today.day + 1))
+                }
+            }
         }
         
         describe("Exception handling") {
             
             context("Error thrown") {
                 
-                // TODO-pk not yes tested.
+                // TODO-pk not yet tested.
                 it("should throw errors when setting to invalid year") {
                  
-                
+                    do {
+                        
+                        let invalidDateTime = try DateTime.dateForFirstDayOfYearMonth(year: -1, month: -1)
+                    
+                    } catch {
+                        
+                        expect(error).to(matchError(DateTimeError))
+                    }
+
                 }
             }
         }
