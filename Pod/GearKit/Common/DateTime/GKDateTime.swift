@@ -236,7 +236,7 @@ extension DateTime {
     public var components: NSDateComponents {
         get {
             
-            var components = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: date)
+            let components = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: date)
             
             components.calendar = calendar
             
@@ -260,7 +260,7 @@ extension DateTime {
     /// - throws A DateTimeError if the year/month is not valid for the given calendar.
     public static func dateForFirstDayOfYearMonth(year year: Int, month: Int, calendar: NSCalendar = NSCalendar.currentCalendar()) throws -> DateTime {
 
-        var components = NSDateComponents()
+        let components = NSDateComponents()
         components.calendar = calendar
 
         components.year = year
@@ -279,7 +279,7 @@ extension DateTime {
     /// - throws A DateTimeError if the year/month is not valid for the given calendar.
     public static func dateForLastDayOfYearMonth(year year: Int, month: Int, calendar: NSCalendar = NSCalendar.currentCalendar()) throws -> DateTime {
         
-        var components = NSDateComponents()
+        let components = NSDateComponents()
         components.calendar = calendar
 
         components.year = year
@@ -307,7 +307,7 @@ extension DateTime {
             
             for day in firstDay.day...lastDay.day {
                 
-                var components = NSDateComponents()
+                let components = NSDateComponents()
                 components.calendar = calendar
                 
                 components.year = year
@@ -317,7 +317,7 @@ extension DateTime {
                 returnArray.append(try DateTime(components: components))
             }
         
-        } catch DateTimeError.InvalidDateComponents(let year, let month, let day) {
+        } catch DateTimeError.InvalidDateComponents(let year, let month, _) {
             
             throw DateTimeError.InvalidComponentsForDateArray(year: year, month: month)
         }
@@ -359,7 +359,7 @@ extension DateTime {
             // Add all the regular days in the month.
             for day in firstDayOfMonth.day...lastDayOfMonth.day {
                 
-                var components = NSDateComponents()
+                let components = NSDateComponents()
                 components.calendar = calendar
                 
                 components.year = year
@@ -370,7 +370,7 @@ extension DateTime {
             }
             
             // If the last day of the month is not a saturday, we must add days until we reach saturday
-            for (index, diff) in (lastDayOfMonth.dayOfWeek ..< 7).enumerate() {
+            for (index, _) in (lastDayOfMonth.dayOfWeek ..< 7).enumerate() {
                 
                 var dayToAppend = lastDayOfMonth
                 dayToAppend.day += (index + 1)
@@ -380,7 +380,7 @@ extension DateTime {
             
             return returnArray
 
-        } catch DateTimeError.InvalidDateComponents(let year, let month, let day) {
+        } catch DateTimeError.InvalidDateComponents(let year, let month, _) {
             
             throw DateTimeError.InvalidComponentsForDateArray(year: year, month: month)
         }
@@ -400,7 +400,7 @@ extension DateTime {
     /// - returns: NSDate constructed with the provided components.
     private func dateBySettingCalendarUnit(unit: NSCalendarUnit, value: Int) throws -> NSDate {
         
-        var componentsToAdd = NSDateComponents()
+        let componentsToAdd = NSDateComponents()
         componentsToAdd.setValue(value - calendar.component(unit, fromDate: date), forComponent: unit)
         
         guard let returnDate = calendar.dateByAddingComponents(componentsToAdd, toDate: date, options: []) else {

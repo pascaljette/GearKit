@@ -8,7 +8,7 @@ end
 target 'GearKit_Tests', :exclusive => true do
   pod 'GearKit', :path => '../'
 
-  pod 'Quick', '~> 0.9.0’
-  pod 'Nimble', ‘~> 3.2.0’
+  pod 'Quick', '~> 0.9'
+  pod 'Nimble', '~> 4'
   pod 'SwiftyJSON', '> 2'
 end
