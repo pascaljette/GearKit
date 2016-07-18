@@ -26,6 +26,12 @@ import Foundation
 /// Describes errors thrown by the DateTime struct.
 public enum DateTimeError : ErrorType {
     
+    /// Format provided to build a date from a string is invalid.
+    case InvalidDateFormat(string: String, format: String)
+    
+    /// The string provided to try auto-detecting the format could not be parsed.
+    case InvalidStringForAutoDetect(string: String)
+    
     /// Components provided to build a date are invalid.
     case InvalidDateComponents(year: Int, month: Int, day: Int)
     
@@ -39,6 +45,12 @@ extension DateTimeError :  CustomStringConvertible {
     public var description: String {
         
         switch self {
+        
+        case .InvalidDateFormat(let string, let format):
+            return "Invalid Date Format: for STRING:\(string), FORMAT:\(format)"
+            
+        case .InvalidStringForAutoDetect(let string):
+            return "Could not auto-detect format for STRING:\(string)"
             
         case .InvalidDateComponents(let year, let month, let day):
             return "Invalid Date Components: for YEAR:\(year), MONTH:\(month), DAY:\(day)"
@@ -55,6 +67,12 @@ extension DateTimeError :  CustomDebugStringConvertible {
     public var debugDescription: String {
         
         switch self {
+        
+        case .InvalidDateFormat(let string, let format):
+            return "Invalid Date Format: for STRING:\(string), FORMAT:\(format)"
+            
+        case .InvalidStringForAutoDetect(let string):
+            return "Could not auto-detect format for STRING:\(string)"
             
         case .InvalidDateComponents(let year, let month, let day):
             return "Invalid Date Components: for YEAR:\(year), MONTH:\(month), DAY:\(day)"

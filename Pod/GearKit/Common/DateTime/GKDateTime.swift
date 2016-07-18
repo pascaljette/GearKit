@@ -57,6 +57,69 @@ public struct DateTime {
         self.calendar = components.calendar ?? NSCalendar.currentCalendar()
         self.date = componentsDate
     }
+    
+    /// Init with a date formatter
+    public init(string string: String, dateFormatter: NSDateFormatter, calendar: NSCalendar = NSCalendar.currentCalendar()) throws {
+        
+        self.calendar = calendar
+        
+        // Save the formatter in the cache
+        DateFormatterCache.addFormatter(dateFormatter)
+        
+        if let parsedDate = dateFormatter.dateFromString(string) {
+            
+            self.date = parsedDate
+            
+        } else {
+            
+            throw DateTimeError.InvalidDateFormat(string: string, format: dateFormatter.dateFormat)
+        }
+    }
+    
+    /// Init from a string and format
+    public init(string string: String, format: String, calendar: NSCalendar = NSCalendar.currentCalendar()) throws {
+        
+        self.calendar = calendar
+        
+        let formatter = DateFormatterCache.dateFormatterFor(format: format)
+        
+        if let parsedDate = formatter.dateFromString(string) {
+            
+            self.date = parsedDate
+            
+        } else {
+            
+            throw DateTimeError.InvalidDateFormat(string: string, format: format)
+        }
+    }
+}
+
+extension DateTime {
+    
+    //
+    // MARK: Nested types and Constants
+    //
+    
+    /// Common Formats for dates
+    public enum CommonFormats: String {
+        
+        /// Timestamp based on ISO 8601.  Preferably use with the UTC timezone.
+        case iso8601Timestamp = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        
+        /// Little Endian date as defined by ISO 8601
+        case ios8601Date = "yyyy-MM-dd"
+    }
+
+    /// Default locale.  It is set to en_US_POSIX with respect to the following article:
+    /// https://developer.apple.com/library/mac/qa/qa1480/_index.html
+    static var defaultLocale: NSLocale {
+        return NSLocale(localeIdentifier: "en_US_POSIX")
+    }
+    
+    /// Gregorian calendar
+    static var gregorianCalendar: NSCalendar {
+        return NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+    }
 }
 
 extension DateTime {
@@ -342,7 +405,7 @@ extension DateTime {
         
             var returnArray: [DateTime] = []
             
-            let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+            let calendar = DateTime.gregorianCalendar
 
             let firstDayOfMonth = try DateTime.dateForFirstDayOfYearMonth(year: year, month: month, calendar: calendar)
             let lastDayOfMonth = try DateTime.dateForLastDayOfYearMonth(year: year, month: month, calendar: calendar)

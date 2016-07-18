@@ -38,6 +38,44 @@ class DateTimeSpec: QuickSpec {
         
         let today = DateTime()
         
+        describe("Initialization") {
+            
+            context("from Compoennts") {
+                
+                it("should throw errors when trying to initialize with components that do not have a calendar") {
+                    
+                    expect {
+                        try DateTime(components: NSDateComponents())
+                        }.to(throwError())
+                }
+            }
+            
+            context("Manual format") {
+                
+                it("Should build a proper datetime with a UTC format string") {
+                    
+                    let dateTime = try! DateTime(string: "2016-07-18T09:23:34+00:00", format: DateTime.CommonFormats.iso8601Timestamp.rawValue)
+                    
+                    expect(dateTime.day).to(equal(18))
+                    expect(dateTime.month).to(equal(7))
+                    expect(dateTime.year).to(equal(2016))
+                    
+                    expect(dateTime.hour).to(equal(18))
+                    expect(dateTime.minute).to(equal(23))
+                    expect(dateTime.seconds).to(equal(34))
+
+                }
+
+                it("should throw errors when trying to parse with an un-matching format and string") {
+                    
+                    expect {
+                        try DateTime(string: "01-02-2015", format: "yyyy-MM-dd")
+                        }.to(throwError())
+                }
+            }
+
+        }
+        
         describe("Set Date Components") {
             
             ///
@@ -270,27 +308,186 @@ class DateTimeSpec: QuickSpec {
             
             context("Computed properties / date components") {
                 
+                it("Should increment years appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02", format: "yyyy-MM-dd")
+
+                    dateTime.year += 1
+                    
+                    expect(dateTime.year).to(equal(2017))
+                    expect(dateTime.month).to(equal(1))
+                    expect(dateTime.day).to(equal(2))
+                    
+                    expect(dateTime.hour).to(equal(0))
+                    expect(dateTime.minute).to(equal(0))
+                    expect(dateTime.seconds).to(equal(0))
+                }
+                
+                
+                it("Should decrement years appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02", format: "yyyy-MM-dd")
+                    
+                    dateTime.year -= 1
+                    
+                    expect(dateTime.year).to(equal(2015))
+                    expect(dateTime.month).to(equal(1))
+                    expect(dateTime.day).to(equal(2))
+                    
+                    expect(dateTime.hour).to(equal(0))
+                    expect(dateTime.minute).to(equal(0))
+                    expect(dateTime.seconds).to(equal(0))
+                }
+                
+                it("Should increment months appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02", format: "yyyy-MM-dd")
+                    
+                    dateTime.month += 3
+                    
+                    expect(dateTime.year).to(equal(2016))
+                    expect(dateTime.month).to(equal(4))
+                    expect(dateTime.day).to(equal(2))
+                    
+                    expect(dateTime.hour).to(equal(0))
+                    expect(dateTime.minute).to(equal(0))
+                    expect(dateTime.seconds).to(equal(0))
+                }
+                
+                it("Should decrement months appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02", format: "yyyy-MM-dd")
+                    
+                    dateTime.month -= 3
+                    
+                    expect(dateTime.year).to(equal(2015))
+                    expect(dateTime.month).to(equal(10))
+                    expect(dateTime.day).to(equal(2))
+                    
+                    expect(dateTime.hour).to(equal(0))
+                    expect(dateTime.minute).to(equal(0))
+                    expect(dateTime.seconds).to(equal(0))
+                }
+
                 it("Should increment days appropriately") {
                     
-                    var dateTime = DateTime()
-                    expect(dateTime.day).to(equal(today.day))
-
-                    dateTime.day += 1
+                    var dateTime = try! DateTime(string: "2016-01-02", format: "yyyy-MM-dd")
                     
-                    expect(dateTime.day).to(equal(today.day + 1))
+                    dateTime.day += 30
+                    
+                    expect(dateTime.year).to(equal(2016))
+                    expect(dateTime.month).to(equal(2))
+                    expect(dateTime.day).to(equal(1))
+                    
+                    expect(dateTime.hour).to(equal(0))
+                    expect(dateTime.minute).to(equal(0))
+                    expect(dateTime.seconds).to(equal(0))
                 }
-            }
-        }
-        
-        describe("Exception handling") {
-            
-            context("Error thrown") {
                 
-                it("should throw errors when setting to invalid year") {
-                 
-//                    expect {
-//                        try DateTime.dateForFirstDayOfYearMonth(year: -100000000000000, month: -1000000000)
-//                    }.to(throwError())
+                it("Should decrement days appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02", format: "yyyy-MM-dd")
+                    
+                    dateTime.day -= 2
+                    
+                    expect(dateTime.year).to(equal(2015))
+                    expect(dateTime.month).to(equal(12))
+                    expect(dateTime.day).to(equal(31))
+                    
+                    expect(dateTime.hour).to(equal(0))
+                    expect(dateTime.minute).to(equal(0))
+                    expect(dateTime.seconds).to(equal(0))
+                }
+                
+                it("Should increment hours appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02T01:00:00", format: "yyyy-MM-dd'T'HH:mm:ss")
+                    
+                    dateTime.hour += 1
+                    
+                    expect(dateTime.year).to(equal(2016))
+                    expect(dateTime.month).to(equal(1))
+                    expect(dateTime.day).to(equal(2))
+                    
+                    expect(dateTime.hour).to(equal(2))
+                    expect(dateTime.minute).to(equal(0))
+                    expect(dateTime.seconds).to(equal(0))
+                }
+                
+                it("Should decrement hours appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02T01:00:00", format: "yyyy-MM-dd'T'HH:mm:ss")
+                    
+                    dateTime.hour -= 2
+                    
+                    expect(dateTime.year).to(equal(2016))
+                    expect(dateTime.month).to(equal(1))
+                    expect(dateTime.day).to(equal(1))
+                    
+                    expect(dateTime.hour).to(equal(23))
+                    expect(dateTime.minute).to(equal(0))
+                    expect(dateTime.seconds).to(equal(0))
+                }
+
+                it("Should increment minutes appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02T01:12:00", format: "yyyy-MM-dd'T'HH:mm:ss")
+                    
+                    dateTime.minute += 1
+                    
+                    expect(dateTime.year).to(equal(2016))
+                    expect(dateTime.month).to(equal(1))
+                    expect(dateTime.day).to(equal(2))
+                    
+                    expect(dateTime.hour).to(equal(1))
+                    expect(dateTime.minute).to(equal(13))
+                    expect(dateTime.seconds).to(equal(0))
+                }
+                
+                it("Should decrement minutes appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02T01:12:00", format: "yyyy-MM-dd'T'HH:mm:ss")
+                    
+                    dateTime.minute -= 14
+                    
+                    expect(dateTime.year).to(equal(2016))
+                    expect(dateTime.month).to(equal(1))
+                    expect(dateTime.day).to(equal(2))
+                    
+                    expect(dateTime.hour).to(equal(0))
+                    expect(dateTime.minute).to(equal(58))
+                    expect(dateTime.seconds).to(equal(0))
+                }
+                
+                
+                it("Should increment seconds appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02T01:12:00", format: "yyyy-MM-dd'T'HH:mm:ss")
+                    
+                    dateTime.seconds += 1
+                    
+                    expect(dateTime.year).to(equal(2016))
+                    expect(dateTime.month).to(equal(1))
+                    expect(dateTime.day).to(equal(2))
+                    
+                    expect(dateTime.hour).to(equal(1))
+                    expect(dateTime.minute).to(equal(12))
+                    expect(dateTime.seconds).to(equal(1))
+                }
+                
+                it("Should decrement seconds appropriately") {
+                    
+                    var dateTime = try! DateTime(string: "2016-01-02T01:12:00", format: "yyyy-MM-dd'T'HH:mm:ss")
+                    
+                    dateTime.seconds -= 7200
+                    
+                    expect(dateTime.year).to(equal(2016))
+                    expect(dateTime.month).to(equal(1))
+                    expect(dateTime.day).to(equal(1))
+                    
+                    expect(dateTime.hour).to(equal(23))
+                    expect(dateTime.minute).to(equal(12))
+                    expect(dateTime.seconds).to(equal(0))
                 }
             }
         }

@@ -60,6 +60,7 @@
 		52E10E7D04C2322A910B67923A7E2C77 /* QuickTestSuite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3A4A2626612481F5EDB018146E4925 /* QuickTestSuite.swift */; };
 		52F8F42AFD78B06A2C5FEB626DAC49AA /* QuickSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = 025C93AB94FC3C54675CDEC95B1F0A77 /* QuickSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53772DAE28CB29723923452A96F2C7FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBB463DE7A246A7A8C01C88C7964D39 /* Foundation.framework */; };
+		5386AFCC1D3B9B380048E7DD /* GKDateFormatterCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386AFCB1D3B9B380048E7DD /* GKDateFormatterCache.swift */; };
 		54CE3FBBD31744EFA8B0A8EADB09F50C /* NMBStringify.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB82A830F14529D0EAA0A0C467365C3 /* NMBStringify.m */; };
 		56429D51C932680BF9798BEEB3E3F885 /* GKRadarGraphParameterDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F5E51304B5624780923EDA55BA6B89 /* GKRadarGraphParameterDatasource.swift */; };
 		56CA153033917F08CCDD22E94806C873 /* MatchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B1025431B1ED65809356DDB6B91E /* MatchError.swift */; };
@@ -271,6 +272,7 @@
 		507E304DEAB0E791555956A4D9E170FD /* Pods-GearKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GearKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		53019248F4E18B3FE0D6A49809122F3E /* Quick-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Quick-umbrella.h"; sourceTree = "<group>"; };
 		534C14AA7EEED43384B679DD66E6F809 /* NMBExceptionCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMBExceptionCapture.h; path = Sources/Nimble/Adapters/ObjectiveC/NMBExceptionCapture.h; sourceTree = "<group>"; };
+		5386AFCB1D3B9B380048E7DD /* GKDateFormatterCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKDateFormatterCache.swift; sourceTree = "<group>"; };
 		542EBEF2C50DB13675D3CE5F1F812F52 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
 		576548B48D37B743BEC5617DB2F6269B /* Closures.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Closures.swift; path = Sources/Quick/Hooks/Closures.swift; sourceTree = "<group>"; };
 		57A6B8BF6A2BA62020098526174648ED /* SuiteHooks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SuiteHooks.swift; path = Sources/Quick/Hooks/SuiteHooks.swift; sourceTree = "<group>"; };
@@ -682,6 +684,7 @@
 			children = (
 				05D66833AB30C898ACD706486DB497DA /* GKDateTime.swift */,
 				74D926013956F8C8C9B53DACB7DA1251 /* GKDateTimeError.swift */,
+				5386AFCB1D3B9B380048E7DD /* GKDateFormatterCache.swift */,
 			);
 			path = DateTime;
 			sourceTree = "<group>";
@@ -1312,6 +1315,7 @@
 				2893736D79FB32CA0FA1A735B44A3ED4 /* GKManualLoginViewControllerBase.swift in Sources */,
 				B0D5088AB4B00C03CAE0B4EF93FD0BF1 /* GKNavigationControllerBase.swift in Sources */,
 				D15CF0924BB8065C7C94A564751E0C50 /* GKNibInstance.swift in Sources */,
+				5386AFCC1D3B9B380048E7DD /* GKDateFormatterCache.swift in Sources */,
 				81E744BF6BC6AB645BD6391815167F25 /* GKPlistKeyConstants.swift in Sources */,
 				46EF4E06437317E005AF0ED76B642981 /* GKQueue.swift in Sources */,
 				CF3959D042542088EDE3E7BAE2904075 /* GKRadarGraphContainerLayer.swift in Sources */,
