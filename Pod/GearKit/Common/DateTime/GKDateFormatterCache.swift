@@ -27,12 +27,38 @@ import Foundation
 // format/timezone combination.
 class DateFormatterCache {
     
+    //
+    // MARK: Singleton pattern
+    //
+    
+    /// Singleton instance.
     static let sharedInstance = DateFormatterCache()
 
+    /// Private initializer
+    private init() {
+        
+    }
     
+    //
+    // MARK: Stored properties
+    //
+
+    /// Limit for formatters in the cache.
     private static let CACHE_ENTRY_LIMIT = 16
-    private var dateFormatterDictionary: [String : NSDateFormatter] = [:]
     
+    /// Dictionary of cached formatters.
+    private var dateFormatterDictionary: [String : NSDateFormatter] = [:]
+}
+
+extension DateFormatterCache {
+    
+    //
+    // MARK: Class functions
+    //
+
+    /// Add formatter to the cache.
+    ///
+    /// - parameter formatter Formatter to add to the cache.
     class func addFormatter(formatter: NSDateFormatter) {
         
         if sharedInstance.dateFormatterDictionary.count >= DateFormatterCache.CACHE_ENTRY_LIMIT {
@@ -40,22 +66,20 @@ class DateFormatterCache {
             sharedInstance.removeRandomFormatterFromCache()
         }
         
-        let idString = sharedInstance.idStringFrom(format: formatter.dateFormat
-            , timezone: formatter.timeZone
-            , locale: formatter.locale
-            , calendar: formatter.calendar)
+        let parameters = DateFormatterParameters(format: formatter.dateFormat, timezone: formatter.timeZone, locale: formatter.locale, calendar: formatter.calendar)
         
-        sharedInstance.dateFormatterDictionary[idString] = formatter
+        sharedInstance.dateFormatterDictionary[parameters.id] = formatter
     }
     
-    class func dateFormatterFor(format format: String
-        , timezone: NSTimeZone = NSTimeZone.localTimeZone()
-        , locale: NSLocale = DateTime.defaultLocale
-        , calendar: NSCalendar = DateTime.gregorianCalendar) -> NSDateFormatter {
+    /// Generate a formatter using the provided parameters.  Add the generated formatter to the cache.
+    ///
+    /// - parameter format: Format of the dates to parse.
+    /// - parameter timezone: Timezone of the formatter.  Defaults to the local timezone.
+    /// - parameter locale: Locale of the formatter.  Defaults to POSIX for en_us.
+    /// - parameter calendar: Calendar for the formatter.  Defaults to the gregorian calendar.
+    class func dateFormatterFor(parameters: DateFormatterParameters) -> NSDateFormatter {
         
-        let idString = sharedInstance.idStringFrom(format: format, timezone: timezone, locale: locale, calendar: calendar)
-        
-        if let dateFormatter = sharedInstance.dateFormatterDictionary[idString] {
+        if let dateFormatter = sharedInstance.dateFormatterDictionary[parameters.id] {
             
             return dateFormatter
             
@@ -66,10 +90,27 @@ class DateFormatterCache {
                 sharedInstance.removeRandomFormatterFromCache()
             }
 
-            return sharedInstance.generateNewDateFormatter(format, timezone: timezone, locale: locale, calendar: calendar)
+            var newDateFormatter = NSDateFormatter()
+            newDateFormatter.timeZone = parameters.timezone
+            newDateFormatter.dateFormat = parameters.format
+            
+            newDateFormatter.locale = parameters.locale
+            newDateFormatter.calendar = parameters.calendar
+            
+            sharedInstance.dateFormatterDictionary[parameters.id] = newDateFormatter
+
+            return newDateFormatter
         }
     }
+}
+
+extension DateFormatterCache {
     
+    //
+    // MARK: Private functions.
+    //
+
+    /// Remove a random formatter from the cache to make room for another one to add.
     private func removeRandomFormatterFromCache() {
         
         // Swift dictionaries are not ordered.  Delete a random element;
@@ -78,36 +119,53 @@ class DateFormatterCache {
         let indexToRemove = dateFormatterDictionary.startIndex.advancedBy(middleIndexPosition)
         dateFormatterDictionary.removeAtIndex(indexToRemove)
     }
+}
+
+struct DateFormatterParameters {
     
-    private func generateNewDateFormatter(format: String
-        , timezone: NSTimeZone
-        , locale: NSLocale
-        , calendar: NSCalendar) -> NSDateFormatter {
+    //
+    // MARK: Stored properties.
+    //
+
+    /// Format
+    let format: String
     
-        var newDateFormatter = NSDateFormatter()
-        newDateFormatter.timeZone = timezone
-        newDateFormatter.dateFormat = format
+    /// Timezone
+    let timezone: NSTimeZone
+    
+    /// Locale
+    let locale: NSLocale
+    
+    /// Calendar
+    let calendar: NSCalendar
+    
+    //
+    // MARK: Initialization.
+    //
+
+    /// Initialize with all the parameters
+    ///
+    /// - parameter format: Format.  Mandatory parameter.
+    /// - parameter timezone: Timezone.  Defaults to local time zone.
+    /// - parameter locale: Locale.  Defaults to the en_us_POSIX.  
+    /// - parameter calendar: Calendar.  Defaults to the gregorian calendar.
+    init(format: String
+        , timezone: NSTimeZone = NSTimeZone.localTimeZone()
+        , locale: NSLocale = DateTime.defaultLocale
+        , calendar: NSCalendar = DateTime.gregorianCalendar) {
         
-        newDateFormatter.locale = locale
-        newDateFormatter.calendar = calendar
-        
-        let formatterIdentifer = idStringFrom(format: format, timezone: timezone, locale: locale, calendar: calendar)
-        
-        dateFormatterDictionary[formatterIdentifer] = newDateFormatter
-        
-        return newDateFormatter
+        self.format = format
+        self.timezone = timezone
+        self.locale = locale
+        self.calendar = calendar
     }
     
-    // add the locale and calendar identifier here.
-    private func idStringFrom(format format: String
-        , timezone: NSTimeZone
-        , locale: NSLocale
-        , calendar: NSCalendar) -> String {
-        
-        return format + timezone.name + locale.localeIdentifier + calendar.calendarIdentifier
-    }
-    
-    private init() {
-        
+    //
+    // MARK: Computed properties.
+    //
+
+    /// Id string associated with the properties.
+    var id: String {
+        return (format + timezone.name + locale.localeIdentifier + calendar.calendarIdentifier)
     }
 }

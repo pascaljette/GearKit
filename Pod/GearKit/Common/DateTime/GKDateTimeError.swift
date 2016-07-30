@@ -42,6 +42,7 @@ public enum DateTimeError : ErrorType {
 /// Print the description of a DateTimeError
 extension DateTimeError :  CustomStringConvertible {
     
+    /// Exception description.
     public var description: String {
         
         switch self {
@@ -64,6 +65,7 @@ extension DateTimeError :  CustomStringConvertible {
 /// Print the debug description of a DateTimeError
 extension DateTimeError :  CustomDebugStringConvertible {
     
+    /// Debug description for the exception.
     public var debugDescription: String {
         
         switch self {

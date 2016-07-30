@@ -39,14 +39,21 @@ public struct DateTime {
     // MARK: Initialization
     //
     
-    /// Initialize with a date.  Defaults to today (current date).
-    public init(date: NSDate = NSDate()) {
+    /// Initialize with an existing date.
+    ///
+    /// - parameter date: Date with which to initialize.  Defaults to today.
+    /// - parameter calendar: Calendar with which to initialize.  Defaults to the current calendar.
+    public init(date: NSDate = NSDate(), calendar: NSCalendar = NSCalendar.currentCalendar()) {
         
         self.date = date
         self.calendar = NSCalendar.currentCalendar()
     }
     
     /// Initialize with components.  Assume that the calendar contain a calendar, otherwise will throw an exception.
+    ///
+    /// - parameter components: Components with which to initialize.  Must contain a calendar.
+    ///
+    /// - throws: A DateTimeError.InvalidDateComponents error if a date cannot be formed from the components.
     public init(components: NSDateComponents) throws {
     
         guard let componentsDate = components.date else {
@@ -58,8 +65,14 @@ public struct DateTime {
         self.date = componentsDate
     }
     
-    /// Init with a date formatter
-    public init(string string: String, dateFormatter: NSDateFormatter, calendar: NSCalendar = NSCalendar.currentCalendar()) throws {
+    /// Init with a date formatter.
+    ///
+    /// - parameter string: Date to parse in string format.
+    /// - parameter dateFormatter: Formatter to use to parse the date.
+    /// - parameter calendar: Calendar used to assign to the date.
+    ///
+    /// - throws: DateTimeError.InvalidDateFormat if a date cannot be parsed with the provided formatter.
+    public init(string: String, dateFormatter: NSDateFormatter, calendar: NSCalendar = NSCalendar.currentCalendar()) throws {
         
         self.calendar = calendar
         
@@ -76,12 +89,19 @@ public struct DateTime {
         }
     }
     
-    /// Init from a string and format
-    public init(string string: String, format: String, calendar: NSCalendar = NSCalendar.currentCalendar()) throws {
+    /// Init from a string and format.  Will create and cache an appropriate date formatter.
+    ///
+    /// - parameter string: Date to parse in string format.
+    /// - parameter format: Format of the date string.
+    /// - parameter calendar: Calendar to assign to the parsed date.  Defaults to the current calendar.
+    ///
+    /// - throws: DateTimeError.InvalidDateFormat if a date cannot be parsed with the provided format.
+    public init(string: String, format: String, calendar: NSCalendar = NSCalendar.currentCalendar()) throws {
         
         self.calendar = calendar
         
-        let formatter = DateFormatterCache.dateFormatterFor(format: format)
+        let formatterParameters = DateFormatterParameters(format: format)
+        let formatter = DateFormatterCache.dateFormatterFor(formatterParameters)
         
         if let parsedDate = formatter.dateFromString(string) {
             
@@ -340,7 +360,7 @@ extension DateTime {
     /// - parameter month: Month for which to get the last day.
     /// - parameter calendar: Calendar used to compute the last day.
     ///
-    /// - throws A DateTimeError if the year/month is not valid for the given calendar.
+    /// - throws: A DateTimeError if the year/month is not valid for the given calendar.
     public static func dateForLastDayOfYearMonth(year year: Int, month: Int, calendar: NSCalendar = NSCalendar.currentCalendar()) throws -> DateTime {
         
         let components = NSDateComponents()
@@ -479,4 +499,3 @@ extension DateTime {
         return returnDate
     }
 }
-
