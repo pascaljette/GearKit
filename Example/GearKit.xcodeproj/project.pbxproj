@@ -16,6 +16,7 @@
 		5379D3481C9EE0FB0032DF52 /* SamplesHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5379D3471C9EE0FB0032DF52 /* SamplesHomeViewController.xib */; };
 		5379D34A1C9EE10F0032DF52 /* SamplesHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379D3491C9EE10F0032DF52 /* SamplesHomeViewController.swift */; };
 		5379D34C1C9EE17D0032DF52 /* GKManualLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5379D34B1C9EE17D0032DF52 /* GKManualLoginViewController.xib */; };
+		5386AFC81D3A48D60048E7DD /* DateTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386AFC61D3A48D60048E7DD /* DateTimeTests.swift */; };
 		53A067441C7090B20022DF95 /* GKTableCustomCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A067431C7090B20022DF95 /* GKTableCustomCellViewController.swift */; };
 		53A1D6101C9037FC009E83CB /* GKQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D60D1C9036D0009E83CB /* GKQueueTests.swift */; };
 		53A1D6121C903B3C009E83CB /* GKDoublyLinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1D6041C805EB0009E83CB /* GKDoublyLinkedListTests.swift */; };
@@ -65,6 +66,7 @@
 		5379D3471C9EE0FB0032DF52 /* SamplesHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SamplesHomeViewController.xib; sourceTree = "<group>"; };
 		5379D3491C9EE10F0032DF52 /* SamplesHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesHomeViewController.swift; sourceTree = "<group>"; };
 		5379D34B1C9EE17D0032DF52 /* GKManualLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKManualLoginViewController.xib; sourceTree = "<group>"; };
+		5386AFC61D3A48D60048E7DD /* DateTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeTests.swift; sourceTree = "<group>"; };
 		53A067431C7090B20022DF95 /* GKTableCustomCellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKTableCustomCellViewController.swift; sourceTree = "<group>"; };
 		53A1D5EE1C78669D009E83CB /* StringExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
 		53A1D5F81C789D5E009E83CB /* GKColorRGBTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKColorRGBTests.swift; sourceTree = "<group>"; };
@@ -178,6 +180,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		5386AFC51D3A48C80048E7DD /* DateTime */ = {
+			isa = PBXGroup;
+			children = (
+				5386AFC61D3A48D60048E7DD /* DateTimeTests.swift */,
+			);
+			path = DateTime;
+			sourceTree = "<group>";
+		};
 		53A067421C70909A0022DF95 /* Table */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +273,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				5386AFC51D3A48C80048E7DD /* DateTime */,
 				53A1D5F71C789D3E009E83CB /* Common */,
 				53A1D6031C805EA1009E83CB /* DataStructures */,
 				5362481D1C784696004EC051 /* Extension */,
@@ -528,6 +539,7 @@
 				53A1D6161C903B49009E83CB /* GKColorRGBTests.swift in Sources */,
 				53A1D6131C903B3F009E83CB /* ArrayExtensionTests.swift in Sources */,
 				53A1D6151C903B43009E83CB /* CGFloatExtensionTests.swift in Sources */,
+				5386AFC81D3A48D60048E7DD /* DateTimeTests.swift in Sources */,
 				535094BE1CFAF92B00B86143 /* GKRestApiTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

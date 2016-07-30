@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BBF28F1D9CF108250BE8D671679629F1"
+               BlueprintIdentifier = "4E9D72CE3A1BDECE45D264005A661D8F"
                BuildableName = "GearKit.framework"
                BlueprintName = "GearKit"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BBF28F1D9CF108250BE8D671679629F1"
+            BlueprintIdentifier = "4E9D72CE3A1BDECE45D264005A661D8F"
             BuildableName = "GearKit.framework"
             BlueprintName = "GearKit"
             ReferencedContainer = "container:Pods.xcodeproj">
