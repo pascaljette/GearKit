@@ -316,11 +316,25 @@ extension DateTime {
         }
     }
     
+    /// Day of week.  For the gregorian calendar, Sunday = 1 and Saturday = 7.
+    public var timeZone: NSTimeZone {
+        
+        get {
+            
+            return calendar.timeZone
+        }
+        
+        set {
+
+            calendar.timeZone = newValue
+        }
+    }
+    
     /// Extract the components from the current date and calendar.
     public var components: NSDateComponents {
         get {
             
-            let components = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: date)
+            let components = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday, .TimeZone], fromDate: date)
             
             components.calendar = calendar
             
@@ -497,5 +511,39 @@ extension DateTime {
         }
         
         return returnDate
+    }
+}
+
+/// Print the description of a DateTime
+extension DateTime :  CustomStringConvertible {
+    
+    /// Exception description.
+    public var description: String {
+
+        let parameters = DateFormatterParameters(format: CommonFormats.iso8601Timestamp.rawValue
+            , timezone: NSTimeZone(abbreviation: "UTC")!
+            , locale: DateTime.defaultLocale
+            , calendar: self.calendar)
+        
+        let dateFormatter = DateFormatterCache.dateFormatterFor(parameters)
+        
+        return dateFormatter.stringFromDate(self.date)
+    }
+}
+
+/// Print the debug description of a DateTime
+extension DateTime :  CustomDebugStringConvertible {
+    
+    /// Exception description.
+    public var debugDescription: String {
+        
+        let parameters = DateFormatterParameters(format: CommonFormats.iso8601Timestamp.rawValue
+            , timezone: NSTimeZone(abbreviation: "UTC")!
+            , locale: DateTime.defaultLocale
+            , calendar: self.calendar)
+        
+        let dateFormatter = DateFormatterCache.dateFormatterFor(parameters)
+        
+        return dateFormatter.stringFromDate(self.date)
     }
 }

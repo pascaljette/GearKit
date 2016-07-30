@@ -54,16 +54,16 @@ class DateTimeSpec: QuickSpec {
                 
                 it("Should build a proper datetime with a UTC format string") {
                     
-                    let dateTime = try! DateTime(string: "2016-07-18T09:23:34+00:00", format: DateTime.CommonFormats.iso8601Timestamp.rawValue)
+                    var dateTime = try! DateTime(string: "2016-07-18T09:23:34+00:00", format: DateTime.CommonFormats.iso8601Timestamp.rawValue)
                     
+                    dateTime.timeZone = NSTimeZone(abbreviation: "UTC")!
                     expect(dateTime.day).to(equal(18))
                     expect(dateTime.month).to(equal(7))
                     expect(dateTime.year).to(equal(2016))
                     
-                    expect(dateTime.hour).to(equal(18))
+                    expect(dateTime.hour).to(equal(9))
                     expect(dateTime.minute).to(equal(23))
                     expect(dateTime.seconds).to(equal(34))
-
                 }
 
                 it("should throw errors when trying to parse with an un-matching format and string") {
