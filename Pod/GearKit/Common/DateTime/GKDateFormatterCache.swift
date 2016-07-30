@@ -90,7 +90,7 @@ extension DateFormatterCache {
                 sharedInstance.removeRandomFormatterFromCache()
             }
 
-            var newDateFormatter = NSDateFormatter()
+            let newDateFormatter = NSDateFormatter()
             newDateFormatter.timeZone = parameters.timezone
             newDateFormatter.dateFormat = parameters.format
             
