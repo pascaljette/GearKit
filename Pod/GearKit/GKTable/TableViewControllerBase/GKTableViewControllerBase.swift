@@ -301,7 +301,7 @@ extension GKTableViewControllerBase: UITableViewDelegate {
             return nil
         }
         
-        return sectionWithView.headerView
+        return sectionWithView.footerView
     }
 }
 
